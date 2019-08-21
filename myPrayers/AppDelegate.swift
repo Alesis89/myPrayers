@@ -8,16 +8,59 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var displayName: String!
+    var userImage: UIImage!
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //Singleton DataController for Core Data
+        DataController.shared.load()
+        
+        FirebaseApp.configure()
+        let showVOTD = checkVOTDAtStartup()
+        let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        //check to see if VOTD is turned on.  If so, show the VOTD view controller first.
+        if (showVOTD){
+            let homePage = mainStoryBoard.instantiateViewController(withIdentifier: "VOTD") as! VOTDViewController
+             self.window?.rootViewController = homePage
+           
+        }else{
+            let homePage = mainStoryBoard.instantiateViewController(withIdentifier: "Login Controller") as! LoginViewController
+            self.window?.rootViewController = homePage
+            
+        }
+       
         return true
+    }
+    
+    func checkVOTDAtStartup()->Bool{
+        //This function will check to see if the user has selected to turn off the VOTD at startup
+        //This will be a User Defaults setting
+        
+        var showVOTD = false
+        
+        if let votdSet = UserDefaults.standard.value(forKey: "VOTD-ON") as? Bool{
+            if(votdSet){
+                showVOTD = true
+            }else{
+                showVOTD = false
+            }
+        }else{
+            //First time app launch.  Set VOTD to true and show VOTD ViewController
+            UserDefaults.standard.set(true, forKey: "VOTD-ON")
+            showVOTD = true
+        }
+        return showVOTD
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -1,24 +1,496 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
+        <scene sceneID="CRB-zJ-nyV">
+            <objects>
+                <viewController storyboardIdentifier="VOTD" id="rLs-yR-i2I" customClass="VOTDViewController" customModule="myPrayers" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z8u-lB-h9u">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HXK-xU-POc" userLabel="image">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewA-OA-aMV" userLabel="verseText">
+                                <rect key="frame" x="20" y="352" width="374" height="160"/>
+                                <fontDescription key="fontDescription" name="SnellRoundhand" family="Snell Roundhand" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ewA-OA-aMV" firstAttribute="leading" secondItem="dfZ-WZ-Osh" secondAttribute="leading" constant="20" id="2yi-FY-RmG"/>
+                            <constraint firstAttribute="bottom" secondItem="HXK-xU-POc" secondAttribute="bottom" id="5aa-BV-Y89"/>
+                            <constraint firstItem="dfZ-WZ-Osh" firstAttribute="bottom" secondItem="ewA-OA-aMV" secondAttribute="bottom" constant="350" id="DJa-P0-sXp"/>
+                            <constraint firstItem="HXK-xU-POc" firstAttribute="top" secondItem="Z8u-lB-h9u" secondAttribute="top" id="FTh-ut-S8t"/>
+                            <constraint firstItem="HXK-xU-POc" firstAttribute="leading" secondItem="Z8u-lB-h9u" secondAttribute="leading" id="KqM-Mk-v88"/>
+                            <constraint firstAttribute="trailing" secondItem="HXK-xU-POc" secondAttribute="trailing" id="sI8-dz-0Ez"/>
+                            <constraint firstItem="ewA-OA-aMV" firstAttribute="top" secondItem="dfZ-WZ-Osh" secondAttribute="top" constant="308" id="sPU-ht-T4p"/>
+                            <constraint firstItem="dfZ-WZ-Osh" firstAttribute="trailing" secondItem="ewA-OA-aMV" secondAttribute="trailing" constant="20" id="x3I-kY-EbU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dfZ-WZ-Osh"/>
+                    </view>
+                    <connections>
+                        <outlet property="image" destination="HXK-xU-POc" id="9HV-yQ-QB6"/>
+                        <outlet property="verseText" destination="ewA-OA-aMV" id="2mZ-Wu-VpR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="um2-ao-L9B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-826.08695652173924" y="20.758928571428569"/>
+        </scene>
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Login Controller" id="BYZ-38-t0r" customClass="LoginViewController" customModule="myPrayers" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KyN-0A-8Mk">
+                                <rect key="frame" x="143" y="124" width="128" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="QoF-IU-JdR"/>
+                                    <constraint firstAttribute="width" constant="128" id="g3q-7b-0Yd"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eFB-7h-CyY">
+                                <rect key="frame" x="5" y="302" width="404" height="170"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Zp-bW-I6c">
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="CIS-mx-xlq"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aQj-qn-kbb">
+                                        <rect key="frame" x="0.0" y="60" width="404" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="6Ea-vU-LcK"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A5T-wD-yDp">
+                                        <rect key="frame" x="0.0" y="120" width="404" height="50"/>
+                                        <color key="backgroundColor" red="0.76018208269999998" green="0.76078431369999999" blue="0.87302601339999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="v9t-xM-0oz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                        <state key="normal" title="Login">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bWF-fR-KrS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="KyN-0A-8Mk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0dR-62-B2m"/>
+                            <constraint firstItem="eFB-7h-CyY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6B7-hm-Ri2"/>
+                            <constraint firstItem="KyN-0A-8Mk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="88m-nh-6yN"/>
+                            <constraint firstAttribute="trailing" secondItem="eFB-7h-CyY" secondAttribute="trailing" constant="5" id="94R-ef-KMP"/>
+                            <constraint firstItem="eFB-7h-CyY" firstAttribute="top" secondItem="KyN-0A-8Mk" secondAttribute="bottom" constant="50" id="sXh-9i-Igr"/>
+                            <constraint firstItem="eFB-7h-CyY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="vmM-4s-LUZ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="userEmail" destination="8Zp-bW-I6c" id="0Hz-hQ-DeE"/>
+                        <outlet property="userPassword" destination="aQj-qn-kbb" id="HX4-eF-UQR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-120" y="21"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="9GU-TF-APl">
+            <objects>
+                <viewController storyboardIdentifier="Settings" id="wts-gM-dyz" customClass="SettingsViewController" customModule="myPrayers" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IkZ-AH-zXx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lJW-gf-0og">
+                                <rect key="frame" x="152" y="94" width="110" height="110"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="110" id="E1z-Ic-k8Z"/>
+                                    <constraint firstAttribute="height" constant="110" id="lC8-Jm-E8I"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Sg2-17-Hrt">
+                                <rect key="frame" x="20" y="229" width="374" height="215"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9sL-4t-B2t">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="firstName"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="nx2-tW-jsK"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OaW-cS-IAe">
+                                        <rect key="frame" x="0.0" y="55" width="374" height="50"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="lastName"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="G6r-oS-vKp"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cGN-Qi-ep2">
+                                        <rect key="frame" x="0.0" y="110" width="374" height="50"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="email"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="8ak-16-mof"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ntd-QO-KJ5">
+                                        <rect key="frame" x="0.0" y="165" width="374" height="50"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="confirmEmail"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="ydy-6u-vEw"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7T-AF-f5u">
+                                <rect key="frame" x="30" y="504" width="354" height="50"/>
+                                <color key="backgroundColor" red="0.76177829504013062" green="0.76207143068313599" blue="0.8666805624961853" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="sW8-d3-8aO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveButton:" destination="wts-gM-dyz" eventType="touchUpInside" id="UfR-H8-Jpw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="F7T-AF-f5u" firstAttribute="top" secondItem="Sg2-17-Hrt" secondAttribute="bottom" constant="60" id="8rH-3t-i8y"/>
+                            <constraint firstItem="lJW-gf-0og" firstAttribute="top" secondItem="fWO-9G-MdS" secondAttribute="top" constant="50" id="Nze-Nu-RI4"/>
+                            <constraint firstItem="Sg2-17-Hrt" firstAttribute="leading" secondItem="fWO-9G-MdS" secondAttribute="leading" constant="20" id="YCv-45-dKd"/>
+                            <constraint firstItem="fWO-9G-MdS" firstAttribute="trailing" secondItem="F7T-AF-f5u" secondAttribute="trailing" constant="30" id="jkl-xq-T0x"/>
+                            <constraint firstItem="lJW-gf-0og" firstAttribute="centerX" secondItem="IkZ-AH-zXx" secondAttribute="centerX" id="krO-Na-Wy9"/>
+                            <constraint firstItem="F7T-AF-f5u" firstAttribute="leading" secondItem="fWO-9G-MdS" secondAttribute="leading" constant="30" id="tCw-mP-OKq"/>
+                            <constraint firstItem="fWO-9G-MdS" firstAttribute="trailing" secondItem="Sg2-17-Hrt" secondAttribute="trailing" constant="20" id="vHg-Tp-WGI"/>
+                            <constraint firstItem="Sg2-17-Hrt" firstAttribute="top" secondItem="lJW-gf-0og" secondAttribute="bottom" constant="25" id="xRc-9R-6Eu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fWO-9G-MdS"/>
+                    </view>
+                    <connections>
+                        <outlet property="confirmEmail" destination="ntd-QO-KJ5" id="ymC-uj-Uvc"/>
+                        <outlet property="email" destination="cGN-Qi-ep2" id="GV1-Th-YcX"/>
+                        <outlet property="firstName" destination="9sL-4t-B2t" id="T3i-Qf-Pf9"/>
+                        <outlet property="lastName" destination="OaW-cS-IAe" id="Uol-1U-cgV"/>
+                        <outlet property="profileImage" destination="lJW-gf-0og" id="Ux1-fB-Qs0"/>
+                        <outlet property="saveButton" destination="F7T-AF-f5u" id="zuL-Vm-e2x"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bkK-DS-pPz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-138" y="674"/>
+        </scene>
+        <!--myPrayers-->
+        <scene sceneID="xwD-zk-lir">
+            <objects>
+                <tableViewController storyboardIdentifier="PrayersVC" id="pEu-XP-XdY" customClass="PrayersViewController" customModule="myPrayers" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="179" sectionHeaderHeight="28" sectionFooterHeight="28" id="DaZ-Yx-8nb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="prayerCell" rowHeight="130" id="jti-7A-T2v" customClass="PrayerTableViewCell" customModule="myPrayers" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="130"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jti-7A-T2v" id="NcU-Sv-ovz">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="129.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Pray For:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omr-fr-RCY">
+                                            <rect key="frame" x="78" y="15" width="56" height="19.5"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="iZI-DZ-ZSh">
+                                            <rect key="frame" x="20" y="15" width="50" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="3fh-pr-DOk"/>
+                                                <constraint firstAttribute="width" constant="50" id="VI2-WN-GvL"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsx-cF-Oeq">
+                                            <rect key="frame" x="140" y="15" width="254" height="19.5"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1Q-6c-lAC">
+                                            <rect key="frame" x="78" y="42.5" width="34" height="16.5"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zu-HY-Bck">
+                                            <rect key="frame" x="20" y="73" width="374" height="36.5"/>
+                                            <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="7zu-HY-Bck" firstAttribute="top" secondItem="iZI-DZ-ZSh" secondAttribute="bottom" constant="8" id="2BZ-ZG-s0K"/>
+                                        <constraint firstItem="Omr-fr-RCY" firstAttribute="top" secondItem="NcU-Sv-ovz" secondAttribute="top" constant="15" id="3q1-iT-Tiy"/>
+                                        <constraint firstAttribute="trailing" secondItem="7zu-HY-Bck" secondAttribute="trailing" constant="20" id="FMq-sZ-egS"/>
+                                        <constraint firstItem="7zu-HY-Bck" firstAttribute="leading" secondItem="NcU-Sv-ovz" secondAttribute="leading" constant="20" id="QVP-Ee-Q8e"/>
+                                        <constraint firstItem="c1Q-6c-lAC" firstAttribute="leading" secondItem="iZI-DZ-ZSh" secondAttribute="trailing" constant="8" id="ScA-Fg-2Uh"/>
+                                        <constraint firstItem="Omr-fr-RCY" firstAttribute="leading" secondItem="iZI-DZ-ZSh" secondAttribute="trailing" constant="8" id="VYf-tL-Adf"/>
+                                        <constraint firstAttribute="bottom" secondItem="7zu-HY-Bck" secondAttribute="bottom" constant="20" id="WFP-5k-gkW"/>
+                                        <constraint firstAttribute="trailing" secondItem="Jsx-cF-Oeq" secondAttribute="trailing" constant="20" id="acB-uk-gQU"/>
+                                        <constraint firstItem="c1Q-6c-lAC" firstAttribute="top" secondItem="Omr-fr-RCY" secondAttribute="bottom" constant="8" id="can-DP-uQy"/>
+                                        <constraint firstItem="Jsx-cF-Oeq" firstAttribute="top" secondItem="NcU-Sv-ovz" secondAttribute="top" constant="15" id="d5S-78-SJL"/>
+                                        <constraint firstItem="Jsx-cF-Oeq" firstAttribute="leading" secondItem="Omr-fr-RCY" secondAttribute="trailing" constant="6" id="gPp-eb-rdF"/>
+                                        <constraint firstItem="iZI-DZ-ZSh" firstAttribute="leading" secondItem="NcU-Sv-ovz" secondAttribute="leading" constant="20" id="iUZ-2x-ocv"/>
+                                        <constraint firstItem="iZI-DZ-ZSh" firstAttribute="top" secondItem="NcU-Sv-ovz" secondAttribute="top" constant="15" id="pXq-9J-jLZ"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="lblPrayFor" destination="Omr-fr-RCY" id="IsS-Vi-rpf"/>
+                                    <outlet property="lblPrayForText" destination="Jsx-cF-Oeq" id="Zdh-3z-OCY"/>
+                                    <outlet property="lblPrayer" destination="7zu-HY-Bck" id="9MS-Tg-Azb"/>
+                                    <outlet property="lblTime" destination="c1Q-6c-lAC" id="Ios-Lm-XVA"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pEu-XP-XdY" id="tgP-4m-dMK"/>
+                            <outlet property="delegate" destination="pEu-XP-XdY" id="eOe-00-qQ8"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="myPrayers" id="129-3h-Dgp">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="Menu" id="PQB-9x-IpH" userLabel="Menu">
+                            <connections>
+                                <action selector="openMenu:" destination="pEu-XP-XdY" id="9WA-IF-wmT"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="dGM-aZ-pyl">
+                            <connections>
+                                <segue destination="Pgg-m1-0Tz" kind="show" identifier="addPrayer" id="A16-Rr-aHN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="prayerTableView" destination="DaZ-Yx-8nb" id="KVO-ov-JTh"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2vG-Fa-E1g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1278" y="21"/>
+        </scene>
+        <!--Add Prayer-->
+        <scene sceneID="vDX-8B-9lO">
+            <objects>
+                <viewController title="Add Prayer" id="Pgg-m1-0Tz" customClass="AddPrayerViewController" customModule="myPrayers" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lHd-Dw-GN6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ht7-Rs-MR2">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Add Prayer" id="K2c-Ri-jJH">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Ulu-9v-hfW">
+                                            <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fK7-jJ-Ldi">
+                                <rect key="frame" x="20" y="108" width="374" height="200"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pryer for?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oMi-SL-jwr">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="FHA-Wu-xaH"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                    </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Prayer?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oXz-V7-RhX">
+                                        <rect key="frame" x="0.0" y="55" width="374" height="145"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" red="0.7883765697479248" green="0.78785079717636108" blue="0.80392426252365112" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="OkQ-6T-upa"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2W-Sq-jT2">
+                                <rect key="frame" x="30" y="328" width="354" height="36"/>
+                                <color key="backgroundColor" red="0.76018208269999998" green="0.76078431369999999" blue="0.87302601339999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Add Prayer">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="addPrayer:" destination="Pgg-m1-0Tz" eventType="touchUpInside" id="BvE-tA-4oa"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ht7-Rs-MR2" firstAttribute="top" secondItem="lHd-Dw-GN6" secondAttribute="top" constant="44" id="0MZ-9J-L0o"/>
+                            <constraint firstItem="fK7-jJ-Ldi" firstAttribute="top" secondItem="ht7-Rs-MR2" secondAttribute="bottom" constant="20" id="0YF-Ld-Ybd"/>
+                            <constraint firstItem="bzN-jo-9o6" firstAttribute="trailing" secondItem="o2W-Sq-jT2" secondAttribute="trailing" constant="30" id="ApX-FE-BuW"/>
+                            <constraint firstItem="ht7-Rs-MR2" firstAttribute="leading" secondItem="lHd-Dw-GN6" secondAttribute="leading" id="NW7-7o-3tF"/>
+                            <constraint firstItem="o2W-Sq-jT2" firstAttribute="leading" secondItem="bzN-jo-9o6" secondAttribute="leading" constant="30" id="PMe-sF-h4a"/>
+                            <constraint firstAttribute="trailing" secondItem="ht7-Rs-MR2" secondAttribute="trailing" id="g4F-gc-rZQ"/>
+                            <constraint firstItem="o2W-Sq-jT2" firstAttribute="top" secondItem="fK7-jJ-Ldi" secondAttribute="bottom" constant="20" id="is7-aP-Rme"/>
+                            <constraint firstItem="fK7-jJ-Ldi" firstAttribute="leading" secondItem="bzN-jo-9o6" secondAttribute="leading" constant="20" id="p4u-oq-dIv"/>
+                            <constraint firstItem="bzN-jo-9o6" firstAttribute="trailing" secondItem="fK7-jJ-Ldi" secondAttribute="trailing" constant="20" id="qch-Tt-6yG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bzN-jo-9o6"/>
+                    </view>
+                    <connections>
+                        <outlet property="addPrayerBtn" destination="o2W-Sq-jT2" id="of6-ul-fSM"/>
+                        <outlet property="prayForTxt" destination="oMi-SL-jwr" id="Zpa-Dw-Dm3"/>
+                        <outlet property="prayerTxt" destination="oXz-V7-RhX" id="O2S-7u-0SO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qKI-2X-bxm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1970" y="21"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zNx-yD-STD">
+            <objects>
+                <navigationController storyboardIdentifier="Nav Controller" id="4b5-0m-Zu1" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="J1o-4j-HDp">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="pEu-XP-XdY" kind="relationship" relationship="rootViewController" id="KJp-Va-Fy7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aCW-wW-HOc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="584" y="21"/>
+        </scene>
+        <!--Modify Prayer-->
+        <scene sceneID="btb-8g-Ypl">
+            <objects>
+                <viewController storyboardIdentifier="Modify Prayer" title="Modify Prayer" id="rnd-Bz-0sc" customClass="ModifyPrayerViewController" customModule="myPrayers" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yq4-Wy-APN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZH-cb-XpK">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Modify Prayer" id="5sI-Ch-Eyy"/>
+                                </items>
+                            </navigationBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="obe-v6-uJk">
+                                <rect key="frame" x="20" y="108" width="374" height="200"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pryer for?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TMJ-sH-q1I">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Zqx-ou-cY4"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                    </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ibs-Rb-SdL">
+                                        <rect key="frame" x="0.0" y="55" width="374" height="145"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="kOS-mv-90Y"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIr-FW-4NU">
+                                <rect key="frame" x="30" y="328" width="354" height="36"/>
+                                <color key="backgroundColor" red="0.76018208269999998" green="0.76078431369999999" blue="0.87302601339999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Modify Prayer">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="modifyPrayer:" destination="rnd-Bz-0sc" eventType="touchUpInside" id="Zg1-gD-yiO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eMa-XQ-kNK" firstAttribute="trailing" secondItem="eIr-FW-4NU" secondAttribute="trailing" constant="30" id="1pF-Y1-eaS"/>
+                            <constraint firstItem="YZH-cb-XpK" firstAttribute="top" secondItem="yq4-Wy-APN" secondAttribute="top" constant="44" id="A0i-SJ-vIr"/>
+                            <constraint firstAttribute="trailing" secondItem="YZH-cb-XpK" secondAttribute="trailing" id="DzQ-Ga-1Gx"/>
+                            <constraint firstItem="eIr-FW-4NU" firstAttribute="top" secondItem="obe-v6-uJk" secondAttribute="bottom" constant="20" id="Gf3-CN-jYt"/>
+                            <constraint firstItem="obe-v6-uJk" firstAttribute="top" secondItem="YZH-cb-XpK" secondAttribute="bottom" constant="20" id="HJM-0s-rrm"/>
+                            <constraint firstItem="eMa-XQ-kNK" firstAttribute="trailing" secondItem="obe-v6-uJk" secondAttribute="trailing" constant="20" id="Rzj-rF-mxa"/>
+                            <constraint firstItem="eIr-FW-4NU" firstAttribute="leading" secondItem="eMa-XQ-kNK" secondAttribute="leading" constant="30" id="acI-BB-pcU"/>
+                            <constraint firstItem="YZH-cb-XpK" firstAttribute="leading" secondItem="yq4-Wy-APN" secondAttribute="leading" id="fDA-Y4-5Q6"/>
+                            <constraint firstItem="obe-v6-uJk" firstAttribute="leading" secondItem="eMa-XQ-kNK" secondAttribute="leading" constant="20" id="ovP-aG-64m"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eMa-XQ-kNK"/>
+                    </view>
+                    <connections>
+                        <outlet property="modifyPrayerBtn" destination="eIr-FW-4NU" id="cMO-zS-ZAc"/>
+                        <outlet property="prayForTxt" destination="TMJ-sH-q1I" id="yIi-Uf-IHS"/>
+                        <outlet property="prayerTxt" destination="Ibs-Rb-SdL" id="iKD-WN-xaO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Pa-Kd-Dn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2652" y="21"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Logo" width="512" height="512"/>
+        <image name="Menu" width="24" height="24"/>
+    </resources>
 </document>

@@ -7,23 +7,57 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D162EC323010A0800820C60 /* GetCalendarDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D162EC223010A0800820C60 /* GetCalendarDay.swift */; };
+		1D57E025230AFAF200C4C9C6 /* AddPrayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D57E024230AFAF200C4C9C6 /* AddPrayerViewController.swift */; };
+		1D57E029230B7D4400C4C9C6 /* ModifyPrayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D57E028230B7D4400C4C9C6 /* ModifyPrayerViewController.swift */; };
+		1D583A74230D7087002E4B3F /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1D583A73230D7087002E4B3F /* readme.txt */; };
+		1D5B47B623020A1D00CA6CDB /* PrayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5B47B523020A1D00CA6CDB /* PrayerTableViewCell.swift */; };
+		1D5B47B8230213B100CA6CDB /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5B47B7230213B100CA6CDB /* Alerts.swift */; };
+		1D5B47BA230237BF00CA6CDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D5B47B9230237BF00CA6CDB /* GoogleService-Info.plist */; };
+		1D7EA981230C7862003954CD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7EA980230C7862003954CD /* SettingsViewController.swift */; };
+		1D9E343B2301CAB100CE4ABF /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9E343A2301CAB000CE4ABF /* Menu.swift */; };
+		1D9E343D2301CD6500CE4ABF /* PrayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9E343C2301CD6500CE4ABF /* PrayersViewController.swift */; };
+		1DAE03AE23076D5A008F745E /* Prayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAE03AD23076D5A008F745E /* Prayer.swift */; };
 		1DB1084B22F7B88200DB4C26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB1084A22F7B88200DB4C26 /* AppDelegate.swift */; };
-		1DB1084D22F7B88200DB4C26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB1084C22F7B88200DB4C26 /* ViewController.swift */; };
 		1DB1085022F7B88200DB4C26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DB1084E22F7B88200DB4C26 /* Main.storyboard */; };
 		1DB1085322F7B88200DB4C26 /* myPrayers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1DB1085122F7B88200DB4C26 /* myPrayers.xcdatamodeld */; };
 		1DB1085522F7B88300DB4C26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DB1085422F7B88300DB4C26 /* Assets.xcassets */; };
 		1DB1085822F7B88300DB4C26 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DB1085622F7B88300DB4C26 /* LaunchScreen.storyboard */; };
+		1DB1086322F7B8F800DB4C26 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB1086222F7B8F800DB4C26 /* Constants.swift */; };
+		1DB1086522F7B95F00DB4C26 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB1086422F7B95F00DB4C26 /* DataController.swift */; };
+		1DB1086722F7B9BB00DB4C26 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB1086622F7B9BB00DB4C26 /* LoginViewController.swift */; };
+		1DB1086922F7C9AD00DB4C26 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB1086822F7C9AD00DB4C26 /* Client.swift */; };
+		1DB1086D22F7CE7500DB4C26 /* VOTDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB1086C22F7CE7500DB4C26 /* VOTDViewController.swift */; };
+		E79D4EB15B1F6D5190DB2719 /* Pods_myPrayers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91A16520B69FCAC6167E1EDB /* Pods_myPrayers.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D162EC223010A0800820C60 /* GetCalendarDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCalendarDay.swift; sourceTree = "<group>"; };
+		1D57E024230AFAF200C4C9C6 /* AddPrayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPrayerViewController.swift; sourceTree = "<group>"; };
+		1D57E028230B7D4400C4C9C6 /* ModifyPrayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyPrayerViewController.swift; sourceTree = "<group>"; };
+		1D583A73230D7087002E4B3F /* readme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		1D5B47B523020A1D00CA6CDB /* PrayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTableViewCell.swift; sourceTree = "<group>"; };
+		1D5B47B7230213B100CA6CDB /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		1D5B47B9230237BF00CA6CDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1D7EA980230C7862003954CD /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		1D9E343A2301CAB000CE4ABF /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		1D9E343C2301CD6500CE4ABF /* PrayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayersViewController.swift; sourceTree = "<group>"; };
+		1DAE03AD23076D5A008F745E /* Prayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prayer.swift; sourceTree = "<group>"; };
 		1DB1084722F7B88200DB4C26 /* myPrayers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myPrayers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DB1084A22F7B88200DB4C26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1DB1084C22F7B88200DB4C26 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1DB1084F22F7B88200DB4C26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1DB1085222F7B88200DB4C26 /* myPrayers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = myPrayers.xcdatamodel; sourceTree = "<group>"; };
 		1DB1085422F7B88300DB4C26 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1DB1085722F7B88300DB4C26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1DB1085922F7B88300DB4C26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1DB1086222F7B8F800DB4C26 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		1DB1086422F7B95F00DB4C26 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		1DB1086622F7B9BB00DB4C26 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1DB1086822F7C9AD00DB4C26 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		1DB1086C22F7CE7500DB4C26 /* VOTDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VOTDViewController.swift; sourceTree = "<group>"; };
+		91A16520B69FCAC6167E1EDB /* Pods_myPrayers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myPrayers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9181EEC1207538662B7745D /* Pods-myPrayers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myPrayers.release.xcconfig"; path = "Pods/Target Support Files/Pods-myPrayers/Pods-myPrayers.release.xcconfig"; sourceTree = "<group>"; };
+		E1F76695AB63BF467DF650A4 /* Pods-myPrayers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myPrayers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-myPrayers/Pods-myPrayers.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E79D4EB15B1F6D5190DB2719 /* Pods_myPrayers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +77,8 @@
 			children = (
 				1DB1084922F7B88200DB4C26 /* myPrayers */,
 				1DB1084822F7B88200DB4C26 /* Products */,
+				FFF2C1DC97234919BA633B18 /* Pods */,
+				74A62AC42A71EE166C07FD09 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +93,71 @@
 		1DB1084922F7B88200DB4C26 /* myPrayers */ = {
 			isa = PBXGroup;
 			children = (
+				1DB1086122F7B8CB00DB4C26 /* Controller */,
+				1DB1086022F7B8B700DB4C26 /* View */,
+				1DB1085F22F7B8A400DB4C26 /* Model */,
 				1DB1084A22F7B88200DB4C26 /* AppDelegate.swift */,
-				1DB1084C22F7B88200DB4C26 /* ViewController.swift */,
 				1DB1084E22F7B88200DB4C26 /* Main.storyboard */,
 				1DB1085422F7B88300DB4C26 /* Assets.xcassets */,
+				1DB1085122F7B88200DB4C26 /* myPrayers.xcdatamodeld */,
 				1DB1085622F7B88300DB4C26 /* LaunchScreen.storyboard */,
 				1DB1085922F7B88300DB4C26 /* Info.plist */,
-				1DB1085122F7B88200DB4C26 /* myPrayers.xcdatamodeld */,
+				1D5B47B9230237BF00CA6CDB /* GoogleService-Info.plist */,
+				1D583A73230D7087002E4B3F /* readme.txt */,
 			);
 			path = myPrayers;
+			sourceTree = "<group>";
+		};
+		1DB1085F22F7B8A400DB4C26 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1DB1086222F7B8F800DB4C26 /* Constants.swift */,
+				1DB1086822F7C9AD00DB4C26 /* Client.swift */,
+				1D162EC223010A0800820C60 /* GetCalendarDay.swift */,
+				1D5B47B7230213B100CA6CDB /* Alerts.swift */,
+				1DAE03AD23076D5A008F745E /* Prayer.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1DB1086022F7B8B700DB4C26 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1D57E028230B7D4400C4C9C6 /* ModifyPrayerViewController.swift */,
+				1DB1086622F7B9BB00DB4C26 /* LoginViewController.swift */,
+				1DB1086C22F7CE7500DB4C26 /* VOTDViewController.swift */,
+				1D9E343A2301CAB000CE4ABF /* Menu.swift */,
+				1D9E343C2301CD6500CE4ABF /* PrayersViewController.swift */,
+				1D5B47B523020A1D00CA6CDB /* PrayerTableViewCell.swift */,
+				1D57E024230AFAF200C4C9C6 /* AddPrayerViewController.swift */,
+				1D7EA980230C7862003954CD /* SettingsViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1DB1086122F7B8CB00DB4C26 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1DB1086422F7B95F00DB4C26 /* DataController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		74A62AC42A71EE166C07FD09 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				91A16520B69FCAC6167E1EDB /* Pods_myPrayers.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FFF2C1DC97234919BA633B18 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E1F76695AB63BF467DF650A4 /* Pods-myPrayers.debug.xcconfig */,
+				B9181EEC1207538662B7745D /* Pods-myPrayers.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +167,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DB1085C22F7B88300DB4C26 /* Build configuration list for PBXNativeTarget "myPrayers" */;
 			buildPhases = (
+				B36016CB9F800A0E98546A45 /* [CP] Check Pods Manifest.lock */,
 				1DB1084322F7B88200DB4C26 /* Sources */,
 				1DB1084422F7B88200DB4C26 /* Frameworks */,
 				1DB1084522F7B88200DB4C26 /* Resources */,
+				FEDFE65A05A09FF2FDE7C93B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,7 +220,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D583A74230D7087002E4B3F /* readme.txt in Resources */,
 				1DB1085822F7B88300DB4C26 /* LaunchScreen.storyboard in Resources */,
+				1D5B47BA230237BF00CA6CDB /* GoogleService-Info.plist in Resources */,
 				1DB1085522F7B88300DB4C26 /* Assets.xcassets in Resources */,
 				1DB1085022F7B88200DB4C26 /* Main.storyboard in Resources */,
 			);
@@ -133,14 +230,80 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B36016CB9F800A0E98546A45 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-myPrayers-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FEDFE65A05A09FF2FDE7C93B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-myPrayers/Pods-myPrayers-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-myPrayers/Pods-myPrayers-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1DB1084322F7B88200DB4C26 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1DB1084D22F7B88200DB4C26 /* ViewController.swift in Sources */,
+				1D5B47B623020A1D00CA6CDB /* PrayerTableViewCell.swift in Sources */,
+				1D57E025230AFAF200C4C9C6 /* AddPrayerViewController.swift in Sources */,
+				1D57E029230B7D4400C4C9C6 /* ModifyPrayerViewController.swift in Sources */,
+				1DB1086D22F7CE7500DB4C26 /* VOTDViewController.swift in Sources */,
+				1DB1086522F7B95F00DB4C26 /* DataController.swift in Sources */,
 				1DB1084B22F7B88200DB4C26 /* AppDelegate.swift in Sources */,
+				1D9E343D2301CD6500CE4ABF /* PrayersViewController.swift in Sources */,
+				1D7EA981230C7862003954CD /* SettingsViewController.swift in Sources */,
+				1DB1086922F7C9AD00DB4C26 /* Client.swift in Sources */,
 				1DB1085322F7B88200DB4C26 /* myPrayers.xcdatamodeld in Sources */,
+				1DB1086722F7B9BB00DB4C26 /* LoginViewController.swift in Sources */,
+				1DB1086322F7B8F800DB4C26 /* Constants.swift in Sources */,
+				1DAE03AE23076D5A008F745E /* Prayer.swift in Sources */,
+				1D162EC323010A0800820C60 /* GetCalendarDay.swift in Sources */,
+				1D5B47B8230213B100CA6CDB /* Alerts.swift in Sources */,
+				1D9E343B2301CAB100CE4ABF /* Menu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +447,7 @@
 		};
 		1DB1085D22F7B88300DB4C26 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1F76695AB63BF467DF650A4 /* Pods-myPrayers.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -296,12 +460,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.billclark.myPrayers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		1DB1085E22F7B88300DB4C26 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9181EEC1207538662B7745D /* Pods-myPrayers.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -314,7 +479,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.billclark.myPrayers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
