@@ -7,7 +7,7 @@ In the menu, user can modify profile information, turn off VOTD on startup, or s
 
 
 //Reviewer Details
-Use login id jandoe@testemail.com.  Password is "prayers123"
+Use login id janedoe@testemail.com.  Password is "prayers123"
 
 myPrayers is an app that users Firebase for authentication/storage/database.  Please install cocopods using these directions...
 
