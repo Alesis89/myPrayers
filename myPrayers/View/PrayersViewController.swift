@@ -78,10 +78,18 @@ class PrayersViewController: UIViewController, UITableViewDelegate, UITableViewD
         return prayerData.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let VC1 = self.storyboard?.instantiateViewController(withIdentifier: "View Prayer") as! ViewPrayerViewController
+        VC1.inPrayFor = self.prayerData[indexPath.row].prayFor
+        VC1.inPrayer = self.prayerData[indexPath.row].prayer
+        self.show(VC1, sender: self)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "prayerCell") as! PrayerTableViewCell
         cell.lblPrayForText.text = prayerData[indexPath.row].prayFor
-        cell.lblTime.text = formatCalDayForCell(inDate: prayerData[indexPath.row].createDateTime) 
+        cell.lblTime.text = formatCalDayForCell(inDate: prayerData[indexPath.row].createDateTime)
         cell.lblPrayer.text = prayerData[indexPath.row].prayer
        
         return cell

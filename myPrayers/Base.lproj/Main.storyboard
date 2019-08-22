@@ -65,9 +65,9 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eFB-7h-CyY">
-                                <rect key="frame" x="5" y="302" width="404" height="170"/>
+                                <rect key="frame" x="5" y="301.5" width="404" height="170"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Zp-bW-I6c">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="alesis89@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Zp-bW-I6c">
                                         <rect key="frame" x="0.0" y="0.0" width="404" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="CIS-mx-xlq"/>
@@ -76,7 +76,7 @@
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aQj-qn-kbb">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test1234" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aQj-qn-kbb">
                                         <rect key="frame" x="0.0" y="60" width="404" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="6Ea-vU-LcK"/>
@@ -101,14 +101,22 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="myPrayers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2I-hl-Wwj">
+                                <rect key="frame" x="148.5" y="252" width="117" height="29.5"/>
+                                <fontDescription key="fontDescription" name="Charter-Bold" family="Charter" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="KyN-0A-8Mk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0dR-62-B2m"/>
+                            <constraint firstItem="s2I-hl-Wwj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3hZ-KB-TMm"/>
                             <constraint firstItem="eFB-7h-CyY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6B7-hm-Ri2"/>
                             <constraint firstItem="KyN-0A-8Mk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="88m-nh-6yN"/>
                             <constraint firstAttribute="trailing" secondItem="eFB-7h-CyY" secondAttribute="trailing" constant="5" id="94R-ef-KMP"/>
-                            <constraint firstItem="eFB-7h-CyY" firstAttribute="top" secondItem="KyN-0A-8Mk" secondAttribute="bottom" constant="50" id="sXh-9i-Igr"/>
+                            <constraint firstItem="eFB-7h-CyY" firstAttribute="top" secondItem="s2I-hl-Wwj" secondAttribute="bottom" constant="20" id="jj1-Rj-jN6"/>
+                            <constraint firstItem="s2I-hl-Wwj" firstAttribute="top" secondItem="KyN-0A-8Mk" secondAttribute="bottom" id="rZ4-yS-QWp"/>
                             <constraint firstItem="eFB-7h-CyY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="vmM-4s-LUZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -120,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-120" y="21"/>
+            <point key="canvasLocation" x="-203" y="21"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="9GU-TF-APl">
@@ -148,7 +156,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OaW-cS-IAe">
                                         <rect key="frame" x="0.0" y="55" width="374" height="50"/>
@@ -158,7 +166,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cGN-Qi-ep2">
                                         <rect key="frame" x="0.0" y="110" width="374" height="50"/>
@@ -168,7 +176,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" textContentType="email"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ntd-QO-KJ5">
                                         <rect key="frame" x="0.0" y="165" width="374" height="50"/>
@@ -178,7 +186,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" textContentType="email"/>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -221,27 +229,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bkK-DS-pPz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-138" y="674"/>
+            <point key="canvasLocation" x="-826" y="659"/>
         </scene>
         <!--myPrayers-->
         <scene sceneID="xwD-zk-lir">
             <objects>
                 <tableViewController storyboardIdentifier="PrayersVC" id="pEu-XP-XdY" customClass="PrayersViewController" customModule="myPrayers" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="179" sectionHeaderHeight="28" sectionFooterHeight="28" id="DaZ-Yx-8nb">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="130" sectionHeaderHeight="28" sectionFooterHeight="28" id="DaZ-Yx-8nb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="prayerCell" rowHeight="130" id="jti-7A-T2v" customClass="PrayerTableViewCell" customModule="myPrayers" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="prayerCell" rowHeight="130" id="jti-7A-T2v" customClass="PrayerTableViewCell" customModule="myPrayers" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="130"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jti-7A-T2v" id="NcU-Sv-ovz">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="129.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="376" height="129.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Pray For:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omr-fr-RCY">
-                                            <rect key="frame" x="78" y="15" width="56" height="19.5"/>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
+                                            <rect key="frame" x="78" y="15" width="68" height="23.5"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -253,19 +261,19 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsx-cF-Oeq">
-                                            <rect key="frame" x="140" y="15" width="254" height="19.5"/>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                            <rect key="frame" x="152" y="15" width="204" height="23.5"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1Q-6c-lAC">
-                                            <rect key="frame" x="78" y="42.5" width="34" height="16.5"/>
+                                            <rect key="frame" x="78" y="35.5" width="34" height="16.5"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zu-HY-Bck">
-                                            <rect key="frame" x="20" y="73" width="374" height="36.5"/>
+                                            <rect key="frame" x="20" y="65" width="336" height="56.5"/>
                                             <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -273,15 +281,15 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="7zu-HY-Bck" firstAttribute="top" secondItem="iZI-DZ-ZSh" secondAttribute="bottom" constant="8" id="2BZ-ZG-s0K"/>
+                                        <constraint firstItem="7zu-HY-Bck" firstAttribute="top" secondItem="iZI-DZ-ZSh" secondAttribute="bottom" id="2BZ-ZG-s0K"/>
                                         <constraint firstItem="Omr-fr-RCY" firstAttribute="top" secondItem="NcU-Sv-ovz" secondAttribute="top" constant="15" id="3q1-iT-Tiy"/>
                                         <constraint firstAttribute="trailing" secondItem="7zu-HY-Bck" secondAttribute="trailing" constant="20" id="FMq-sZ-egS"/>
                                         <constraint firstItem="7zu-HY-Bck" firstAttribute="leading" secondItem="NcU-Sv-ovz" secondAttribute="leading" constant="20" id="QVP-Ee-Q8e"/>
                                         <constraint firstItem="c1Q-6c-lAC" firstAttribute="leading" secondItem="iZI-DZ-ZSh" secondAttribute="trailing" constant="8" id="ScA-Fg-2Uh"/>
+                                        <constraint firstItem="c1Q-6c-lAC" firstAttribute="top" secondItem="Omr-fr-RCY" secondAttribute="bottom" constant="-3" id="TgW-Ms-CLj"/>
                                         <constraint firstItem="Omr-fr-RCY" firstAttribute="leading" secondItem="iZI-DZ-ZSh" secondAttribute="trailing" constant="8" id="VYf-tL-Adf"/>
-                                        <constraint firstAttribute="bottom" secondItem="7zu-HY-Bck" secondAttribute="bottom" constant="20" id="WFP-5k-gkW"/>
+                                        <constraint firstAttribute="bottom" secondItem="7zu-HY-Bck" secondAttribute="bottom" constant="8" id="WFP-5k-gkW"/>
                                         <constraint firstAttribute="trailing" secondItem="Jsx-cF-Oeq" secondAttribute="trailing" constant="20" id="acB-uk-gQU"/>
-                                        <constraint firstItem="c1Q-6c-lAC" firstAttribute="top" secondItem="Omr-fr-RCY" secondAttribute="bottom" constant="8" id="can-DP-uQy"/>
                                         <constraint firstItem="Jsx-cF-Oeq" firstAttribute="top" secondItem="NcU-Sv-ovz" secondAttribute="top" constant="15" id="d5S-78-SJL"/>
                                         <constraint firstItem="Jsx-cF-Oeq" firstAttribute="leading" secondItem="Omr-fr-RCY" secondAttribute="trailing" constant="6" id="gPp-eb-rdF"/>
                                         <constraint firstItem="iZI-DZ-ZSh" firstAttribute="leading" secondItem="NcU-Sv-ovz" secondAttribute="leading" constant="20" id="iUZ-2x-ocv"/>
@@ -319,7 +327,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vG-Fa-E1g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1278" y="21"/>
+            <point key="canvasLocation" x="1035" y="21"/>
         </scene>
         <!--Add Prayer-->
         <scene sceneID="vDX-8B-9lO">
@@ -364,8 +372,11 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2W-Sq-jT2">
-                                <rect key="frame" x="30" y="328" width="354" height="36"/>
+                                <rect key="frame" x="30" y="328" width="354" height="50"/>
                                 <color key="backgroundColor" red="0.76018208269999998" green="0.76078431369999999" blue="0.87302601339999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Zt3-fk-2F2"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <state key="normal" title="Add Prayer">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -397,7 +408,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qKI-2X-bxm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1970" y="21"/>
+            <point key="canvasLocation" x="1651" y="21"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zNx-yD-STD">
@@ -413,7 +424,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aCW-wW-HOc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="584" y="21"/>
+            <point key="canvasLocation" x="416" y="21"/>
         </scene>
         <!--Modify Prayer-->
         <scene sceneID="btb-8g-Ypl">
@@ -453,8 +464,11 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIr-FW-4NU">
-                                <rect key="frame" x="30" y="328" width="354" height="36"/>
+                                <rect key="frame" x="30" y="328" width="354" height="50"/>
                                 <color key="backgroundColor" red="0.76018208269999998" green="0.76078431369999999" blue="0.87302601339999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="NSl-Hb-RWd"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <state key="normal" title="Modify Prayer">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -469,11 +483,11 @@
                             <constraint firstItem="eMa-XQ-kNK" firstAttribute="trailing" secondItem="eIr-FW-4NU" secondAttribute="trailing" constant="30" id="1pF-Y1-eaS"/>
                             <constraint firstItem="YZH-cb-XpK" firstAttribute="top" secondItem="yq4-Wy-APN" secondAttribute="top" constant="44" id="A0i-SJ-vIr"/>
                             <constraint firstAttribute="trailing" secondItem="YZH-cb-XpK" secondAttribute="trailing" id="DzQ-Ga-1Gx"/>
-                            <constraint firstItem="eIr-FW-4NU" firstAttribute="top" secondItem="obe-v6-uJk" secondAttribute="bottom" constant="20" id="Gf3-CN-jYt"/>
                             <constraint firstItem="obe-v6-uJk" firstAttribute="top" secondItem="YZH-cb-XpK" secondAttribute="bottom" constant="20" id="HJM-0s-rrm"/>
                             <constraint firstItem="eMa-XQ-kNK" firstAttribute="trailing" secondItem="obe-v6-uJk" secondAttribute="trailing" constant="20" id="Rzj-rF-mxa"/>
                             <constraint firstItem="eIr-FW-4NU" firstAttribute="leading" secondItem="eMa-XQ-kNK" secondAttribute="leading" constant="30" id="acI-BB-pcU"/>
                             <constraint firstItem="YZH-cb-XpK" firstAttribute="leading" secondItem="yq4-Wy-APN" secondAttribute="leading" id="fDA-Y4-5Q6"/>
+                            <constraint firstItem="eIr-FW-4NU" firstAttribute="top" secondItem="obe-v6-uJk" secondAttribute="bottom" constant="20" id="ocR-8w-oGo"/>
                             <constraint firstItem="obe-v6-uJk" firstAttribute="leading" secondItem="eMa-XQ-kNK" secondAttribute="leading" constant="20" id="ovP-aG-64m"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eMa-XQ-kNK"/>
@@ -486,7 +500,83 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Pa-Kd-Dn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2652" y="21"/>
+            <point key="canvasLocation" x="2270" y="21"/>
+        </scene>
+        <!--View Prayer-->
+        <scene sceneID="7Fe-7s-tY3">
+            <objects>
+                <viewController storyboardIdentifier="View Prayer" title="View Prayer" id="HhY-4f-bgU" customClass="ViewPrayerViewController" customModule="myPrayers" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UPo-4x-nb6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rUo-s4-L8T">
+                                <rect key="frame" x="20" y="175" width="374" height="679"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Pray For" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3C-C0-5Jx">
+                                <rect key="frame" x="100.5" y="108" width="293.5" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="uKx-BW-ISt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kHG-G7-Ja8">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="View Prayer" id="VBH-j7-C9c"/>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pray For: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfX-G7-S28">
+                                <rect key="frame" x="20" y="108" width="72.5" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="IsH-5I-TVD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vMX-Vo-RXb">
+                                <rect key="frame" x="20" y="166" width="374" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="T3u-Hs-Qzn"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="X3C-C0-5Jx" firstAttribute="leading" secondItem="rfX-G7-S28" secondAttribute="trailing" constant="8" id="1Kz-P7-dSk"/>
+                            <constraint firstItem="nJ7-4F-ySe" firstAttribute="trailing" secondItem="X3C-C0-5Jx" secondAttribute="trailing" constant="20" id="4E3-pU-mDC"/>
+                            <constraint firstItem="vMX-Vo-RXb" firstAttribute="leading" secondItem="nJ7-4F-ySe" secondAttribute="leading" constant="20" id="7wx-Xk-aZG"/>
+                            <constraint firstItem="rfX-G7-S28" firstAttribute="top" secondItem="kHG-G7-Ja8" secondAttribute="bottom" constant="20" id="GPd-nu-Enw"/>
+                            <constraint firstItem="nJ7-4F-ySe" firstAttribute="bottom" secondItem="rUo-s4-L8T" secondAttribute="bottom" constant="8" id="K3o-1g-iR3"/>
+                            <constraint firstAttribute="trailing" secondItem="kHG-G7-Ja8" secondAttribute="trailing" id="OXO-8J-VlV"/>
+                            <constraint firstItem="X3C-C0-5Jx" firstAttribute="top" secondItem="kHG-G7-Ja8" secondAttribute="bottom" constant="20" id="bge-eW-xMD"/>
+                            <constraint firstItem="vMX-Vo-RXb" firstAttribute="top" secondItem="X3C-C0-5Jx" secondAttribute="bottom" constant="8" id="cm9-K3-woT"/>
+                            <constraint firstItem="nJ7-4F-ySe" firstAttribute="trailing" secondItem="rUo-s4-L8T" secondAttribute="trailing" constant="20" id="h4E-yV-5eI"/>
+                            <constraint firstItem="rfX-G7-S28" firstAttribute="leading" secondItem="nJ7-4F-ySe" secondAttribute="leading" constant="20" id="kXd-sj-Lko"/>
+                            <constraint firstItem="rUo-s4-L8T" firstAttribute="top" secondItem="vMX-Vo-RXb" secondAttribute="bottom" constant="8" id="mlN-pv-JUD"/>
+                            <constraint firstItem="kHG-G7-Ja8" firstAttribute="leading" secondItem="UPo-4x-nb6" secondAttribute="leading" id="nkS-2m-jsT"/>
+                            <constraint firstItem="nJ7-4F-ySe" firstAttribute="trailing" secondItem="vMX-Vo-RXb" secondAttribute="trailing" constant="20" id="pgh-qO-h85"/>
+                            <constraint firstItem="rUo-s4-L8T" firstAttribute="leading" secondItem="nJ7-4F-ySe" secondAttribute="leading" constant="20" id="rbI-px-p0J"/>
+                            <constraint firstItem="kHG-G7-Ja8" firstAttribute="top" secondItem="UPo-4x-nb6" secondAttribute="top" constant="44" id="tmF-yy-SsG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nJ7-4F-ySe"/>
+                    </view>
+                    <connections>
+                        <outlet property="prayFor" destination="X3C-C0-5Jx" id="TAK-iM-ho5"/>
+                        <outlet property="prayer" destination="rUo-s4-L8T" id="XJb-TI-d7x"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3rh-HO-VmP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2892.753623188406" y="20.758928571428569"/>
         </scene>
     </scenes>
     <resources>

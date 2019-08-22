@@ -215,7 +215,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
             }
             print(emailChanged)
         case "confirmEmail":
-            if(object.text != email.text){
+            if(object.text!.count > 0 && object.text != email.text){
                 saveButton.isEnabled = false
                 errorMessageAlert(title: "Password Mismatch", message: "Passwords don't match.", thisView: self)
             }else{
