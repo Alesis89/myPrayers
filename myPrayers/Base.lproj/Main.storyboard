@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -72,16 +70,14 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="CIS-mx-xlq"/>
                                         </constraints>
-                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test1234" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aQj-qn-kbb">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="prayers1234" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aQj-qn-kbb">
                                         <rect key="frame" x="0.0" y="60" width="404" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="6Ea-vU-LcK"/>
                                         </constraints>
-                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
@@ -107,6 +103,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LiW-V4-9U1">
+                                <rect key="frame" x="146.5" y="501.5" width="121" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="i1h-w2-TiQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                <state key="normal" title="Forgot Password?">
+                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetPassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5hq-i9-3Dw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -115,6 +124,8 @@
                             <constraint firstItem="eFB-7h-CyY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6B7-hm-Ri2"/>
                             <constraint firstItem="KyN-0A-8Mk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="88m-nh-6yN"/>
                             <constraint firstAttribute="trailing" secondItem="eFB-7h-CyY" secondAttribute="trailing" constant="5" id="94R-ef-KMP"/>
+                            <constraint firstItem="LiW-V4-9U1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FQD-u3-Zkd"/>
+                            <constraint firstItem="LiW-V4-9U1" firstAttribute="top" secondItem="eFB-7h-CyY" secondAttribute="bottom" constant="30" id="Kfh-vZ-S1q"/>
                             <constraint firstItem="eFB-7h-CyY" firstAttribute="top" secondItem="s2I-hl-Wwj" secondAttribute="bottom" constant="20" id="jj1-Rj-jN6"/>
                             <constraint firstItem="s2I-hl-Wwj" firstAttribute="top" secondItem="KyN-0A-8Mk" secondAttribute="bottom" id="rZ4-yS-QWp"/>
                             <constraint firstItem="eFB-7h-CyY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="vmM-4s-LUZ"/>
@@ -129,6 +140,83 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-203" y="21"/>
+        </scene>
+        <!--Reset Password View Controller-->
+        <scene sceneID="eHv-Yb-ogz">
+            <objects>
+                <viewController storyboardIdentifier="Reset Password" id="6BD-nn-z1P" customClass="ResetPasswordViewController" customModule="myPrayers" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xMu-4a-f4J">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="cr4-5I-r0n">
+                                <rect key="frame" x="143" y="124" width="128" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="MJQ-fk-TQu"/>
+                                    <constraint firstAttribute="height" constant="128" id="vHq-dn-0xA"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qIR-bw-0Ed">
+                                <rect key="frame" x="30" y="377" width="354" height="50"/>
+                                <color key="backgroundColor" red="0.76177829504013062" green="0.76207143068313599" blue="0.8666805624961853" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="4EZ-kI-NBH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Send">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendResetLink:" destination="6BD-nn-z1P" eventType="touchUpInside" id="fMn-ff-Dpc"/>
+                                </connections>
+                            </button>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oUx-xJ-yrR">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Reset Password" id="DuU-N7-vQr">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="NRD-Ax-xe3">
+                                            <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="cancelBtn:" destination="6BD-nn-z1P" id="Lxi-jS-DA0"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TW2-qk-Sgg">
+                                <rect key="frame" x="20" y="282" width="374" height="50"/>
+                                <accessibility key="accessibilityConfiguration" identifier="confirmEmail"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Wa3-ij-0Iu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" textContentType="email"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="7u2-N5-khJ" firstAttribute="trailing" secondItem="TW2-qk-Sgg" secondAttribute="trailing" constant="20" id="2dk-4n-FTQ"/>
+                            <constraint firstItem="oUx-xJ-yrR" firstAttribute="trailing" secondItem="7u2-N5-khJ" secondAttribute="trailing" id="5wm-le-fjg"/>
+                            <constraint firstItem="oUx-xJ-yrR" firstAttribute="top" secondItem="7u2-N5-khJ" secondAttribute="top" id="8Yy-Df-Shv"/>
+                            <constraint firstItem="qIR-bw-0Ed" firstAttribute="leading" secondItem="7u2-N5-khJ" secondAttribute="leading" constant="30" id="DJJ-lZ-PxK"/>
+                            <constraint firstItem="7u2-N5-khJ" firstAttribute="trailing" secondItem="qIR-bw-0Ed" secondAttribute="trailing" constant="30" id="DvP-q7-6Nh"/>
+                            <constraint firstItem="qIR-bw-0Ed" firstAttribute="top" secondItem="TW2-qk-Sgg" secondAttribute="bottom" constant="45" id="Nyx-DN-6Ug"/>
+                            <constraint firstItem="qIR-bw-0Ed" firstAttribute="leading" secondItem="7u2-N5-khJ" secondAttribute="leading" constant="30" id="QPe-hz-u1a"/>
+                            <constraint firstItem="oUx-xJ-yrR" firstAttribute="leading" secondItem="7u2-N5-khJ" secondAttribute="leading" id="R6V-BJ-2PX"/>
+                            <constraint firstItem="cr4-5I-r0n" firstAttribute="top" secondItem="oUx-xJ-yrR" secondAttribute="bottom" constant="36" id="cS0-Vs-9mC"/>
+                            <constraint firstItem="cr4-5I-r0n" firstAttribute="centerX" secondItem="xMu-4a-f4J" secondAttribute="centerX" id="dr8-BJ-xMx"/>
+                            <constraint firstItem="TW2-qk-Sgg" firstAttribute="top" secondItem="cr4-5I-r0n" secondAttribute="bottom" constant="30" id="tmI-dy-ysi"/>
+                            <constraint firstItem="TW2-qk-Sgg" firstAttribute="leading" secondItem="7u2-N5-khJ" secondAttribute="leading" constant="20" id="u3P-6k-fhf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7u2-N5-khJ"/>
+                    </view>
+                    <connections>
+                        <outlet property="email" destination="TW2-qk-Sgg" id="seJ-u8-EYx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pvx-aR-OoR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-204.34782608695653" y="665.625"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="9GU-TF-APl">
@@ -154,7 +242,6 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="nx2-tW-jsK"/>
                                         </constraints>
-                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
@@ -164,7 +251,6 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="G6r-oS-vKp"/>
                                         </constraints>
-                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
@@ -174,7 +260,6 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="8ak-16-mof"/>
                                         </constraints>
-                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" textContentType="email"/>
                                     </textField>
@@ -184,7 +269,6 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="ydy-6u-vEw"/>
                                         </constraints>
-                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" textContentType="email"/>
                                     </textField>
@@ -229,7 +313,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bkK-DS-pPz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-826" y="659"/>
+            <point key="canvasLocation" x="416" y="666"/>
         </scene>
         <!--myPrayers-->
         <scene sceneID="xwD-zk-lir">
@@ -244,7 +328,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="130"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jti-7A-T2v" id="NcU-Sv-ovz">
-                                    <rect key="frame" x="0.0" y="0.0" width="376" height="129.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="382.5" height="130"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Pray For:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omr-fr-RCY">
@@ -261,19 +345,19 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsx-cF-Oeq">
-                                            <rect key="frame" x="152" y="15" width="204" height="23.5"/>
+                                            <rect key="frame" x="152" y="15" width="210.5" height="23.5"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1Q-6c-lAC">
-                                            <rect key="frame" x="78" y="35.5" width="34" height="16.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1Q-6c-lAC">
+                                            <rect key="frame" x="78" y="35.5" width="284.5" height="16.5"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zu-HY-Bck">
-                                            <rect key="frame" x="20" y="65" width="336" height="56.5"/>
+                                            <rect key="frame" x="20" y="65" width="342.5" height="57"/>
                                             <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -284,6 +368,7 @@
                                         <constraint firstItem="7zu-HY-Bck" firstAttribute="top" secondItem="iZI-DZ-ZSh" secondAttribute="bottom" id="2BZ-ZG-s0K"/>
                                         <constraint firstItem="Omr-fr-RCY" firstAttribute="top" secondItem="NcU-Sv-ovz" secondAttribute="top" constant="15" id="3q1-iT-Tiy"/>
                                         <constraint firstAttribute="trailing" secondItem="7zu-HY-Bck" secondAttribute="trailing" constant="20" id="FMq-sZ-egS"/>
+                                        <constraint firstAttribute="trailing" secondItem="c1Q-6c-lAC" secondAttribute="trailing" constant="20" id="PfL-Bp-IkR"/>
                                         <constraint firstItem="7zu-HY-Bck" firstAttribute="leading" secondItem="NcU-Sv-ovz" secondAttribute="leading" constant="20" id="QVP-Ee-Q8e"/>
                                         <constraint firstItem="c1Q-6c-lAC" firstAttribute="leading" secondItem="iZI-DZ-ZSh" secondAttribute="trailing" constant="8" id="ScA-Fg-2Uh"/>
                                         <constraint firstItem="c1Q-6c-lAC" firstAttribute="top" secondItem="Omr-fr-RCY" secondAttribute="bottom" constant="-3" id="TgW-Ms-CLj"/>
@@ -310,12 +395,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="myPrayers" id="129-3h-Dgp">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="7WJ-Qu-kdt"/>
                         <barButtonItem key="leftBarButtonItem" title="Item" image="Menu" id="PQB-9x-IpH" userLabel="Menu">
+                            <color key="tintColor" red="0.76177829504013062" green="0.76207143068313599" blue="0.8666805624961853" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="openMenu:" destination="pEu-XP-XdY" id="9WA-IF-wmT"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="dGM-aZ-pyl">
+                            <color key="tintColor" red="0.60861361030000005" green="0.60974669459999997" blue="0.69020694490000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <segue destination="Pgg-m1-0Tz" kind="show" identifier="addPrayer" id="A16-Rr-aHN"/>
                             </connections>
@@ -340,24 +428,19 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ht7-Rs-MR2">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
-                                    <navigationItem title="Add Prayer" id="K2c-Ri-jJH">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Ulu-9v-hfW">
-                                            <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </barButtonItem>
-                                    </navigationItem>
+                                    <navigationItem title="Add Prayer" id="K2c-Ri-jJH"/>
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fK7-jJ-Ldi">
                                 <rect key="frame" x="20" y="108" width="374" height="200"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pryer for?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oMi-SL-jwr">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pray for?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oMi-SL-jwr">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="FHA-Wu-xaH"/>
                                         </constraints>
-                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Prayer?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oXz-V7-RhX">
                                         <rect key="frame" x="0.0" y="55" width="374" height="145"/>
@@ -443,14 +526,13 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="obe-v6-uJk">
                                 <rect key="frame" x="20" y="108" width="374" height="200"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pryer for?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TMJ-sH-q1I">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pray for?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TMJ-sH-q1I">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Zqx-ou-cY4"/>
                                         </constraints>
-                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ibs-Rb-SdL">
                                         <rect key="frame" x="0.0" y="55" width="374" height="145"/>

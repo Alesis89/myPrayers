@@ -38,7 +38,6 @@ class VOTDViewController: UIViewController {
                                 //Show VOTD for 7 seconds, then go to login screen
                                 self.startTimer()
                             }
-                            
                         }
                     })
                 }else{

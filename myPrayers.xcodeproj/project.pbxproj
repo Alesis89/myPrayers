@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D162EC323010A0800820C60 /* GetCalendarDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D162EC223010A0800820C60 /* GetCalendarDay.swift */; };
+		1D3D8845231428AB00E55DE5 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3D8844231428AB00E55DE5 /* ResetPasswordViewController.swift */; };
 		1D57E025230AFAF200C4C9C6 /* AddPrayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D57E024230AFAF200C4C9C6 /* AddPrayerViewController.swift */; };
 		1D57E029230B7D4400C4C9C6 /* ModifyPrayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D57E028230B7D4400C4C9C6 /* ModifyPrayerViewController.swift */; };
 		1D583A74230D7087002E4B3F /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1D583A73230D7087002E4B3F /* readme.txt */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		1D162EC223010A0800820C60 /* GetCalendarDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCalendarDay.swift; sourceTree = "<group>"; };
+		1D3D8844231428AB00E55DE5 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		1D57E024230AFAF200C4C9C6 /* AddPrayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPrayerViewController.swift; sourceTree = "<group>"; };
 		1D57E028230B7D4400C4C9C6 /* ModifyPrayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyPrayerViewController.swift; sourceTree = "<group>"; };
 		1D583A73230D7087002E4B3F /* readme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				1D57E024230AFAF200C4C9C6 /* AddPrayerViewController.swift */,
 				1D7EA980230C7862003954CD /* SettingsViewController.swift */,
 				1D96C195230EF7CE0047A9F0 /* ViewPrayerViewController.swift */,
+				1D3D8844231428AB00E55DE5 /* ResetPasswordViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				1DB1084B22F7B88200DB4C26 /* AppDelegate.swift in Sources */,
 				1D9E343D2301CD6500CE4ABF /* PrayersViewController.swift in Sources */,
 				1D7EA981230C7862003954CD /* SettingsViewController.swift in Sources */,
+				1D3D8845231428AB00E55DE5 /* ResetPasswordViewController.swift in Sources */,
 				1DB1086922F7C9AD00DB4C26 /* Client.swift in Sources */,
 				1DB1085322F7B88200DB4C26 /* myPrayers.xcdatamodeld in Sources */,
 				1DB1086722F7B9BB00DB4C26 /* LoginViewController.swift in Sources */,

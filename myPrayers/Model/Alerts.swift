@@ -19,18 +19,18 @@ func errorMessageAlert(title: String, message: String, thisView: UIViewControlle
 }
 
 func prayerAddedAlert(title: String, message: String, thisView: UIViewController){
-    let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
+    //let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
     
     let alertController = UIAlertController(title: "\(title)", message: "\(message)", preferredStyle: .alert)
     let ok = UIAlertAction(title: "OK", style: .default){ (UIAlertAction) in
         thisView.navigationController?.popToRootViewController(animated: true)
     }
     alertController.addAction(ok)
-    topVC!.present(alertController, animated: true, completion: nil)
+    thisView.present(alertController, animated: true, completion: nil)
 }
 
 func profileUpdatedAlert(title: String, message: String, thisView: UIViewController){
-    let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
+    let topVC = UIApplication.shared.keyWindow?.rootViewController
     
     let alertController = UIAlertController(title: "\(title)", message: "\(message)", preferredStyle: .alert)
     let ok = UIAlertAction(title: "OK", style: .default){ (UIAlertAction) in
@@ -41,13 +41,22 @@ func profileUpdatedAlert(title: String, message: String, thisView: UIViewControl
 }
 
 func prayerModifiedAlert(title: String, message: String, thisView: UIViewController){
-    let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
     
     let alertController = UIAlertController(title: "\(title)", message: "\(message)", preferredStyle: .alert)
     let ok = UIAlertAction(title: "OK", style: .default){ (UIAlertAction) in
         thisView.navigationController?.popToRootViewController(animated: true)
     }
     alertController.addAction(ok)
-    topVC!.present(alertController, animated: true, completion: nil)
+    thisView.present(alertController, animated: true, completion: nil)
 }
 
+func resetPasswordAlert(title: String, message: String, thisView: UIViewController){
+    let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
+    
+    let alertController = UIAlertController(title: "\(title)", message: "\(message)", preferredStyle: .alert)
+    let ok = UIAlertAction(title: "OK", style: .default){ (UIAlertAction) in
+        thisView.dismiss(animated: true, completion: nil)
+    }
+    alertController.addAction(ok)
+    topVC!.present(alertController, animated: true, completion: nil)
+}

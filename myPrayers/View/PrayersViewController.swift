@@ -46,11 +46,16 @@ class PrayersViewController: UIViewController, UITableViewDelegate, UITableViewD
             let prayerKey = data.key
             let prayFor = prayerData?["prayFor"] as? String
             let prayer = prayerData?["prayer"] as? String
+            var itemIndex = 0
             
             for item in self.prayerData{
+               
                 if item.prayerKey == prayerKey{
-                    self.prayerData[0].prayFor = prayFor!
-                    self.prayerData[0].prayer = prayer!
+                    self.prayerData[itemIndex].prayFor = prayFor!
+                    self.prayerData[itemIndex].prayer = prayer!
+                    itemIndex += 1
+                }else{
+                    itemIndex += 1
                 }
             }
             
@@ -98,10 +103,22 @@ class PrayersViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
-            let delKey = self.prayerData[indexPath.row].prayerKey
-            self.ref.child("prayers/\(self.userId!)").child("\(delKey)").removeValue()
-            self.prayerData.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            let alertController = UIAlertController(title: "Delete Prayer", message: "Are you sure you want to delete this prayer?", preferredStyle: .alert)
+            
+            let ok = UIAlertAction(title: "Yes", style: .default){ (UIAlertAction) in
+                let delKey = self.prayerData[indexPath.row].prayerKey
+                self.ref.child("prayers/\(self.userId!)").child("\(delKey)").removeValue()
+                self.prayerData.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            let cancel = UIAlertAction(title: "No", style: .cancel){ (UIAlertAction) in
+                //Nothing to do here.
+            }
+            cancel.setValue(UIColor.red, forKey: "titleTextColor")
+            alertController.addAction(ok)
+            alertController.addAction(cancel)
+            self.present(alertController, animated: true, completion: nil)
         }
         delete.backgroundColor = .red
         

@@ -26,6 +26,8 @@ func getVOTD(completion: @escaping (Bool,[String:String])->()){
     request.addValue(YouVersionConstants.accept, forHTTPHeaderField: "accept")
     request.addValue("myPrayers", forHTTPHeaderField: "user-agent")
     
+    print(request)
+    
     let task = session.dataTask(with: request) { data, response, error in
         if error != nil && response != nil  {
             print(error?.localizedDescription ?? "Error")

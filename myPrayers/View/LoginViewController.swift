@@ -10,17 +10,32 @@ import UIKit
 import FirebaseAuth
 import CoreData
 import FirebaseStorage
+import LocalAuthentication
 
 class LoginViewController: UIViewController {
     
     let mainDelegate = UIApplication.shared.delegate as! AppDelegate
     var userId: String!
+    var showBioLogin = false
     @IBOutlet weak var userEmail: UITextField!
     @IBOutlet weak var userPassword: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         createToolbar()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //Check to see if user still logged in.  If so, login screen is being shown after logout.
+        if(Auth.auth().currentUser != nil){
+            do{
+                try Auth.auth().signOut()
+            }catch{
+                print(error)
+            }
+        }else{
+            useBiometricsIfAvailable()
+        }
     }
 
     @IBAction func btnLogin(_ sender: Any) {
@@ -40,12 +55,18 @@ class LoginViewController: UIViewController {
             if (user != nil){
                 self!.userId = user?.user.uid
                 
+                //clear login and password for security reasons after being authenticated.
+                self!.userEmail.text = nil
+                self!.userPassword.text = nil
+                
                 //Check coredata for user info.  Core data values should be present if user previously logged in.
                 self!.getDataFromCoreDataUser { (result) in
                     if(result){
-                        //Open app to nav controller
-                        let VC1 = self?.storyboard?.instantiateViewController(withIdentifier: "Nav Controller") as! UINavigationController
-                        self!.present(VC1, animated: true, completion: nil)
+                        
+                        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let viewController = mainStoryboard.instantiateViewController(withIdentifier: "Nav Controller")
+                        UIApplication.shared.keyWindow?.rootViewController = viewController
+
                     }else{
                         
                         //Save user info to Core data
@@ -56,8 +77,9 @@ class LoginViewController: UIViewController {
                             }
                         })
                         
-                        let VC1 = self?.storyboard?.instantiateViewController(withIdentifier: "Nav Controller") as! UINavigationController
-                        self!.present(VC1, animated: true, completion: nil)
+                        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let viewController = mainStoryboard.instantiateViewController(withIdentifier: "Nav Controller")
+                        UIApplication.shared.keyWindow?.rootViewController = viewController
                     }
                 }
             }else{
@@ -67,6 +89,12 @@ class LoginViewController: UIViewController {
         }
     }
     
+    @IBAction func resetPassword(_ sender: Any) {
+        let VC1 = self.storyboard?.instantiateViewController(withIdentifier: "Reset Password") as! ResetPasswordViewController
+        VC1.inEmailAddress = userEmail.text
+        self.present(VC1, animated: true, completion: nil)
+    }
+
     //Create a toolbar for the keyboard so that we can show a "done" button for the user to dismiss keyboard
     func createToolbar()
     {
@@ -135,7 +163,6 @@ class LoginViewController: UIViewController {
                         let profilePic = UIImage(named: "profile_pic_default")
                         mainDelegate.userImage = profilePic
                     }
-                   
                 }
                 completion(true)
                 return
@@ -166,6 +193,26 @@ class LoginViewController: UIViewController {
                 self.mainDelegate.userImage = userProfileImage
                 completion(true)
                 }
+        }
+    }
+    
+    func useBiometricsIfAvailable(){
+        let context:LAContext = LAContext()
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil){
+            if context.biometryType == LABiometryType.faceID || context.biometryType == LABiometryType.touchID{
+                print(context.biometryType.rawValue)
+                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Biometric Login") { (success, error) in
+                    if(success){
+                        DispatchQueue.main.async {
+                            self.btnLogin(self)
+                        }
+                    }else{
+                        print("Bad Login")
+                    }
+                }
+            }
+
         }
     }
     

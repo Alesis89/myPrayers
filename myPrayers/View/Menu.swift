@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 import FirebaseAuth
 
-class Menu: NSObject{
-    
+class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
+
     //Setup Variables
     let exitButton = UIButton()
     let menuView = UIView()
@@ -26,13 +26,19 @@ class Menu: NSObject{
     let versionLabel = UILabel()
     var topVC = UIViewController()
     let mainDelegate = UIApplication.shared.delegate as! AppDelegate
+    var tableView = UITableView()
 
-    
     func showMenu(){
         
         if let window = UIApplication.shared.keyWindow{
             let height = window.frame.height
             let width: CGFloat = 250
+    
+            tableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+            tableView.dataSource = self
+            tableView.delegate = self
+            tableView.backgroundColor = .white
+            tableView.tableFooterView = UIView(frame: CGRect.zero)
             
             //Call function to setup a black grounds that our menu will show on top of
             setupBlackBackground(window: window)
@@ -65,13 +71,15 @@ class Menu: NSObject{
             setupVersionLabel()
             setupExitButton()
             
-            menuView.addSubview(self.votdSetting)
-            menuView.addSubview(votdLabel)
+            //menuView.addSubview(self.votdSetting)
+            //menuView.addSubview(votdLabel)
+            menuView.addSubview(tableView)
             menuView.addSubview(versionLabel)
             menuView.addSubview(self.exitButton)
            
-            setVOTDSwitchConstraints()
-            setVotdConstraints()
+            //setVOTDSwitchConstraints()
+            //setVotdConstraints()
+            setTableConstraints()
             setVersionConstraints()
             setExitButtonConstraints()
             
@@ -122,7 +130,6 @@ class Menu: NSObject{
         settingsButton.bottomAnchor.constraint(equalTo: profileView.bottomAnchor, constant: -5).isActive = true
         settingsButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
         settingsButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        
     }
     
     func setupProfileImage(){
@@ -132,10 +139,6 @@ class Menu: NSObject{
         profileImageView.isUserInteractionEnabled = true
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         profileImageView.clipsToBounds = true
-        
-        if(profileImageView.image?.imageOrientation == UIImage.Orientation .up){
-            print("Image is landscape")
-        }
     }
 
     func setProfileImageConstraints(){
@@ -178,6 +181,15 @@ class Menu: NSObject{
         votdLabel.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 10).isActive = true
         votdLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
         votdLabel.topAnchor.constraint(equalTo: profileView.safeAreaLayoutGuide.bottomAnchor, constant: 30).isActive = true
+    }
+    
+    func setTableConstraints(){
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: profileView.bottomAnchor, constant: 30).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: exitButton.topAnchor, constant: -30).isActive = true
+        //tableView.heightAnchor.constraint(equalToConstant:50).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 0).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: menuView.trailingAnchor, constant: 0).isActive = true
     }
     
     func setupVOTDSwitch(){
@@ -229,7 +241,7 @@ class Menu: NSObject{
     }
     
     @objc func settingsButtonAction(_ sender:UIButton!){
-        let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
+        let topVC = UIApplication.shared.keyWindow?.rootViewController
         let SC1 = topVC?.storyboard?.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
         
         //set data in SC1 form
@@ -253,7 +265,7 @@ class Menu: NSObject{
         
         if logout{
             
-            let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
+            let topVC = UIApplication.shared.keyWindow?.rootViewController
             
             //Confirm user wants to logout
             let alertController = UIAlertController(title: "Confirm Sign Out", message: "Are you sure you want to sign out?", preferredStyle: .alert)
@@ -266,14 +278,17 @@ class Menu: NSObject{
                     self.blackBackgroundView.alpha = 0
                     self.menuView.frame = CGRect.init(x: 0, y: 0, width: -250, height: height!)
                 }
-                do{
-                    try Auth.auth().signOut()
-                    topVC!.dismiss(animated: true, completion: nil)
-                }catch{
-                    print(error)
-                }
+//                do{
+//                    try Auth.auth().signOut()
+                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let viewController = mainStoryboard.instantiateViewController(withIdentifier: "Login Controller")
+                    UIApplication.shared.keyWindow?.rootViewController = viewController
+//                }catch{
+//                    print(error)
+//                }
                 
             }
+            
             alertController.addAction(cancel)
             alertController.addAction(confirm)
             topVC!.present(alertController, animated: true, completion: nil)
@@ -293,5 +308,68 @@ class Menu: NSObject{
         let build = dictionary![AppVersionBuildConstants.buildNumber] as! String
         
         return "v\(version) (\(build))"
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (section == 0){
+            return 1
+        }else if (section == 1){
+            return 1
+        }else if (section == 2){
+            return 2
+        }
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //should change StaticCell to the static cell class you want to use.
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath)
+        if indexPath.section == 0{
+            cell.textLabel?.text = "Coming Soon..."
+            return cell
+        }else if indexPath.section == 1{
+            cell.textLabel?.text = votdLabel.text
+            cell.accessoryView = votdSetting
+            return cell
+        }else if indexPath.section == 2{
+            if(indexPath.row == 0){
+                cell.textLabel?.text = "Face ID:  Coming Soon..."
+                return cell
+            }else if (indexPath.row == 1){
+                cell.textLabel?.text = "Reset Password:  Coming Soon..."
+                return cell
+            }else{
+                return cell
+            }
+            
+        }else{
+            return cell
+        }
+        //cell.textLabel?.text = "Test\(indexPath.row)"
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 25.0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.textColor = .lightGray
+        label.font = UIFont(name: "Avenir Next-Bold", size: 14.0)
+        
+        if(section == 0){
+            label.text = "Notifications"
+            return label
+        }else if (section == 1){
+            label.text = "Verse of the Day"
+            return label
+        }else if (section == 2){
+            label.text = "Profile Security"
+            return label
+        }else{
+            return label
+        }
     }
 }
