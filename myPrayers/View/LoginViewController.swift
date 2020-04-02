@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var logo: UIImageView!
     let mainDelegate = UIApplication.shared.delegate as! AppDelegate
     var userId: String!
-    let bioImage = UIImage(named: "face-id")
+    var bioImage = UIImageView()
     let bioButton = UIButton()
     let storedUserName = KeychainWrapper.standard.string(forKey: "userName")
     let storedUserPassword = KeychainWrapper.standard.string(forKey: "userPwd")
@@ -32,7 +32,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createToolbar()
-        setupBioButton()
         setupLoginButton()
         setupPasswordImage()
         
@@ -41,28 +40,30 @@ class LoginViewController: UIViewController {
         if isBiometricsAvailable(){
             
             //check if biometric option off in the app.  If so, do not run biometric option
-           
-                if (checkBio == false){
-                    //do not run any biometric options.  Show login form as is.
-                    bioButton.isHidden = true
-                }else{
-                    
-                    //check to make sure we have credentials already stored user.
-                    //if not, we cannot login with bio.
-                    if(storedUserName != nil && storedUserPassword != nil){
-                        bioButton.isHidden = false
-                        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Biometric Login") { (success, error) in
-                            if(success){
-                                DispatchQueue.main.async {
-                                    self.loginUser(userName: self.storedUserName, userPassword: self.storedUserPassword)
-                                }
-                            }else{
-                                print("Cannot login")
+            
+            if (checkBio == false){
+                //do not run any biometric options.  Show login form as is.
+                bioButton.isHidden = true
+            }else{
+                
+                //check to make sure we have credentials already stored user.
+                //if not, we cannot login with bio.
+                if(storedUserName != nil && storedUserPassword != nil){
+                    bioButton.isHidden = false
+                    context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Biometric Login") { (success, error) in
+                        if(success){
+                            DispatchQueue.main.async {
+                                self.loginUser(userName: self.storedUserName, userPassword: self.storedUserPassword)
                             }
+                        }else{
+                            print("Cannot login")
                         }
                     }
                 }
+            }
         }
+        
+        setupBioButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -83,12 +84,12 @@ class LoginViewController: UIViewController {
     }
     
     func setupBioButton(){
-        bioButton.setImage(bioImage, for: .normal)
+        bioButton.setImage(bioImage.image, for: .normal)
         bioButton.addTarget(self, action: #selector(faceIdTapped), for: .touchUpInside)
         //push the button off the edge of the textfield
         bioButton.contentEdgeInsets.right = 10
         bioButton.contentEdgeInsets.left = -10
-        bioButton.isHidden = true
+//        bioButton.isHidden = true
     }
     
     @objc func faceIdTapped(_ sender: Any) {
@@ -101,7 +102,7 @@ class LoginViewController: UIViewController {
                         self.loginUser(userName: self.storedUserName, userPassword: self.storedUserPassword)
                     }
                 }else{
-                    print("Cannot login")
+                    errorMessageAlert(title: "Error", message: "Unable to login, please try again later.", thisView: self)
                 }
             }
         }else if (userEmail.text == "" || userPassword.text == ""){
@@ -303,8 +304,14 @@ class LoginViewController: UIViewController {
         var result = false
 
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil ){
-            if context.biometryType == LABiometryType.faceID || context.biometryType == LABiometryType.touchID{
+            if context.biometryType == LABiometryType.faceID{
+                bioImage.image =  UIImage(named: "face-id")!
                 result = true
+            }else{
+                if context.biometryType == LABiometryType.touchID{
+                    bioImage.image = UIImage(named: "fingerprint")!
+                    result = true
+                }
             }
         }else{
             bioButton.isHidden = true

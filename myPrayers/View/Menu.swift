@@ -21,7 +21,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     var votdSetting = UISwitch()
     var votdLabel = UILabel()
     var faceIdSetting = UISwitch()
-    let faceIDLabel = "Face ID:"
+    var faceIDLabel = ""
     var profileUserName = UILabel()
     var profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
     var settingsImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
@@ -34,6 +34,19 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     let context:LAContext = LAContext()
 
     func showMenu(){
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil ){
+            if context.biometryType == LABiometryType.faceID{
+                faceIDLabel = "Face ID:"
+            }else{
+                if context.biometryType == LABiometryType.touchID{
+                    faceIDLabel = "Touch ID:"
+                }
+            }
+        }
+        
+        
+        
         
         if let window = UIApplication.shared.keyWindow{
             let height = window.frame.height
@@ -151,7 +164,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
 
     func setProfileImageConstraints(){
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        profileImageView.topAnchor.constraint(equalTo: profileView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        profileImageView.topAnchor.constraint(equalTo: profileView.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
         profileImageView.centerXAnchor.constraint(equalTo: profileView.centerXAnchor).isActive = true
         profileImageView.heightAnchor.constraint(equalToConstant: 110).isActive = true
         profileImageView.widthAnchor.constraint(equalToConstant: 110).isActive = true
