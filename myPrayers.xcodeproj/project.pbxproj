@@ -44,6 +44,7 @@
 		1D5B47B7230213B100CA6CDB /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		1D5B47B9230237BF00CA6CDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1D7EA980230C7862003954CD /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		1D855C84243650FC00A02391 /* myPrayers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myPrayers.entitlements; sourceTree = "<group>"; };
 		1D8D54232435587500AA6E08 /* DailyNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNotificationViewController.swift; sourceTree = "<group>"; };
 		1D96C195230EF7CE0047A9F0 /* ViewPrayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPrayerViewController.swift; sourceTree = "<group>"; };
 		1D9E343A2301CAB000CE4ABF /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
@@ -99,6 +100,7 @@
 		1DB1084922F7B88200DB4C26 /* myPrayers */ = {
 			isa = PBXGroup;
 			children = (
+				1D855C84243650FC00A02391 /* myPrayers.entitlements */,
 				1DB1086122F7B8CB00DB4C26 /* Controller */,
 				1DB1086022F7B8B700DB4C26 /* View */,
 				1DB1085F22F7B8A400DB4C26 /* Model */,
@@ -451,8 +453,9 @@
 			baseConfigurationReference = E1F76695AB63BF467DF650A4 /* Pods-myPrayers.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = myPrayers/myPrayers.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 8Y3E4QY6HH;
 				INFOPLIST_FILE = myPrayers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -471,8 +474,9 @@
 			baseConfigurationReference = B9181EEC1207538662B7745D /* Pods-myPrayers.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = myPrayers/myPrayers.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 8Y3E4QY6HH;
 				INFOPLIST_FILE = myPrayers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

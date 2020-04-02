@@ -306,10 +306,7 @@ class LoginViewController: UIViewController {
             if context.biometryType == LABiometryType.faceID || context.biometryType == LABiometryType.touchID{
                 result = true
             }
-            print("Biometrics are available")
-        
         }else{
-            print("Biometrics not available")
             bioButton.isHidden = true
             result = false
         }
