@@ -10,13 +10,15 @@ import UIKit
 import CoreData
 import Firebase
 import FirebaseAuth
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
     var displayName: String!
     var userImage: UIImage!
+    let notificationCenter = UNUserNotificationCenter.current()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -40,8 +42,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = homePage
             
         }
+        
+        UNUserNotificationCenter.current().delegate = self
        
         return true
+    }
+    
+    func registerForPushNotifications() {
+        
+        let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options: [.alert, .sound, .badge]) {
+                granted, error in
+                guard granted else { return }
+                self.getNotificationSettings()
+        }
+    }
+    
+    func getNotificationSettings() {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            //print("Notification settings: \(settings)")
+            guard settings.authorizationStatus == .authorized else { return }
+            DispatchQueue.main.async {
+                UIApplication.shared.registerForRemoteNotifications()
+            }
+        }
     }
     
     func checkVOTDAtStartup()->Bool{
@@ -140,6 +164,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    func scheduleDailyNotification(inHour: Int, inMin: Int){
+        let identifier = "Daily Reminder"
+        let content = UNMutableNotificationContent()
+        content.title = "Daily Prayer Reminder"
+        content.body = "Take time now to pray for those in your prayer list."
+        content.categoryIdentifier = "alarm"
+        content.sound = UNNotificationSound.default
+        
+        var dateComponents = DateComponents()
+        dateComponents.hour = inHour
+        dateComponents.minute = inMin
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        notificationCenter.add(request)
+    }
+    
+    func removeDailyNotification(identifier: String){
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
+    }
+    
 
 }
 

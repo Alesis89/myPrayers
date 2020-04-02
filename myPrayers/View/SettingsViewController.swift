@@ -19,7 +19,10 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var confirmEmail: UITextField!
     @IBOutlet weak var profileImage: UIImageView!
-    let overlayImageView = UIImageView(frame: CGRect(x: 75, y: 50, width: 25, height: 25))
+    @IBOutlet weak var resetPasswordButton: UIButton!
+    
+    
+    let overlayImageView = UIImageView(frame: CGRect(x: 75, y: 50, width: 60, height: 50))
     let mainDelegate = UIApplication.shared.delegate as! AppDelegate
     
     //keep track of values that have changed
@@ -42,6 +45,8 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         
         //setup Profile Image
         setupProfileImage()
+        setupSaveButton()
+        setupResetPasswordButton()
         firstName.text = inFN
         lastName.text = inLN
         email.text = inEmail
@@ -56,6 +61,17 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         
         //create toolbar with Done option so user can close keyboard
         createToolbar()
+        
+        
+        
+    }
+    
+    func setupSaveButton(){
+        saveButton.layer.cornerRadius = 10.0
+    }
+    
+    func setupResetPasswordButton(){
+        resetPasswordButton.layer.cornerRadius = 10.0
     }
 
     @IBAction func saveButton(_ sender: Any) {
@@ -110,6 +126,13 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         }
     }
     
+    @IBAction func resetPassword(_ sender: Any) {
+        let VC1 = self.storyboard?.instantiateViewController(withIdentifier: "Reset Password") as! ResetPasswordViewController
+        VC1.inEmailAddress = email.text
+        self.present(VC1, animated: true, completion: nil)
+    }
+    
+    
     func setupProfileImage(){
         profileImage.image = inImage
         profileImage.contentMode = .scaleAspectFill
@@ -122,7 +145,16 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func setupOverlayImage()->UIImageView{
-        overlayImageView.image = UIImage(named: "settings")
+        if #available(iOS 13.0, *) {
+            overlayImageView.image = UIImage(systemName: "camera")
+            overlayImageView.contentMode = .scaleAspectFit
+        } else {
+            // Fallback on earlier versions
+        }
+        overlayImageView.alpha = 0.6
+        overlayImageView.layer.cornerRadius =  overlayImageView.frame.size.width / 2
+        overlayImageView.center = CGPoint(x: profileImage.frame.size.width  / 2,
+        y: profileImage.frame.size.height / 2)
         let retImage = overlayImageView
         return retImage
     }

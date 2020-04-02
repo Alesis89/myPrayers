@@ -60,3 +60,23 @@ func resetPasswordAlert(title: String, message: String, thisView: UIViewControll
     alertController.addAction(ok)
     topVC!.present(alertController, animated: true, completion: nil)
 }
+
+func dailyNotificationAddedAlert(title: String, message: String, thisView: UIViewController){
+    
+    let alertController = UIAlertController(title: "\(title)", message: "\(message)", preferredStyle: .alert)
+    let ok = UIAlertAction(title: "OK", style: .default){ (UIAlertAction) in
+        thisView.navigationController?.popToRootViewController(animated: true)
+    }
+    alertController.addAction(ok)
+    thisView.present(alertController, animated: true, completion: nil)
+}
+
+func dailyNotificationRemovedAlert(title: String, message: String, thisView: UIViewController){
+    
+    let alertController = UIAlertController(title: "\(title)", message: "\(message)", preferredStyle: .alert)
+    let ok = UIAlertAction(title: "OK", style: .default){ (UIAlertAction) in
+        thisView.navigationController?.popToRootViewController(animated: true)
+    }
+    alertController.addAction(ok)
+    thisView.present(alertController, animated: true, completion: nil)
+}

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -65,15 +65,15 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eFB-7h-CyY">
                                 <rect key="frame" x="5" y="301.5" width="404" height="170"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="alesis89@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Zp-bW-I6c">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Zp-bW-I6c">
                                         <rect key="frame" x="0.0" y="0.0" width="404" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="CIS-mx-xlq"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" textContentType="email"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="prayers1234" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aQj-qn-kbb">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aQj-qn-kbb">
                                         <rect key="frame" x="0.0" y="60" width="404" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="6Ea-vU-LcK"/>
@@ -83,7 +83,7 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A5T-wD-yDp">
                                         <rect key="frame" x="0.0" y="120" width="404" height="50"/>
-                                        <color key="backgroundColor" red="0.76018208269999998" green="0.76078431369999999" blue="0.87302601339999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.76078431372549016" green="0.76078431372549016" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="v9t-xM-0oz"/>
                                         </constraints>
@@ -92,7 +92,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="btnLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bWF-fR-KrS"/>
+                                            <action selector="btnLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MOd-9f-6C4"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -117,7 +117,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="KyN-0A-8Mk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0dR-62-B2m"/>
                             <constraint firstItem="s2I-hl-Wwj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3hZ-KB-TMm"/>
@@ -133,6 +133,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="login" destination="A5T-wD-yDp" id="tn6-B2-WAD"/>
+                        <outlet property="logo" destination="KyN-0A-8Mk" id="fjO-NS-XdR"/>
                         <outlet property="userEmail" destination="8Zp-bW-I6c" id="0Hz-hQ-DeE"/>
                         <outlet property="userPassword" destination="aQj-qn-kbb" id="HX4-eF-UQR"/>
                     </connections>
@@ -193,7 +195,7 @@
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="7u2-N5-khJ" firstAttribute="trailing" secondItem="TW2-qk-Sgg" secondAttribute="trailing" constant="20" id="2dk-4n-FTQ"/>
                             <constraint firstItem="oUx-xJ-yrR" firstAttribute="trailing" secondItem="7u2-N5-khJ" secondAttribute="trailing" id="5wm-le-fjg"/>
@@ -243,7 +245,7 @@
                                             <constraint firstAttribute="height" constant="50" id="nx2-tW-jsK"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OaW-cS-IAe">
                                         <rect key="frame" x="0.0" y="55" width="374" height="50"/>
@@ -252,7 +254,7 @@
                                             <constraint firstAttribute="height" constant="50" id="G6r-oS-vKp"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cGN-Qi-ep2">
                                         <rect key="frame" x="0.0" y="110" width="374" height="50"/>
@@ -288,15 +290,33 @@
                                     <action selector="saveButton:" destination="wts-gM-dyz" eventType="touchUpInside" id="UfR-H8-Jpw"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M3Z-4H-F8k">
+                                <rect key="frame" x="30" y="562" width="354" height="50"/>
+                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="IsA-6z-iAr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Reset Password">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetPassword:" destination="wts-gM-dyz" eventType="touchUpInside" id="CX0-hU-alf"/>
+                                    <action selector="saveButton:" destination="wts-gM-dyz" eventType="touchUpInside" id="uYi-WV-bAa"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="M3Z-4H-F8k" firstAttribute="top" secondItem="F7T-AF-f5u" secondAttribute="bottom" constant="8" id="6Vh-43-bDm"/>
                             <constraint firstItem="F7T-AF-f5u" firstAttribute="top" secondItem="Sg2-17-Hrt" secondAttribute="bottom" constant="60" id="8rH-3t-i8y"/>
                             <constraint firstItem="lJW-gf-0og" firstAttribute="top" secondItem="fWO-9G-MdS" secondAttribute="top" constant="50" id="Nze-Nu-RI4"/>
+                            <constraint firstItem="fWO-9G-MdS" firstAttribute="trailing" secondItem="M3Z-4H-F8k" secondAttribute="trailing" constant="30" id="TCK-Bv-TNC"/>
                             <constraint firstItem="Sg2-17-Hrt" firstAttribute="leading" secondItem="fWO-9G-MdS" secondAttribute="leading" constant="20" id="YCv-45-dKd"/>
                             <constraint firstItem="fWO-9G-MdS" firstAttribute="trailing" secondItem="F7T-AF-f5u" secondAttribute="trailing" constant="30" id="jkl-xq-T0x"/>
                             <constraint firstItem="lJW-gf-0og" firstAttribute="centerX" secondItem="IkZ-AH-zXx" secondAttribute="centerX" id="krO-Na-Wy9"/>
                             <constraint firstItem="F7T-AF-f5u" firstAttribute="leading" secondItem="fWO-9G-MdS" secondAttribute="leading" constant="30" id="tCw-mP-OKq"/>
+                            <constraint firstItem="M3Z-4H-F8k" firstAttribute="leading" secondItem="fWO-9G-MdS" secondAttribute="leading" constant="30" id="tyu-Nu-W6b"/>
                             <constraint firstItem="fWO-9G-MdS" firstAttribute="trailing" secondItem="Sg2-17-Hrt" secondAttribute="trailing" constant="20" id="vHg-Tp-WGI"/>
                             <constraint firstItem="Sg2-17-Hrt" firstAttribute="top" secondItem="lJW-gf-0og" secondAttribute="bottom" constant="25" id="xRc-9R-6Eu"/>
                         </constraints>
@@ -308,6 +328,7 @@
                         <outlet property="firstName" destination="9sL-4t-B2t" id="T3i-Qf-Pf9"/>
                         <outlet property="lastName" destination="OaW-cS-IAe" id="Uol-1U-cgV"/>
                         <outlet property="profileImage" destination="lJW-gf-0og" id="Ux1-fB-Qs0"/>
+                        <outlet property="resetPasswordButton" destination="M3Z-4H-F8k" id="jL3-Cw-RK7"/>
                         <outlet property="saveButton" destination="F7T-AF-f5u" id="zuL-Vm-e2x"/>
                     </connections>
                 </viewController>
@@ -315,20 +336,106 @@
             </objects>
             <point key="canvasLocation" x="416" y="666"/>
         </scene>
+        <!--Daily Notification View Controller-->
+        <scene sceneID="fLv-fO-bGX">
+            <objects>
+                <viewController storyboardIdentifier="Daily Reminder" id="uaG-9k-PeL" customClass="DailyNotificationViewController" customModule="myPrayers" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GC0-Rk-ENi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1vF-tB-xYU">
+                                <rect key="frame" x="47" y="159" width="320" height="216"/>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EuS-Xi-9hZ">
+                                <rect key="frame" x="30" y="383" width="354" height="50"/>
+                                <color key="backgroundColor" red="0.76018208269999998" green="0.76078431369999999" blue="0.87302601339999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="h84-33-dEa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Set Daily Time">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="SetTime:" destination="uaG-9k-PeL" eventType="touchUpInside" id="eDC-tj-u0N"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFw-Yd-4Qj">
+                                <rect key="frame" x="30" y="441" width="354" height="50"/>
+                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="TmD-G1-tz2"/>
+                                    <constraint firstAttribute="height" constant="50" id="g1u-Mw-MuQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Remove Daily Reminder">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="RemoveTime:" destination="uaG-9k-PeL" eventType="touchUpInside" id="bmK-Kb-ysF"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Set Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WRp-qs-rJO">
+                                <rect key="frame" x="138.5" y="109" width="137.5" height="24"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not Set" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JKf-ii-1cH">
+                                <rect key="frame" x="183" y="135" width="48" height="19.5"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="YlS-hi-R8V" firstAttribute="trailing" secondItem="EuS-Xi-9hZ" secondAttribute="trailing" constant="30" id="0at-d3-gNq"/>
+                            <constraint firstItem="EuS-Xi-9hZ" firstAttribute="leading" secondItem="YlS-hi-R8V" secondAttribute="leading" constant="30" id="1sm-mx-eYr"/>
+                            <constraint firstItem="JKf-ii-1cH" firstAttribute="centerX" secondItem="GC0-Rk-ENi" secondAttribute="centerX" id="BxW-xw-qoV"/>
+                            <constraint firstItem="JKf-ii-1cH" firstAttribute="top" secondItem="WRp-qs-rJO" secondAttribute="bottom" constant="2" id="JRJ-XS-rbm"/>
+                            <constraint firstItem="YlS-hi-R8V" firstAttribute="trailing" secondItem="cFw-Yd-4Qj" secondAttribute="trailing" constant="30" id="NYu-cA-zou"/>
+                            <constraint firstItem="1vF-tB-xYU" firstAttribute="leading" secondItem="YlS-hi-R8V" secondAttribute="leading" constant="47" id="RDU-pM-9wY"/>
+                            <constraint firstItem="cFw-Yd-4Qj" firstAttribute="leading" secondItem="YlS-hi-R8V" secondAttribute="leading" constant="30" id="STc-Xt-jUy"/>
+                            <constraint firstItem="1vF-tB-xYU" firstAttribute="top" secondItem="YlS-hi-R8V" secondAttribute="top" constant="115" id="UaU-9B-S0X"/>
+                            <constraint firstItem="EuS-Xi-9hZ" firstAttribute="top" secondItem="1vF-tB-xYU" secondAttribute="bottom" constant="8" id="Xct-hp-h9l"/>
+                            <constraint firstItem="1vF-tB-xYU" firstAttribute="centerX" secondItem="GC0-Rk-ENi" secondAttribute="centerX" id="XfB-RB-SYs"/>
+                            <constraint firstItem="1vF-tB-xYU" firstAttribute="top" secondItem="WRp-qs-rJO" secondAttribute="bottom" constant="26" id="evH-r3-B9N"/>
+                            <constraint firstItem="WRp-qs-rJO" firstAttribute="top" secondItem="YlS-hi-R8V" secondAttribute="top" constant="65" id="gQX-9B-fPx"/>
+                            <constraint firstItem="YlS-hi-R8V" firstAttribute="trailing" secondItem="1vF-tB-xYU" secondAttribute="trailing" constant="47" id="gcS-Vi-9oW"/>
+                            <constraint firstItem="WRp-qs-rJO" firstAttribute="centerX" secondItem="GC0-Rk-ENi" secondAttribute="centerX" id="ir8-TT-k7X"/>
+                            <constraint firstItem="cFw-Yd-4Qj" firstAttribute="top" secondItem="EuS-Xi-9hZ" secondAttribute="bottom" constant="8" id="w3y-U7-THF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="YlS-hi-R8V"/>
+                    </view>
+                    <connections>
+                        <outlet property="DatePicker" destination="1vF-tB-xYU" id="FQy-1g-xeB"/>
+                        <outlet property="RemoveTimeBtn" destination="cFw-Yd-4Qj" id="jpP-pI-YVq"/>
+                        <outlet property="SetTimeBtn" destination="EuS-Xi-9hZ" id="Omd-Ds-10N"/>
+                        <outlet property="currentTimeLbl" destination="JKf-ii-1cH" id="bKL-w4-qB0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LoZ-lJ-G9T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1045" y="666"/>
+        </scene>
         <!--myPrayers-->
         <scene sceneID="xwD-zk-lir">
             <objects>
                 <tableViewController storyboardIdentifier="PrayersVC" id="pEu-XP-XdY" customClass="PrayersViewController" customModule="myPrayers" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="130" sectionHeaderHeight="28" sectionFooterHeight="28" id="DaZ-Yx-8nb">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="170" sectionHeaderHeight="28" sectionFooterHeight="28" id="DaZ-Yx-8nb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ZYw-2r-Gd7"/>
+                        <inset key="scrollIndicatorInsets" minX="0.0" minY="19" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="prayerCell" rowHeight="130" id="jti-7A-T2v" customClass="PrayerTableViewCell" customModule="myPrayers" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="130"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="prayerCell" rowHeight="170" id="jti-7A-T2v" customClass="PrayerTableViewCell" customModule="myPrayers" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="170"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jti-7A-T2v" id="NcU-Sv-ovz">
-                                    <rect key="frame" x="0.0" y="0.0" width="382.5" height="130"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="170"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Pray For:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Omr-fr-RCY">
@@ -345,19 +452,19 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsx-cF-Oeq">
-                                            <rect key="frame" x="152" y="15" width="210.5" height="23.5"/>
+                                            <rect key="frame" x="152" y="15" width="211" height="23.5"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1Q-6c-lAC">
-                                            <rect key="frame" x="78" y="35.5" width="284.5" height="16.5"/>
+                                            <rect key="frame" x="78" y="35.5" width="285" height="16.5"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zu-HY-Bck">
-                                            <rect key="frame" x="20" y="65" width="342.5" height="57"/>
+                                            <rect key="frame" x="20" y="65" width="343" height="97"/>
                                             <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -397,13 +504,13 @@
                     <navigationItem key="navigationItem" title="myPrayers" id="129-3h-Dgp">
                         <barButtonItem key="backBarButtonItem" title="Back" id="7WJ-Qu-kdt"/>
                         <barButtonItem key="leftBarButtonItem" title="Item" image="Menu" id="PQB-9x-IpH" userLabel="Menu">
-                            <color key="tintColor" red="0.76177829504013062" green="0.76207143068313599" blue="0.8666805624961853" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="openMenu:" destination="pEu-XP-XdY" id="9WA-IF-wmT"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="dGM-aZ-pyl">
-                            <color key="tintColor" red="0.60861361030000005" green="0.60974669459999997" blue="0.69020694490000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="Pgg-m1-0Tz" kind="show" identifier="addPrayer" id="A16-Rr-aHN"/>
                             </connections>
@@ -415,7 +522,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vG-Fa-E1g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1035" y="21"/>
+            <point key="canvasLocation" x="1034.7826086956522" y="20.758928571428569"/>
         </scene>
         <!--Add Prayer-->
         <scene sceneID="vDX-8B-9lO">
@@ -445,7 +552,7 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Prayer?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oXz-V7-RhX">
                                         <rect key="frame" x="0.0" y="55" width="374" height="145"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="textColor" red="0.7883765697479248" green="0.78785079717636108" blue="0.80392426252365112" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -469,7 +576,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="ht7-Rs-MR2" firstAttribute="top" secondItem="lHd-Dw-GN6" secondAttribute="top" constant="44" id="0MZ-9J-L0o"/>
                             <constraint firstItem="fK7-jJ-Ldi" firstAttribute="top" secondItem="ht7-Rs-MR2" secondAttribute="bottom" constant="20" id="0YF-Ld-Ybd"/>
@@ -560,7 +667,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="eMa-XQ-kNK" firstAttribute="trailing" secondItem="eIr-FW-4NU" secondAttribute="trailing" constant="30" id="1pF-Y1-eaS"/>
                             <constraint firstItem="YZH-cb-XpK" firstAttribute="top" secondItem="yq4-Wy-APN" secondAttribute="top" constant="44" id="A0i-SJ-vIr"/>
@@ -592,7 +699,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rUo-s4-L8T">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rUo-s4-L8T">
                                 <rect key="frame" x="20" y="175" width="374" height="679"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>

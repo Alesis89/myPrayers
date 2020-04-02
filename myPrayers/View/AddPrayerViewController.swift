@@ -24,6 +24,8 @@ class AddPrayerViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupAddPrayerButton()
+        
         //Get userId of logged in user
         userID = Auth.auth().currentUser?.uid
         
@@ -81,5 +83,9 @@ class AddPrayerViewController: UIViewController, UITextViewDelegate {
                 activity.stopAnimating()
             }
         }
+    }
+    
+    func setupAddPrayerButton(){
+        addPrayerBtn.layer.cornerRadius = 10
     }
 }

@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import FirebaseAuth
+import LocalAuthentication
+import SwiftKeychainWrapper
 
 class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
 
@@ -18,6 +20,8 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     let profileView = UIView()
     var votdSetting = UISwitch()
     var votdLabel = UILabel()
+    var faceIdSetting = UISwitch()
+    let faceIDLabel = "Face ID:"
     var profileUserName = UILabel()
     var profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
     var settingsImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
@@ -27,6 +31,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     var topVC = UIViewController()
     let mainDelegate = UIApplication.shared.delegate as! AppDelegate
     var tableView = UITableView()
+    let context:LAContext = LAContext()
 
     func showMenu(){
         
@@ -39,6 +44,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
             tableView.delegate = self
             tableView.backgroundColor = .white
             tableView.tableFooterView = UIView(frame: CGRect.zero)
+            
             
             //Call function to setup a black grounds that our menu will show on top of
             setupBlackBackground(window: window)
@@ -68,6 +74,8 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
             setupVotdLabel()
             setupVOTDSwitch()
             setVOTDSwitch()
+            setupBioSwitch()
+            setBioSwitch()
             setupVersionLabel()
             setupExitButton()
             
@@ -105,12 +113,12 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     
     func setupMenuView(window: UIWindow){
         menuView.frame = CGRect(x: 0, y: 0, width: -250, height: window.frame.height)
-        menuView.backgroundColor = UIColor.white
+        menuView.backgroundColor = .white
     }
     
     func setupProfileView(window: UIWindow){
         profileView.frame = CGRect(x: 0, y: 0, width: 250, height: window.frame.height/4)
-        profileView.backgroundColor = UIColor.white
+        profileView.backgroundColor = .white
         profileView.layer.shadowColor = UIColor.black.cgColor
         profileView.layer.shadowOpacity = 1
         profileView.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
@@ -120,7 +128,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     func setupSettingsButton(){
         settingsImageView.image = UIImage(named: "settings")
         settingsButton.setImage(settingsImageView.image, for: .normal)
-        settingsButton.setTitleColor(UIColor.red, for: .normal)
+        settingsButton.tintColor = UIColor.purple
         settingsButton.addTarget(self, action: #selector(self.settingsButtonAction(_:)), for: .touchUpInside)
     }
     
@@ -197,6 +205,11 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
         votdSetting.addTarget(self, action: #selector(VOTDSwitchTapped), for: .touchUpInside)
     }
     
+    func setupBioSwitch(){
+        //faceIdSetting = UISwitch(frame:CGRect(x: 150, y: 150, width: 0, height: 0))
+        faceIdSetting.addTarget(self, action: #selector(bioSwitchTapped), for: .touchUpInside)
+    }
+    
     func setVOTDSwitchConstraints(){
         votdSetting.translatesAutoresizingMaskIntoConstraints = false
         votdSetting.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -226,7 +239,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     
     @objc func setVOTDSwitch(){
         let setSwitchTo = UserDefaults.standard.value(forKey: "VOTD-ON") as? Bool
-        votdSetting.setOn(setSwitchTo!, animated: false)
+        votdSetting.setOn(setSwitchTo!, animated: true)
     }
     
     @objc func VOTDSwitchTapped(){
@@ -240,8 +253,30 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
         }
     }
     
+    @objc func bioSwitchTapped(){
+        if (faceIdSetting.isOn){
+            let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
+            UserDefaults.standard.set(true, forKey: "SET BIOMETRICS")
+            setBioSwitch()
+            errorMessageAlert(title: "Test", message: "Biometrics will be activated next time you start the application", thisView: topVC!)
+        }else{
+            //remove stored keychain values
+            let _: Bool = KeychainWrapper.standard.removeObject(forKey: "userName")
+            let _: Bool = KeychainWrapper.standard.removeObject(forKey: "userPwd")
+            UserDefaults.standard.set(false, forKey: "SET BIOMETRICS")
+            setBioSwitch()
+        }
+    }
+    
+    @objc func setBioSwitch(){
+        if let setBioSwitchTo = UserDefaults.standard.value(forKey: "SET BIOMETRICS") as? Bool{
+            faceIdSetting.setOn(setBioSwitchTo, animated: true)
+        }
+        
+    }
+    
     @objc func settingsButtonAction(_ sender:UIButton!){
-        let topVC = UIApplication.shared.keyWindow?.rootViewController
+        let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
         let SC1 = topVC?.storyboard?.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
         
         //set data in SC1 form
@@ -265,7 +300,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
         
         if logout{
             
-            let topVC = UIApplication.shared.keyWindow?.rootViewController
+            let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
             
             //Confirm user wants to logout
             let alertController = UIAlertController(title: "Confirm Sign Out", message: "Are you sure you want to sign out?", preferredStyle: .alert)
@@ -278,15 +313,10 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
                     self.blackBackgroundView.alpha = 0
                     self.menuView.frame = CGRect.init(x: 0, y: 0, width: -250, height: height!)
                 }
-//                do{
-//                    try Auth.auth().signOut()
-                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let viewController = mainStoryboard.instantiateViewController(withIdentifier: "Login Controller")
-                    UIApplication.shared.keyWindow?.rootViewController = viewController
-//                }catch{
-//                    print(error)
-//                }
-                
+                topVC?.dismiss(animated: true, completion: nil)
+                    //let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    //let viewController = mainStoryboard.instantiateViewController(withIdentifier: "Login Controller")
+                    //UIApplication.shared.keyWindow?.rootViewController = viewController
             }
             
             alertController.addAction(cancel)
@@ -316,7 +346,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
         }else if (section == 1){
             return 1
         }else if (section == 2){
-            return 2
+            return 1
         }
         return 1
     }
@@ -324,34 +354,62 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //should change StaticCell to the static cell class you want to use.
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath)
+        cell.backgroundColor = .white
+        cell.selectionStyle = .none
+        
         if indexPath.section == 0{
-            cell.textLabel?.text = "Coming Soon..."
+            cell.textLabel?.text = "Daily Reminder"
+            cell.textLabel?.textColor = .black
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
             return cell
         }else if indexPath.section == 1{
             cell.textLabel?.text = votdLabel.text
+            cell.textLabel?.textColor = .black
             cell.accessoryView = votdSetting
             return cell
         }else if indexPath.section == 2{
-            if(indexPath.row == 0){
-                cell.textLabel?.text = "Face ID:  Coming Soon..."
-                return cell
-            }else if (indexPath.row == 1){
-                cell.textLabel?.text = "Reset Password:  Coming Soon..."
-                return cell
-            }else{
-                return cell
-            }
+            cell.textLabel?.text = faceIDLabel
+            cell.textLabel?.textColor = .black
+            cell.accessoryView = faceIdSetting
+            return cell
+            
+//            if(indexPath.row == 0){
+//                cell.textLabel?.text = faceIDLabel
+//                cell.textLabel?.textColor = .black
+//                cell.accessoryView = faceIdSetting
+//                return cell
+//            }else if (indexPath.row == 1){
+//                cell.textLabel?.textColor = .black
+//                cell.textLabel?.text = "Reset Password:  Coming Soon..."
+//                return cell
+//            }else{
+//                return cell
+//            }
             
         }else{
             return cell
         }
-        //cell.textLabel?.text = "Test\(indexPath.row)"
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 25.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if(indexPath.section == 0){
+            let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
+            let SC1 = topVC?.storyboard?.instantiateViewController(withIdentifier: "Daily Reminder") as! DailyNotificationViewController
+            SC1.modalPresentationStyle = .fullScreen
+            topVC!.show(SC1,sender:topVC)
+            blackBackgroundView.alpha = 0
+            let height = UIApplication.shared.keyWindow?.frame.height
+            menuView.frame = CGRect.init(x: 0, y: 0, width: -250, height: height!)
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
