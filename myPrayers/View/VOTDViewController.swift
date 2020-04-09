@@ -16,6 +16,8 @@ class VOTDViewController: UIViewController {
     var storedCalDay = Int()
     var currentCalDay = Int()
     
+    var shouldStartTimer = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -35,20 +37,26 @@ class VOTDViewController: UIViewController {
                         if(result){
                             DispatchQueue.main.async {
                                 self.saveData()
-                                //Show VOTD for 7 seconds, then go to login screen
-                                self.startTimer()
+                                if(self.shouldStartTimer == true){
+                                    //Show VOTD for 7 seconds, then go to login screen
+                                    self.startTimer()
+                                }
                             }
                         }
                     })
                 }else{
-                    self.startTimer()
+                    if(self.shouldStartTimer == true){
+                        self.startTimer()
+                    }
                 }
             }else{
                 getTodaysVerse { (result) in
                     if(result){
                         DispatchQueue.main.async {
                             self.saveData()
-                            self.startTimer()
+                            if(self.shouldStartTimer == true){
+                                self.startTimer()
+                            }
                         }
                     }
                 }
@@ -109,7 +117,6 @@ class VOTDViewController: UIViewController {
                 return
             }
         }catch{
-            print("Failed to get data!")
             completion(false)
             return
         }
@@ -168,7 +175,6 @@ class VOTDViewController: UIViewController {
                     return
                 }
             }else{
-                print("no connection")
                 //cannot get api data
                 DispatchQueue.main.async {
                     self.verseText.text = "Error getting verse of the day"

@@ -20,6 +20,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var userEmail: UITextField!
     @IBOutlet weak var userPassword: UITextField!
     @IBOutlet weak var logo: UIImageView!
+    @IBOutlet weak var createAccountButton: UIButton!
+    
     let mainDelegate = UIApplication.shared.delegate as! AppDelegate
     var userId: String!
     var bioImage = UIImageView()
@@ -35,13 +37,12 @@ class LoginViewController: UIViewController {
         setupLoginButton()
         setupPasswordImage()
         
-        
         //Check to see if the device biometrics has been enabled
         if isBiometricsAvailable(){
             
             //check if biometric option off in the app.  If so, do not run biometric option
             
-            if (checkBio == false){
+            if (checkBio == false || checkBio == nil){
                 //do not run any biometric options.  Show login form as is.
                 bioButton.isHidden = true
             }else{
@@ -195,6 +196,12 @@ class LoginViewController: UIViewController {
         VC1.inEmailAddress = userEmail.text
         self.present(VC1, animated: true, completion: nil)
     }
+    
+    @IBAction func createAccountTapped(_ sender: Any) {
+        let VC1 = self.storyboard?.instantiateViewController(withIdentifier: "Create Account") as! CreateAccountViewController
+        self.present(VC1, animated: true, completion: nil)
+    }
+    
 
     //Create a toolbar for the keyboard so that we can show a "done" button for the user to dismiss keyboard
     func createToolbar()
@@ -319,6 +326,4 @@ class LoginViewController: UIViewController {
         }
         return result
     }
-    
-
 }

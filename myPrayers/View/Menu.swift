@@ -38,15 +38,12 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil ){
             if context.biometryType == LABiometryType.faceID{
                 faceIDLabel = "Face ID:"
-            }else{
-                if context.biometryType == LABiometryType.touchID{
+            }else if context.biometryType == LABiometryType.touchID{
                     faceIDLabel = "Touch ID:"
-                }
             }
+        }else{
+            faceIDLabel = "Biometric Login:"
         }
-        
-        
-        
         
         if let window = UIApplication.shared.keyWindow{
             let height = window.frame.height
@@ -209,7 +206,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
         tableView.topAnchor.constraint(equalTo: profileView.bottomAnchor, constant: 30).isActive = true
         tableView.bottomAnchor.constraint(equalTo: exitButton.topAnchor, constant: -30).isActive = true
         //tableView.heightAnchor.constraint(equalToConstant:50).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 0).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 5).isActive = true
         tableView.trailingAnchor.constraint(equalTo: menuView.trailingAnchor, constant: 0).isActive = true
     }
     
@@ -271,7 +268,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
             let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
             UserDefaults.standard.set(true, forKey: "SET BIOMETRICS")
             setBioSwitch()
-            errorMessageAlert(title: "Test", message: "Biometrics will be activated next time you start the application", thisView: topVC!)
+            errorMessageAlert(title: "", message: "Biometrics will be activated after your next login.", thisView: topVC!)
         }else{
             //remove stored keychain values
             let _: Bool = KeychainWrapper.standard.removeObject(forKey: "userName")
@@ -357,7 +354,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
         if (section == 0){
             return 1
         }else if (section == 1){
-            return 1
+            return 2
         }else if (section == 2){
             return 1
         }
@@ -376,10 +373,19 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
             cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
             return cell
         }else if indexPath.section == 1{
-            cell.textLabel?.text = votdLabel.text
-            cell.textLabel?.textColor = .black
-            cell.accessoryView = votdSetting
-            return cell
+            if(indexPath.row == 0){
+                cell.textLabel?.text = votdLabel.text
+                cell.textLabel?.textColor = .black
+                cell.accessoryView = votdSetting
+                return cell
+            }else if (indexPath.row == 1){
+                cell.textLabel?.textColor = .black
+                cell.textLabel?.text = "Verse of the day"
+                cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                return cell
+            }else{
+                return cell
+            }
         }else if indexPath.section == 2{
             cell.textLabel?.text = faceIDLabel
             cell.textLabel?.textColor = .black
@@ -418,10 +424,28 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
             let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
             let SC1 = topVC?.storyboard?.instantiateViewController(withIdentifier: "Daily Reminder") as! DailyNotificationViewController
             SC1.modalPresentationStyle = .fullScreen
+            SC1.title = "Set Daily Reminder"
             topVC!.show(SC1,sender:topVC)
             blackBackgroundView.alpha = 0
             let height = UIApplication.shared.keyWindow?.frame.height
             menuView.frame = CGRect.init(x: 0, y: 0, width: -250, height: height!)
+        }
+        
+        if(indexPath.section == 1){
+            if(indexPath.row == 1){
+                let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
+                let VC1 = topVC?.storyboard?.instantiateViewController(withIdentifier: "VOTD") as! VOTDViewController
+                VC1.shouldStartTimer = false
+                VC1.modalPresentationStyle = .fullScreen
+                VC1.title = "Verse of the Day"
+                topVC!.show(VC1, sender: topVC)
+                blackBackgroundView.alpha = 0
+                let height = UIApplication.shared.keyWindow?.frame.height
+                menuView.frame = CGRect.init(x: 0, y: 0, width: -250, height: height!)
+                
+//                let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
+//                errorMessageAlert(title: "Coming Soon", message: "", thisView: topVC!)
+            }
         }
     }
     

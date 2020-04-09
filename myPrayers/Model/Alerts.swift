@@ -30,11 +30,23 @@ func prayerAddedAlert(title: String, message: String, thisView: UIViewController
 }
 
 func profileUpdatedAlert(title: String, message: String, thisView: UIViewController){
-    let topVC = UIApplication.shared.keyWindow?.rootViewController
+    //let topVC = UIApplication.shared.keyWindow?.rootViewController
     
     let alertController = UIAlertController(title: "\(title)", message: "\(message)", preferredStyle: .alert)
     let ok = UIAlertAction(title: "OK", style: .default){ (UIAlertAction) in
         thisView.navigationController?.popToRootViewController(animated: true)
+    }
+    alertController.addAction(ok)
+    //topVC!.present(alertController, animated: true, completion: nil)
+    thisView.present(alertController, animated: true, completion: nil)
+}
+
+func profileCreatedAlert(title: String, message: String, thisView: UIViewController){
+    let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
+    
+    let alertController = UIAlertController(title: "\(title)", message: "\(message)", preferredStyle: .alert)
+    let ok = UIAlertAction(title: "OK", style: .default){ (UIAlertAction) in
+        thisView.dismiss(animated: true, completion: nil)
     }
     alertController.addAction(ok)
     topVC!.present(alertController, animated: true, completion: nil)
