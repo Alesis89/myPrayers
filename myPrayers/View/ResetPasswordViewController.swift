@@ -16,6 +16,7 @@ class ResetPasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createToolbar()
         
         if(inEmailAddress != nil){
             email.text = inEmailAddress
@@ -63,5 +64,24 @@ class ResetPasswordViewController: UIViewController {
             object.becomeFirstResponder()
             return false
         }
+    }
+    
+    func createToolbar()
+    {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissKeyboard))
+        let flexible = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        
+        toolbar.setItems([flexible,doneButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        email.inputAccessoryView = toolbar
+    }
+    
+    @objc func dismissKeyboard(){
+        
+        view.endEditing(true)
     }
 }

@@ -23,6 +23,7 @@ class AddPrayerViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createToolbar()
         
         setupAddPrayerButton()
         
@@ -87,5 +88,25 @@ class AddPrayerViewController: UIViewController, UITextViewDelegate {
     
     func setupAddPrayerButton(){
         addPrayerBtn.layer.cornerRadius = 10
+    }
+    
+    func createToolbar()
+    {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissKeyboard))
+        let flexible = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        
+        toolbar.setItems([flexible,doneButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        prayerTxt.inputAccessoryView = toolbar
+        prayForTxt.inputAccessoryView = toolbar
+    }
+    
+    @objc func dismissKeyboard(){
+        
+        view.endEditing(true)
     }
 }
