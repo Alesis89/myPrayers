@@ -62,8 +62,8 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         //create toolbar with Done option so user can close keyboard
         createToolbar()
         
-        
-        
+        //add the camera to right side of navigation tool bar
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(cameraImageTapped))
     }
     
     func setupSaveButton(){
@@ -181,7 +181,11 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @objc func profileImageTapped(){
-        chooseImageFromCameraOrPhoto(source: .photoLibrary)
+        chooseImageFromPhoto(source: .photoLibrary)
+    }
+    
+    @objc func cameraImageTapped(){
+        chooseImageFromCamera(source: .camera)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
@@ -192,7 +196,15 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         dismiss(animated: true, completion: nil)
     }
     
-    func chooseImageFromCameraOrPhoto(source: UIImagePickerController.SourceType) {
+    func chooseImageFromPhoto(source: UIImagePickerController.SourceType) {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.allowsEditing = true
+        pickerController.sourceType = source
+        present(pickerController, animated: true, completion: nil)
+    }
+    
+    func chooseImageFromCamera(source: UIImagePickerController.SourceType) {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.allowsEditing = true

@@ -439,6 +439,8 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
                 VC1.modalPresentationStyle = .fullScreen
                 VC1.title = "Verse of the Day"
                 topVC!.show(VC1, sender: topVC)
+                
+                //Close the menu
                 blackBackgroundView.alpha = 0
                 let height = UIApplication.shared.keyWindow?.frame.height
                 menuView.frame = CGRect.init(x: 0, y: 0, width: -250, height: height!)

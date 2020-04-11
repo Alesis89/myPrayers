@@ -62,6 +62,11 @@ class VOTDViewController: UIViewController {
                 }
             }
         }
+        
+        //check to see if we are coming from them menu.  shouldStartTimer will be false if so.
+        if(shouldStartTimer == false){
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareVOTD))
+        }
     }
     
     //Save Image, Verse, Calendar day to Core Data
@@ -182,6 +187,35 @@ class VOTDViewController: UIViewController {
                 completion(false)
                 return
             }
+        }
+    }
+    
+    @objc func shareVOTD(){
+        
+        //Because saving images to photo library cause the UIActivityViewController to close down to the root view controler (my login page)
+        //this is a work around to allow saving to photo library that will close down the fakeViewController and take me back to my
+        //ViewController.
+        
+        let fakeViewController = UIViewController()
+        fakeViewController.modalPresentationStyle = .overCurrentContext
+        let shareVOTD = UIActivityViewController(activityItems: [image.image!], applicationActivities: nil)
+            shareVOTD.completionWithItemsHandler = {(activity: UIActivity.ActivityType?,success:Bool,items:[Any]?,error:Error?) in
+                if(success){
+                    if let presentingViewController = fakeViewController.presentingViewController {
+                        presentingViewController.dismiss(animated: false, completion: nil)
+                    } else {
+                        fakeViewController.dismiss(animated: false, completion: nil)
+                    }
+                }else{
+                    if let presentingViewController = fakeViewController.presentingViewController {
+                        presentingViewController.dismiss(animated: false, completion: nil)
+                    } else {
+                        fakeViewController.dismiss(animated: false, completion: nil)
+                    }
+                }
+            }
+        self.present(fakeViewController, animated: true) { [weak fakeViewController] in
+            fakeViewController?.present(shareVOTD, animated: true, completion: nil)
         }
     }
 }
