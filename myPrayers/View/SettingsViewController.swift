@@ -20,6 +20,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var confirmEmail: UITextField!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var resetPasswordButton: UIButton!
+    var activeField: UITextField?
     
     
     let overlayImageView = UIImageView(frame: CGRect(x: 75, y: 50, width: 60, height: 50))
@@ -56,14 +57,46 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         email.addTarget(self, action: #selector(textFieldChanged(object:)), for: .editingDidEnd)
         email.addTarget(self, action: #selector(selectAllText), for: .editingDidBegin)
         email.addTarget(self, action: #selector(isValidEmail), for: .editingDidEnd)
+        email.addTarget(self, action: #selector(setActiveField(object:)), for: .editingDidBegin)
         confirmEmail.addTarget(self, action: #selector(isValidEmail), for: .editingDidEnd)
         confirmEmail.addTarget(self, action: #selector(textFieldChanged(object:)), for: .editingDidEnd)
+        confirmEmail.addTarget(self, action: #selector(setActiveField(object:)), for: .editingDidBegin)
         
         //create toolbar with Done option so user can close keyboard
         createToolbar()
         
         //add the camera to right side of navigation tool bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(cameraImageTapped))
+        
+        //Setup listener for keyboard.  This will allow for use to adjust view y axis in case keyboard covers a control
+        //Listen for keyboard events
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc func keyboardWillChange(notification: Notification){
+        
+        if notification.name == UIResponder.keyboardWillShowNotification || notification.name == UIResponder.keyboardWillChangeFrameNotification {
+            if(activeField?.accessibilityIdentifier == "confirmEmail"){
+                
+                view.frame.origin.y = (-(activeField?.frame.origin.y)!)
+                
+            }
+        }else{
+            view.frame.origin.y = 0
+        }
+    }
+    
+    @objc func setActiveField(object: UITextField) {
+        
+        activeField = object
     }
     
     func setupSaveButton(){
@@ -89,41 +122,45 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         
         let imagePath = Storage.storage().reference(withPath: "\(userID!)/profile_pic.jpg")
         
-        imagePath.putData((profileImage.image?.jpegData(compressionQuality: 1.0))!, metadata: nil, completion: {(metadata, error) in
+        imagePath.putData((profileImage.image?.jpegData(compressionQuality: 0.5))!, metadata: nil, completion: {(metadata, error) in
             if error != nil{
                 errorMessageAlert(title: "Error Uploading Image", message: "Error uploading image.  Try again later.", thisView: self)
             }else{
+                activity.startAnimating()
+                
                 //update appdelegate
                 self.mainDelegate.userImage = self.profileImage.image
-            }
-        })
-        
-        //Auth display name is both first and last.,  Need to concatenate these two values before storing
-        let displayName = "\(firstName.text!) \(lastName.text!)"
-        
-        if(fnChanged == true || lnChanged == true || emailChanged == true){
-            Auth.auth().currentUser?.setValue(displayName, forKey: "displayName")
-            Auth.auth().currentUser?.updateEmail(to: confirmEmail.text!, completion: { (error) in
-                if(error != nil){
-                    errorMessageAlert(title: "Error!", message: "Error saving email.", thisView: self)
+                
+                //Auth display name is both first and last.,  Need to concatenate these two values before storing
+                let displayName = "\(self.firstName.text!) \(self.lastName.text!)"
+                
+                if(self.fnChanged == true || self.lnChanged == true || self.emailChanged == true){
+                    Auth.auth().currentUser?.setValue(displayName, forKey: "displayName")
+                    Auth.auth().currentUser?.updateEmail(to: self.confirmEmail.text!, completion: { (error) in
+                        if(error != nil){
+                            errorMessageAlert(title: "Error!", message: "Error saving email.", thisView: self)
+                        }
+                    })
+                    self.mainDelegate.displayName = displayName
+                    
+                    //update CoreData
+                    
+                    self.saveDataToCoreData(inDisplayName: displayName) { (result) in
+                        if(result == false){
+                            errorMessageAlert(title: "Error!", message: "Error updating profile!", thisView: self)
+                        }
+                    }
+                }else{
+                    self.saveDataToCoreData(inDisplayName: displayName) { (result) in
+                        if(result == false){
+                            errorMessageAlert(title: "Error!", message: "Error updating profile!", thisView: self)
+                        }
+                    }
                 }
-            })
-            mainDelegate.displayName = displayName
-        }
-        
-        //update CoreData
-        activity.startAnimating()
-        saveDataToCoreData(inDisplayName: displayName) { (result) in
-            if(result){
-                activity.stopAnimating()
                 profileUpdatedAlert(title: "Profile Updated!", message: "Profile succesfully updated!", thisView: self)
                 activity.stopAnimating()
-            }else{
-                activity.stopAnimating()
-                errorMessageAlert(title: "Error!", message: "Error updating profile!", thisView: self)
-                activity.stopAnimating()
             }
-        }
+        })
     }
     
     @IBAction func resetPassword(_ sender: Any) {
@@ -243,21 +280,18 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
             }else{
                 fnChanged = true
             }
-            print(fnChanged)
         case "lastName":
             if(object.text == inLN){
                 lnChanged = false
             }else{
                 lnChanged = true
             }
-            print(lnChanged)
         case "email":
             if(object.text == inEmail){
                 emailChanged = false
             }else{
                 emailChanged = true
             }
-            print(emailChanged)
         case "confirmEmail":
             if(object.text!.count > 0 && object.text != email.text){
                 saveButton.isEnabled = false
@@ -266,7 +300,6 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
                 saveButton.isEnabled = true
                 emailChanged = true
             }
-            print(emailChanged)
         default:
             return
         }
@@ -282,16 +315,14 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         //Set data to the referenced entity attributes
         //newValue.setValue(mainDelegate.userImage.jpegData(compressionQuality: 1.0), forKey: "image")
         newValue.setValue(inDisplayName, forKey: "displayName")
-        newValue.setValue(profileImage.image!.jpegData(compressionQuality: 1.0), forKey: "image")
+        newValue.setValue(profileImage.image!.jpegData(compressionQuality: 0.5), forKey: "image")
         
         //save data into attributes
         do{
             try context.save()
             completion(true)
-            print("Saved Data!")
         }catch{
             completion(false)
-            print("Failed to save data!")
         }
     }
         

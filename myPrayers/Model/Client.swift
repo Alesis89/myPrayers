@@ -28,7 +28,6 @@ func getVOTD(completion: @escaping (Bool,[String:String])->()){
     
     let task = session.dataTask(with: request) { data, response, error in
         if error != nil && response != nil  {
-            print(error?.localizedDescription ?? "Error")
             completion(false,[:])
         }
         if data != nil{
@@ -42,13 +41,11 @@ func getVOTD(completion: @escaping (Bool,[String:String])->()){
                     for (key, value) in parsedResult{
                         if key == "verse"{
                             if let verseArray:[String: Any] = value as? [String: Any]{
-                                //print(verseArray["text"] as! String)
                                 returnArray["VerseText"] = verseArray["text"] as? String
                             }
                         }
                         if key == "image"{
                             if let verseImage:[String: Any] = value as? [String: Any]{
-                                //print(verseImage["url"] as! String)
                                 returnArray["ImgURL"] = verseImage["url"] as? String
                             }
                         }
@@ -60,7 +57,6 @@ func getVOTD(completion: @escaping (Bool,[String:String])->()){
                 }
                 
             }catch{
-                print("Could not parse JSON data.")
                 completion(false,[:])
                 return
             }

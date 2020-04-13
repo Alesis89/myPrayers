@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let showVOTD = checkVOTDAtStartup()
         let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
         
         //check to see if VOTD is turned on.  If so, show the VOTD view controller first.
         if (showVOTD){
@@ -63,7 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func getNotificationSettings() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
-            //print("Notification settings: \(settings)")
             guard settings.authorizationStatus == .authorized else { return }
             DispatchQueue.main.async {
                 UIApplication.shared.registerForRemoteNotifications()
@@ -118,7 +118,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         do{
             try Auth.auth().signOut()
         }catch{
-            print(error)
         }
          
     }

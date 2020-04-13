@@ -20,6 +20,7 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var confirmPassword: UITextField!
     @IBOutlet weak var errorMessageLbl: UILabel!
+    @IBOutlet weak var scrollBar: UIScrollView!
     
     var emailConfirmed = false
     var passwordConfirmed = false
@@ -51,6 +52,10 @@ class CreateAccountViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
+        //sound the edges of the Save Button
+        saveButton.layer.cornerRadius = 10
+        
     }
     
     deinit {
@@ -65,11 +70,7 @@ class CreateAccountViewController: UIViewController {
         //guard let keyboard = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {return}
         
         if notification.name == UIResponder.keyboardWillShowNotification || notification.name == UIResponder.keyboardWillChangeFrameNotification {
-            if(activeField?.accessibilityIdentifier == "confirmEmail"||activeField?.accessibilityIdentifier == "password" || activeField?.accessibilityIdentifier == "confirmPassword"){
-                view.frame.origin.y = (-(activeField?.frame.origin.y)!)
-            }
-        }else{
-            view.frame.origin.y = 0
+            self.scrollBar.setContentOffset(activeField!.frame.origin, animated: true)
         }
     }
     
@@ -179,7 +180,7 @@ class CreateAccountViewController: UIViewController {
                     }
                 }
                 if(error != nil){
-                    print(error?.localizedDescription as Any)
+                    errorMessageAlert(title: "Error", message: error!.localizedDescription, thisView: self)
                 }
             }
         }
@@ -202,10 +203,8 @@ class CreateAccountViewController: UIViewController {
         do{
             try context.save()
             completion(true)
-            print("Saved Data!")
         }catch{
             completion(false)
-            print("Failed to save data!")
         }
     }
     
@@ -262,7 +261,6 @@ class CreateAccountViewController: UIViewController {
             }else{
                 saveButton.isEnabled = true
                 passwordConfirmed = true
-                print("before")
                 return
             }
         default:

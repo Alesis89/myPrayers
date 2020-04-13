@@ -66,6 +66,11 @@ class VOTDViewController: UIViewController {
         //check to see if we are coming from them menu.  shouldStartTimer will be false if so.
         if(shouldStartTimer == false){
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareVOTD))
+            
+            //This allows the view to start below the navigation bar
+            edgesForExtendedLayout = []
+            //Previous command makes the navigationbar translucent.  Have to reset it back to false.
+            self.navigationController?.navigationBar.isTranslucent = false
         }
     }
     
@@ -85,11 +90,8 @@ class VOTDViewController: UIViewController {
         //save data into attributes
         do{
             try context.save()
-            print("Saved Data!")
         }catch{
-            print("Failed to save data!")
         }
-        
     }
     
     func getDataFromCoreData(completion: (Bool)->Void){

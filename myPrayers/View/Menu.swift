@@ -37,9 +37,9 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
         
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil ){
             if context.biometryType == LABiometryType.faceID{
-                faceIDLabel = "Face ID:"
+                faceIDLabel = "Face ID"
             }else if context.biometryType == LABiometryType.touchID{
-                    faceIDLabel = "Touch ID:"
+                    faceIDLabel = "Touch ID"
             }
         }else{
             faceIDLabel = "Biometric Login:"
@@ -255,8 +255,10 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     @objc func VOTDSwitchTapped(){
         //Set User Detault for switch
         if (votdSetting.isOn){
+            let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
             UserDefaults.standard.set(true, forKey: "VOTD-ON")
             setVOTDSwitch()
+            errorMessageAlert(title: "Verse of the Day Turned On", message: "Next time you start the app, Verse of the Day will start.", thisView: topVC!)
         }else{
             UserDefaults.standard.set(false, forKey: "VOTD-ON")
             setVOTDSwitch()
@@ -268,7 +270,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
             let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
             UserDefaults.standard.set(true, forKey: "SET BIOMETRICS")
             setBioSwitch()
-            errorMessageAlert(title: "", message: "Biometrics will be activated after your next login.", thisView: topVC!)
+            errorMessageAlert(title: "\(faceIDLabel) Turned On", message: "Biometrics will be activated after your next login.", thisView: topVC!)
         }else{
             //remove stored keychain values
             let _: Bool = KeychainWrapper.standard.removeObject(forKey: "userName")
@@ -324,9 +326,6 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
                     self.menuView.frame = CGRect.init(x: 0, y: 0, width: -250, height: height!)
                 }
                 topVC?.dismiss(animated: true, completion: nil)
-                    //let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    //let viewController = mainStoryboard.instantiateViewController(withIdentifier: "Login Controller")
-                    //UIApplication.shared.keyWindow?.rootViewController = viewController
             }
             
             alertController.addAction(cancel)
@@ -436,7 +435,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
                 let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
                 let VC1 = topVC?.storyboard?.instantiateViewController(withIdentifier: "VOTD") as! VOTDViewController
                 VC1.shouldStartTimer = false
-                VC1.modalPresentationStyle = .fullScreen
+                VC1.modalPresentationStyle = .currentContext
                 VC1.title = "Verse of the Day"
                 topVC!.show(VC1, sender: topVC)
                 
