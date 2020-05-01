@@ -13,16 +13,29 @@ import FirebaseAuth
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var displayName: String!
     var userImage: UIImage!
     let notificationCenter = UNUserNotificationCenter.current()
+    var userStatus = LoggedInStatus.notSet
+    
+    //Using enum to set if the user is logged in or out.  notSet represents the user first launching the app.  Logged out is for when the user logs out of the app and comes back to this login screen.  What we will be preventing is the biometric login launching again if the user just logged out.  We only want it to auto-run if the user is first launching the app.
+    enum LoggedInStatus {
+        case loggedIn
+        case loggedOut
+        case notSet
+    }
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
         
         //UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.purple], for: .normal)
         UINavigationBar.appearance().tintColor = .purple
@@ -31,64 +44,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         DataController.shared.load()
         
         FirebaseApp.configure()
-        let showVOTD = checkVOTDAtStartup()
-        let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        window?.makeKeyAndVisible()
         
-        //check to see if VOTD is turned on.  If so, show the VOTD view controller first.
-        if (showVOTD){
-            let homePage = mainStoryBoard.instantiateViewController(withIdentifier: "VOTD") as! VOTDViewController
-             self.window?.rootViewController = homePage
-           
-        }else{
-            let homePage = mainStoryBoard.instantiateViewController(withIdentifier: "Login Controller") as! LoginViewController
-            self.window?.rootViewController = homePage
-            
-        }
-        
-        UNUserNotificationCenter.current().delegate = self
-       
+        _ = checkVOTDAtStartup(completion: { (result) in
+            //check to see if VOTD is turned on.  If so, show the VOTD view controller first.
+            if (result){
+                let homePage: UIViewController = mainStoryBoard.instantiateViewController(withIdentifier: "VOTD") as! VOTDViewController
+                 self.window?.rootViewController = homePage
+                window?.makeKeyAndVisible()
+               
+            }else{
+                let homePage: UIViewController = mainStoryBoard.instantiateViewController(withIdentifier: "Login Controller") as! LoginViewController
+                 self.window?.rootViewController = homePage
+                window?.makeKeyAndVisible()
+            }
+        })
         return true
     }
     
-    func registerForPushNotifications() {
-        
-        let center = UNUserNotificationCenter.current()
-            center.requestAuthorization(options: [.alert, .sound, .badge]) {
-                granted, error in
-                guard granted else { return }
-                self.getNotificationSettings()
-        }
-    }
-    
-    func getNotificationSettings() {
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-            guard settings.authorizationStatus == .authorized else { return }
-            DispatchQueue.main.async {
-                UIApplication.shared.registerForRemoteNotifications()
-            }
-        }
-    }
-    
-    func checkVOTDAtStartup()->Bool{
+    func checkVOTDAtStartup(completion: (Bool)->Void){
         //This function will check to see if the user has selected to turn off the VOTD at startup
         //This will be a User Defaults setting
         
-        var showVOTD = false
+        //var showVOTD = false
         
         if let votdSet = UserDefaults.standard.value(forKey: "VOTD-ON") as? Bool{
             if(votdSet){
-                showVOTD = true
+                //showVOTD = true
+                completion(true)
             }else{
-                showVOTD = false
+                //showVOTD = false
+                completion(false)
             }
         }else{
             //First time app launch.  Set VOTD to true and show VOTD ViewController
             UserDefaults.standard.set(true, forKey: "VOTD-ON")
-            showVOTD = true
+            //showVOTD = true
+            completion(true)
         }
-        return showVOTD
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -166,27 +158,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         }
     }
-    
-    func scheduleDailyNotification(inHour: Int, inMin: Int){
-        let identifier = "Daily Reminder"
-        let content = UNMutableNotificationContent()
-        content.title = "Daily Prayer Reminder"
-        content.body = "Take time now to pray for those in your prayer list."
-        content.categoryIdentifier = "alarm"
-        content.sound = UNNotificationSound.default
-        
-        var dateComponents = DateComponents()
-        dateComponents.hour = inHour
-        dateComponents.minute = inMin
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        notificationCenter.add(request)
-    }
-    
-    func removeDailyNotification(identifier: String){
-        notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
-    }
-    
-
 }
 

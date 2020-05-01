@@ -20,10 +20,6 @@ class VOTDViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
         
         currentCalDay = getCalendarDayForVOTD()
         
@@ -38,6 +34,7 @@ class VOTDViewController: UIViewController {
                             DispatchQueue.main.async {
                                 self.saveData()
                                 if(self.shouldStartTimer == true){
+                                    self.image.isHidden = false
                                     //Show VOTD for 7 seconds, then go to login screen
                                     self.startTimer()
                                 }
@@ -46,6 +43,7 @@ class VOTDViewController: UIViewController {
                     })
                 }else{
                     if(self.shouldStartTimer == true){
+                        image.isHidden = false
                         self.startTimer()
                     }
                 }
@@ -55,6 +53,7 @@ class VOTDViewController: UIViewController {
                         DispatchQueue.main.async {
                             self.saveData()
                             if(self.shouldStartTimer == true){
+                                self.image.isHidden = false
                                 self.startTimer()
                             }
                         }
@@ -65,6 +64,7 @@ class VOTDViewController: UIViewController {
         
         //check to see if we are coming from them menu.  shouldStartTimer will be false if so.
         if(shouldStartTimer == false){
+            self.image.isHidden = false
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareVOTD))
             
             //This allows the view to start below the navigation bar
@@ -113,6 +113,8 @@ class VOTDViewController: UIViewController {
                     storedCalDay = data.value(forKey: "day") as! Int
                     if let temp = data.value(forKey: "image"){
                         image.image = UIImage(data: temp as! Data)
+                        //temporarily hide the image until we know if we want to show the current one, or get one from API.
+                        image.isHidden = true
                     }else{
                          verseText.isHidden = false
                     }
@@ -136,10 +138,13 @@ class VOTDViewController: UIViewController {
     }
     
     func goToLogin(){
-        
+        let window: UIWindow?
+        window = UIWindow(frame: UIScreen.main.bounds)
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = mainStoryboard.instantiateViewController(withIdentifier: "Login Controller") as! LoginViewController
+        let viewController: UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "Login Controller") as! LoginViewController
         UIApplication.shared.keyWindow?.rootViewController = viewController
+        window?.makeKeyAndVisible()
+        
         
         
 //        let loginVC = self.storyboard!.instantiateViewController(withIdentifier: "Login Controller") as! LoginViewController

@@ -43,7 +43,7 @@ class AddPrayerViewController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor(red: 201.0/255.0, green: 201.0/255.0, blue: 205.0/255.0, alpha: 1.0) {
+        if (textView.text == "Prayer?"){
             textView.text = nil
             textView.textColor = UIColor.black
         }

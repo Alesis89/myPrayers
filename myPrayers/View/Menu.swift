@@ -31,18 +31,20 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     var topVC = UIViewController()
     let mainDelegate = UIApplication.shared.delegate as! AppDelegate
     var tableView = UITableView()
-    let context:LAContext = LAContext()
 
     func showMenu(){
         
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil ){
-            if context.biometryType == LABiometryType.faceID{
-                faceIDLabel = "Face ID"
-            }else if context.biometryType == LABiometryType.touchID{
+        if(checkIfBioActivatedOnDevice()){
+            let context:LAContext = LAContext()
+            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil ){
+                if context.biometryType == LABiometryType.faceID{
+                    faceIDLabel = "Face ID"
+                }else if context.biometryType == LABiometryType.touchID{
                     faceIDLabel = "Touch ID"
+                }
+            }else{
+                faceIDLabel = "Biometric Login:"
             }
-        }else{
-            faceIDLabel = "Biometric Login:"
         }
         
         if let window = UIApplication.shared.keyWindow{
@@ -53,7 +55,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
             tableView.dataSource = self
             tableView.delegate = self
             tableView.backgroundColor = .white
-            tableView.tableFooterView = UIView(frame: CGRect.zero)
+            tableView.tableFooterView = UIView()
             
             
             //Call function to setup a black grounds that our menu will show on top of
@@ -216,7 +218,6 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     }
     
     func setupBioSwitch(){
-        //faceIdSetting = UISwitch(frame:CGRect(x: 150, y: 150, width: 0, height: 0))
         faceIdSetting.addTarget(self, action: #selector(bioSwitchTapped), for: .touchUpInside)
     }
     
@@ -267,6 +268,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     
     @objc func bioSwitchTapped(){
         if (faceIdSetting.isOn){
+
             let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
             UserDefaults.standard.set(true, forKey: "SET BIOMETRICS")
             setBioSwitch()
@@ -326,6 +328,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
                     self.menuView.frame = CGRect.init(x: 0, y: 0, width: -250, height: height!)
                 }
                 topVC?.dismiss(animated: true, completion: nil)
+                self.mainDelegate.userStatus = AppDelegate.LoggedInStatus.loggedOut
             }
             
             alertController.addAction(cancel)
@@ -410,7 +413,13 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        var sectionsToReturn: Int!
+        if(!checkIfBioActivatedOnDevice()){
+            sectionsToReturn = 2
+        }else{
+            sectionsToReturn = 3
+        }
+        return sectionsToReturn
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

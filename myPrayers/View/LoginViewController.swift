@@ -23,37 +23,58 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var createAccountButton: UIButton!
     var activeField: UITextField?
     
+    //Variable for Biometrics
+    var isBioSwitchOn = false
+    var isBioActivatedForApp = false //User confirmed to use BioMetrics
+    var isDeviceBioCapable = checkIfDeviceBioCapable()
+    var isBioTurnedOnForDevice = checkIfBioActivatedOnDevice()
+    var storedUserName = KeychainWrapper.standard.string(forKey: "userEmail")
+    var storedUserPassword = KeychainWrapper.standard.string(forKey: "userPassword")
+    
     let mainDelegate = UIApplication.shared.delegate as! AppDelegate
     var userId: String!
     var bioImage = UIImageView()
     let bioButton = UIButton()
-    let storedUserName = KeychainWrapper.standard.string(forKey: "userName")
-    let storedUserPassword = KeychainWrapper.standard.string(forKey: "userPwd")
-    let checkBio = UserDefaults.standard.value(forKey: "SET BIOMETRICS") as? Bool
     
     override func viewDidLoad() {
         super.viewDidLoad()
         createToolbar()
         setupLoginButton()
+        setupBioButton()
         setupPasswordImage()
-        
+    
         userEmail.addTarget(self, action: #selector(setActiveField(object:)), for: .editingDidBegin)
-        
-        //check if biometric option off in the app.  If so, do not run biometric option
-        if (checkBio == false || checkBio == nil){
-            //do not run any biometric options.  Show login form as is.
-            bioButton.isHidden = true
-        }else{
-            
-            bioMetricLogin()
-            setupBioButton()
-        }
+        userEmail.addTarget(self, action: #selector(isValidEmail), for: .editingDidEnd)
         
         //Setup listener for keyboard.  This will allow for use to adjust view y axis in case keyboard covers a control
         //Listen for keyboard events
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
+        checkBio(completion: nil)
+        
+        if(isDeviceBioCapable){
+            //Device can use biometrics.  Check to see if user has turned on biometrics at the device level
+            if(isBioTurnedOnForDevice){
+                //See if user turned on biometrics for the app.  If so, we can try to login using biometrics
+                if(isBioSwitchOn && storedUserName != nil){
+                    //log into device using biometrics
+                    if(storedUserName != "" && storedUserPassword != ""){
+                        bioMetricLogin(inUserEmail: storedUserName!, inUserPassword: storedUserPassword!)
+                    }else{
+                        //User probably turned this on for the first time from the menu
+                        //Will return back to regular login.  Login function will store creds if isBioActivatedForApp is true
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        checkBio(completion: nil)
     }
     
     deinit {
@@ -64,12 +85,9 @@ class LoginViewController: UIViewController {
     
     @objc func keyboardWillChange(notification: Notification){
         
-        
         if notification.name == UIResponder.keyboardWillShowNotification || notification.name == UIResponder.keyboardWillChangeFrameNotification {
             if(activeField?.accessibilityIdentifier == "userPassword"){
-                
                 view.frame.origin.y = (-(activeField?.frame.origin.y)!)
-                
             }
         }else{
             view.frame.origin.y = 0
@@ -81,14 +99,48 @@ class LoginViewController: UIViewController {
         activeField = object
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        if (checkBio == true && storedUserName != nil){
-            bioButton.isHidden = false
+    @objc func isValidEmail(object: UITextField) {
+        let testStr = object.text!
+        if(object.accessibilityIdentifier == "confirmEmail" || object.accessibilityIdentifier == "email" && object.text?.count == 0){
+            return
+        }
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        let result = emailTest.evaluate(with: testStr)
+        if !result{
+            //Not a valid email address
+            object.textColor = UIColor.red
+            errorMessageAlert(title: "Email Not Valid!", message: "Email address is not valid", thisView: self)
+        }
+    }
+    
+    func checkBio(completion:((Bool)->Void)?){
+        if(isBioTurnedOnForDevice){
+            guard let checkBio = (UserDefaults.standard.value(forKey: "SET BIOMETRICS") as? Bool) else {
+                isBioSwitchOn = false
+                bioButton.isHidden = true
+                completion?(true)
+                return
+            }
+            
+            if checkBio && isBioActivatedForApp{
+                isBioSwitchOn = true
+                bioButton.isHidden = false
+                completion?(true)
+            }else if (checkBio && !isBioActivatedForApp){
+                isBioSwitchOn = true
+                bioButton.isHidden = true
+                completion?(true)
+            }else{
+                isBioSwitchOn = false
+                bioButton.isHidden = true
+                completion?(true)
+            }
         }else{
             bioButton.isHidden = true
         }
     }
-
+    
     func setupLoginButton(){
         login.layer.cornerRadius = 10
     }
@@ -99,6 +151,7 @@ class LoginViewController: UIViewController {
     }
     
     func setupBioButton(){
+        bioImage.image =  UIImage(named: "face-id")!
         bioButton.setImage(bioImage.image, for: .normal)
         bioButton.addTarget(self, action: #selector(faceIdTapped), for: .touchUpInside)
         //push the button off the edge of the textfield
@@ -107,25 +160,25 @@ class LoginViewController: UIViewController {
     }
     
     @objc func faceIdTapped(_ sender: Any) {
-        bioMetricLogin()
+        
+        bioMetricLogin(inUserEmail: storedUserName!, inUserPassword: storedUserPassword!)
     }
     
     @IBAction func btnLogin(_ sender: Any) {
-        if(userEmail.text?.count != 0 || userPassword.text?.count != 0){
-            if checkBio == true {
-                storeCredsinKeyChain()
-            }
-            loginUser(userName: userEmail.text!, userPassword: userPassword.text!)
+        if(isBioSwitchOn && storedUserName == "" && storedUserPassword == ""){
+            //User just turned this on from menu
+            storeCredsinKeyChain()
+            
+            bioMetricLogin(inUserEmail: userEmail.text!, inUserPassword: userPassword.text!)
         }else{
-            errorMessageAlert(title: "Error!", message: "Error logging in, please check credentials", thisView: self)
+            loginUser(userName: userEmail.text!, userPassword: userPassword.text!)
         }
     }
     
     func storeCredsinKeyChain(){
         
-        let _: Bool = KeychainWrapper.standard.set(self.userPassword.text!, forKey: "userPwd")
-        let _: Bool = KeychainWrapper.standard.set(self.userEmail.text!, forKey: "userName")
-  
+        let _: Bool = KeychainWrapper.standard.set(self.userPassword.text!, forKey: "userPassword")
+        let _: Bool = KeychainWrapper.standard.set(self.userEmail.text!, forKey: "userEmail")
     }
     
     func loginUser(userName: String!, userPassword: String!){
@@ -141,15 +194,12 @@ class LoginViewController: UIViewController {
         //MARK - Verify credentials
                Auth.auth().signIn(withEmail: "\(userName!)", password: "\(userPassword!)") { [weak self] user, error in
                    if (user != nil){
+                    self!.mainDelegate.userStatus = AppDelegate.LoggedInStatus.loggedIn
                        self!.userId = user?.user.uid
-                       
+                    
                         //clear login and password for security reasons after being authenticated.
                         self!.userEmail.text = nil
                         self!.userPassword.text = nil
-                    
-                        //Save credentials to Keychain for auto login with biometrics later
-                        let _: Bool = KeychainWrapper.standard.set((self!.userEmail.text!), forKey: "userEmail")
-                        let _: Bool = KeychainWrapper.standard.set((self!.userPassword.text!), forKey: "userPassword")
                        
                        //Check coredata for user info.  Core data values should be present if user previously logged in.
                        self!.getDataFromCoreDataUser { (result) in
@@ -192,7 +242,6 @@ class LoginViewController: UIViewController {
         self.present(VC1, animated: true, completion: nil)
     }
     
-
     //Create a toolbar for the keyboard so that we can show a "done" button for the user to dismiss keyboard
     func createToolbar()
     {
@@ -290,36 +339,28 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
-    
-    
+
     //Check to see if the user has enable biometerics on the device itself.
-    @objc func bioMetricLogin(){
+    @objc func bioMetricLogin(inUserEmail: String, inUserPassword: String){
+        
         let context:LAContext = LAContext()
-        //check to make sure we have stored credentials.
-        if(storedUserName != nil && storedUserPassword != nil){
-            //Login with users credentials.
-            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil ){
-                let reason = "Log in to your account"
-                
-                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "\(reason)") { (success, error) in
-                    if(success){
-                        DispatchQueue.main.async {
-                            self.loginUser(userName: self.storedUserName, userPassword: self.storedUserPassword)
-                        }
-                    }else{
-                        //errorMessageAlert(title: "Error", message: error!.localizedDescription, thisView: self)
+        //Login with users credentials.
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil ){
+            let reason = "Log in to your account"
+            
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "\(reason)") { (success, error) in
+                if(success){
+                    self.isBioActivatedForApp = true
+                    DispatchQueue.main.async {
+                        self.loginUser(userName: inUserEmail, userPassword: inUserPassword)
                     }
-                }
-                
-                if context.biometryType == LABiometryType.faceID{
-                    bioImage.image =  UIImage(named: "face-id")!
                 }else{
-                    if context.biometryType == LABiometryType.touchID{
-                        bioImage.image = UIImage(named: "fingerprint")!
-                    }
+                    print("User Declined for this app")
+                    self.isBioActivatedForApp = false
                 }
             }
+        }else{
+            isBioActivatedForApp = false
         }
     }
 }

@@ -25,6 +25,8 @@ class CreateAccountViewController: UIViewController {
     var emailConfirmed = false
     var passwordConfirmed = false
     var activeField: UITextField?
+    let helpButton = UIButton()
+    var helpImage = UIImageView.init(image: UIImage(named: "help"))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +44,9 @@ class CreateAccountViewController: UIViewController {
         confirmEmail.addTarget(self, action: #selector(textFieldChanged(object:)), for: .editingDidEnd)
         //confirmPassword.addTarget(self, action: #selector(textFieldChanged(object:)), for: .editingDidEnd)
         password.addTarget(self, action: #selector(setActiveField(object:)), for: .editingDidBegin)
+        password.addTarget(self, action: #selector(isValidPasswordLength(object:)), for: .editingChanged)
+        password.addTarget(self, action: #selector(isValidPassword(object:)), for: .editingDidEnd)
         confirmPassword.addTarget(self, action: #selector(setActiveField(object:)), for: .editingDidBegin)
-        
-        
-        
         
         //Setup listener for keyboard.  This will allow for use to adjust view y axis in case keyboard covers a control
         //Listen for keyboard events
@@ -55,6 +56,10 @@ class CreateAccountViewController: UIViewController {
         
         //sound the edges of the Save Button
         saveButton.layer.cornerRadius = 10
+        
+        setupHelpButton()
+        setupPasswordImage()
+        
         
     }
     
@@ -71,7 +76,26 @@ class CreateAccountViewController: UIViewController {
         
         if notification.name == UIResponder.keyboardWillShowNotification || notification.name == UIResponder.keyboardWillChangeFrameNotification {
             self.scrollBar.setContentOffset(activeField!.frame.origin, animated: true)
+        }else{
+            self.scrollBar.setContentOffset(.zero, animated: true)
         }
+    }
+    
+    func setupPasswordImage(){
+        password.rightViewMode = .always
+        password.rightView = helpButton
+    }
+    
+    func setupHelpButton(){
+        helpButton.setImage(helpImage.image, for: .normal)
+        helpButton.addTarget(self, action: #selector(helpTapped), for: .touchUpInside)
+        //push the button off the edge of the textfield
+        helpButton.contentEdgeInsets.right = 10
+        helpButton.contentEdgeInsets.left = -10
+    }
+    
+    @objc func helpTapped(){
+        errorMessageAlert(title: "Password Requirements", message: "Password must contain 1 Uppercase Character, 1 Special Character, 2 numerics, 3 Lowercase Characters, and between 8-12 Characters", thisView: self)
     }
     
     func createToolbar()
@@ -151,22 +175,21 @@ class CreateAccountViewController: UIViewController {
        let activity = UIActivityIndicatorView(style: .gray)
 
        activity.translatesAutoresizingMaskIntoConstraints = false
-       activity.startAnimating()
        view.addSubview(activity)
        activity.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
        activity.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         if(errors > 0){
             errorMessageLbl.isHidden = false
+            self.scrollBar.setContentOffset(.zero, animated: true)
         }else{
-
+            activity.startAnimating()
             //Auth display name is both first and last.,  Need to concatenate these two values before storing
             Auth.auth().createUser(withEmail: confirmEmail.text!, password: confirmPassword.text!) { (result, error) in
                 if(result != nil){
                     Auth.auth().currentUser?.setValue(displayName, forKey: "displayName")
                     
                     //update CoreData
-                    activity.startAnimating()
                     self.saveDataToCoreData(inDisplayName: displayName) { (result) in
                         if(result){
                             activity.stopAnimating()
@@ -227,10 +250,33 @@ class CreateAccountViewController: UIViewController {
     }
     
     @objc func isFieldValid(object: UITextField) {
-        
         if (object.text!.count > 0){
             //Valid field
             object.textColor = UIColor.init(red: 38.0/255, green: 150.0/255, blue: 92.0/255, alpha: 1.0)
+        }
+    }
+    
+    @objc func isValidPassword(object: UITextField){
+        if(object.text!.count > 0)
+        {
+            let testStr = object.text!
+            //Password must include 1-Capital Letter, Special Character, 2 digits, at lest 3 lowercase letters, and 8-12 charcters long
+            let passwordRegEx = "^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,12}$"
+            let passwordTest = NSPredicate(format:"SELF MATCHES %@", passwordRegEx)
+            let result = passwordTest.evaluate(with: testStr)
+            
+            if !result{
+                //Not a valid password
+                object.becomeFirstResponder()
+                errorMessageAlert(title: "Password Not Valid!", message: "Password Requirements:.  Password must contain 1 Uppercase Character, 1 Special Character, 2 numerics, 3 Lowercase Characters, and between 8-12 Characters", thisView: self)
+            }
+        }
+    }
+    
+    @objc func isValidPasswordLength(object: UITextField){
+        
+        if (object.text!.count > 12){
+            object.deleteBackward()
         }
     }
     

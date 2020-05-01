@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class DailyNotificationViewController: UIViewController {
     
@@ -18,50 +19,51 @@ class DailyNotificationViewController: UIViewController {
     var hour = String()
     var min = String()
     var dateToDisplay = String()
-    
+    let center = UNUserNotificationCenter.current()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSetTimeButton()
         setupRemoveTimeButton()
         
-        appDelegate?.registerForPushNotifications()
-        
-        let center = UNUserNotificationCenter.current()
-        center.getPendingNotificationRequests(completionHandler: { requests in
-            for request in requests {
-                if let temp = request.trigger as? UNCalendarNotificationTrigger{
-                    self.hour = String(temp.dateComponents.hour!)
-                    self.min = String(temp.dateComponents.minute!)
-                }
-            }
-            
-            if(self.hour == "" || self.min == ""){
-                DispatchQueue.main.async {
-                    self.currentTimeLbl.text = "Not Set"
-                    self.setRemoveDailyReminderBtn()
-                }
-            }else{
-                if(self.hour != "" || self.min != ""){
-                    self.dateToDisplay = self.formatTime(inHour: self.hour, inMin: self.min)
-                    DispatchQueue.main.async {
-                        self.currentTimeLbl.text = self.dateToDisplay
-                        self.setRemoveDailyReminderBtn()
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                self.center.getPendingNotificationRequests(completionHandler: { requests in
+                    for request in requests {
+                        if let temp = request.trigger as? UNCalendarNotificationTrigger{
+                            self.hour = String(temp.dateComponents.hour!)
+                            self.min = String(temp.dateComponents.minute!)
+                        }
                     }
+                    
+                    if(self.hour == "" || self.min == ""){
+                        DispatchQueue.main.async {
+                            self.currentTimeLbl.text = "Not Set"
+                            self.setRemoveDailyReminderBtn()
+                        }
+                    }else{
+                        if(self.hour != "" || self.min != ""){
+                            self.dateToDisplay = self.formatTime(inHour: self.hour, inMin: self.min)
+                            DispatchQueue.main.async {
+                                self.currentTimeLbl.text = self.dateToDisplay
+                                self.setRemoveDailyReminderBtn()
+                            }
+                        }
+                    }
+                })
+            } else if let error = error {
+                print(error.localizedDescription)
+            }else{
+                DispatchQueue.main.async {
+                    permissionDenied(title: "Permission Denied", message: "Permission has not been granted for notifications", thisView: self)
                 }
             }
-        })
+        }
     }
 
     @IBAction func SetTime(_ sender: Any) {
-        let dateFormatter = DateFormatter()
-        let calHour = Calendar.current.dateComponents([.hour], from: datePicker.date)
-        let calMin = Calendar.current.dateComponents([.minute], from: datePicker.date)
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        dateFormatter.dateFormat = "hh:mm a"
-        currentTimeLbl.text = dateFormatter.string(from: datePicker.date)
-        appDelegate?.scheduleDailyNotification(inHour: calHour.hour!, inMin: calMin.minute!)
+        
+        currentTimeLbl.text = setDailyReminder(inDate: datePicker, completion: nil)
         setRemoveDailyReminderBtn()
         dailyNotificationAddedAlert(title: "Daily Notification Set", message: "Daily notification set for \(currentTimeLbl.text!)", thisView: self)
     }
@@ -79,7 +81,7 @@ class DailyNotificationViewController: UIViewController {
         let dateAsString = combined
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
-        
+
         let date = dateFormatter.date(from: dateAsString)
         dateFormatter.dateFormat = "h:mm a"
         let returnDate = dateFormatter.string(from: date!)
@@ -87,7 +89,7 @@ class DailyNotificationViewController: UIViewController {
     }
     
     @IBAction func RemoveTime(_ sender: Any) {
-        appDelegate?.removeDailyNotification(identifier: "Daily Reminder")
+        center.removePendingNotificationRequests(withIdentifiers: ["Daily Reminder"])
         currentTimeLbl.text = "Not Set"
         setRemoveDailyReminderBtn()
         dailyNotificationRemovedAlert(title: "Daily Notificaiton Removed", message: "Daily notification for prayer has been removed.", thisView: self)

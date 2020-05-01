@@ -28,6 +28,11 @@ class PrayersViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //set table attributes
+        self.prayerTableView.tableFooterView = UIView()
+        self.prayerTableView.backgroundColor = UIColor.init(red: 194/255, green: 194/255, blue: 223/255, alpha: 1.0)
+        
+        
         ref.child("prayers/\(userId!)").observe(.childAdded) { (data) in
             let prayerData = data.value as? [String:Any]
             let prayerKey = data.key
@@ -58,20 +63,21 @@ class PrayersViewController: UIViewController, UITableViewDelegate, UITableViewD
                     itemIndex += 1
                 }
             }
-            
             self.prayerTableView.reloadData()
         }
         
         ref.child("prayers/\(userId!)").observe(.childRemoved) { (data) in
-            let prayerKey = data.key
+            //checking to see if prayer was deleted from some other place other
+            //than current device.  Otherwise removal from FB was already handled by
+            //the delete action on the row.
             
+            let prayerKey = data.key
             for item in self.prayerData{
                 if item.prayerKey == prayerKey{
-                   self.prayerData.remove(at: 0)
+                    self.prayerData.remove(at: 0)
+                    self.prayerTableView.reloadData()
                 }
             }
-            
-           self.prayerTableView.reloadData()
         }
     }
     
@@ -100,29 +106,29 @@ class PrayersViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
-            
-            let alertController = UIAlertController(title: "Delete Prayer", message: "Are you sure you want to delete this prayer?", preferredStyle: .alert)
-            
-            let ok = UIAlertAction(title: "Yes", style: .default){ (UIAlertAction) in
+        //If delete is selected
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (deleteAction, view, handler) in
+            let alertController = UIAlertController(title: "Delete Prayer?", message: "Are you sure you want to delete this prayer?", preferredStyle: .actionSheet)
+            let ok = UIAlertAction(title: "Delete", style: .destructive){ (UIAlertAction) in
                 let delKey = self.prayerData[indexPath.row].prayerKey
-                self.ref.child("prayers/\(self.userId!)").child("\(delKey)").removeValue()
                 self.prayerData.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                self.ref.child("prayers/\(self.userId!)").child("\(delKey)").removeValue()
+                handler(true)
             }
-            let cancel = UIAlertAction(title: "No", style: .cancel){ (UIAlertAction) in
-                //Nothing to do here.
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel){ (UIAlertAction) in
+                handler(false)
             }
-            cancel.setValue(UIColor.red, forKey: "titleTextColor")
             alertController.addAction(ok)
             alertController.addAction(cancel)
             self.present(alertController, animated: true, completion: nil)
         }
-        delete.backgroundColor = .red
+        deleteAction.backgroundColor = .red
         
-        let modify = UITableViewRowAction(style: .normal, title: "Modify") { action, index in
+        //If modify is selected
+        let modifyAction = UIContextualAction(style: .normal, title: "Modify") { (modifyAction, view, handler) in
             let modKey = self.prayerData[indexPath.row].prayerKey
             
             let VC1 = self.storyboard?.instantiateViewController(withIdentifier: "Modify Prayer") as! ModifyPrayerViewController
@@ -131,11 +137,40 @@ class PrayersViewController: UIViewController, UITableViewDelegate, UITableViewD
             VC1.inPrayFor = self.prayerData[indexPath.row].prayFor
             VC1.inPrayer = self.prayerData[indexPath.row].prayer
             self.show(VC1, sender: self)
-           
         }
-        modify.backgroundColor = UIColor(red: 194.0/255.0, green: 194.0/255.0, blue: 223.0/255.0, alpha: 1.0)
         
-        return [delete, modify]
+        if #available(iOS 13.0, *) {
+            deleteAction.image = UIImage.init(systemName: "trash")
+            modifyAction.image = UIImage.init(systemName: "pencil")
+            
+        }else {
+            // Fallback on earlier versions
+        }
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, modifyAction])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        //If timer is selected
+        let timerAction = UIContextualAction(style: .normal, title: "Reminder") { (timerAction, view, handler) in
+            let prayerKey = self.prayerData[indexPath.row].prayerKey
+            let VC1 = self.storyboard?.instantiateViewController(withIdentifier: "Prayer Reminder") as! PrayerReminderTableViewController
+            VC1.title = "Prayer Reminder"
+            VC1.inPrayerKey = prayerKey
+            VC1.inPrayerFor = self.prayerData[indexPath.row].prayFor
+            VC1.inPrayerMessage = self.prayerData[indexPath.row].prayer
+            self.show(VC1, sender: self)
+        }
+        timerAction.backgroundColor = .orange
+        if #available(iOS 13.0, *) {
+            timerAction.image = UIImage.init(systemName: "alarm")
+        }
+        
+        let configuration = UISwipeActionsConfiguration(actions: [timerAction])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
     }
     
 }
