@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 import UserNotifications
 
+let center = UNUserNotificationCenter.current()
+
 func setDailyReminder(inDate: UIDatePicker, completion: ((Bool)->Void)?)->String{
     
     var stringToReturn = ""
-    
-    let center = UNUserNotificationCenter.current()
     let dateFormatter = DateFormatter()
     var dateComponents = DateComponents()
 
@@ -47,8 +47,6 @@ func setDailyReminder(inDate: UIDatePicker, completion: ((Bool)->Void)?)->String
 func setPrayerReminder(inIdentifier: String, inPrayFor: String, inMessageBody: String, inDate: UIDatePicker, inRepeat: String, completion: ((Bool)->Void)?){
     
     var repeatAlert = false
-    
-    let center = UNUserNotificationCenter.current()
     var dateComponents = DateComponents()
 
     //store hour and minute and repeat from picker
@@ -91,6 +89,10 @@ func setPrayerReminder(inIdentifier: String, inPrayFor: String, inMessageBody: S
         
     }
     completion?(true)
+}
+
+func removePrayerReminder(inPrayerId: String){
+    center.removePendingNotificationRequests(withIdentifiers: [inPrayerId])
 }
 
 

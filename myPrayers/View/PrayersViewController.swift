@@ -113,6 +113,11 @@ class PrayersViewController: UIViewController, UITableViewDelegate, UITableViewD
             let alertController = UIAlertController(title: "Delete Prayer?", message: "Are you sure you want to delete this prayer?", preferredStyle: .actionSheet)
             let ok = UIAlertAction(title: "Delete", style: .destructive){ (UIAlertAction) in
                 let delKey = self.prayerData[indexPath.row].prayerKey
+                
+                //remove any pending alerts for this prayer
+                removePrayerReminder(inPrayerId: delKey)
+                
+                //Remove prayer from db
                 self.prayerData.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 self.ref.child("prayers/\(self.userId!)").child("\(delKey)").removeValue()
