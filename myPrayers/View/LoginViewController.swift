@@ -355,7 +355,6 @@ class LoginViewController: UIViewController {
                         self.loginUser(userName: inUserEmail, userPassword: inUserPassword)
                     }
                 }else{
-                    print("User Declined for this app")
                     self.isBioActivatedForApp = false
                 }
             }

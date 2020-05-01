@@ -85,7 +85,10 @@ func setPrayerReminder(inIdentifier: String, inPrayFor: String, inMessageBody: S
     let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: repeatAlert)
     let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
     center.add(request) { (error) in
-        print(error.debugDescription)
+        if error != nil{
+            print(error!.localizedDescription)
+        }
+        
     }
     completion?(true)
 }

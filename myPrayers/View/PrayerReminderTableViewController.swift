@@ -184,6 +184,7 @@ class PrayerReminderTableViewController: UITableViewController{
     
     @IBAction func removeReminderTapped(_ sender: Any) {
         center.removePendingNotificationRequests(withIdentifiers: [inPrayerKey])
+        lblPickerDate.text = "Not Set"
         repeatLabel.text = "Not Set"
         setRemoveDailyReminderBtn()
         dailyNotificationRemovedAlert(title: "Prayer Notificaiton Removed", message: "Prayer notification has been removed.", thisView: self)
