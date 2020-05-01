@@ -84,6 +84,7 @@ class PrayerReminderTableViewController: UITableViewController{
                                     self.setRemoveDailyReminderBtn()
                                 }
                             }
+                            break //Exit loop.  Otherwise other alert data is ignored.
                         }else{
                             DispatchQueue.main.async {
                                 self.lblPickerDate.text = "Not Set"
