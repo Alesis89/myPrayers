@@ -30,26 +30,28 @@ class DailyNotificationViewController: UIViewController {
             if success {
                 self.center.getPendingNotificationRequests(completionHandler: { requests in
                     for request in requests {
-                        if let temp = request.trigger as? UNCalendarNotificationTrigger{
-                            self.hour = String(temp.dateComponents.hour!)
-                            self.min = String(temp.dateComponents.minute!)
-                        }
-                    }
-                    
-                    if(self.hour == "" || self.min == ""){
-                        DispatchQueue.main.async {
-                            self.currentTimeLbl.text = "Not Set"
-                            self.setRemoveDailyReminderBtn()
-                        }
-                    }else{
-                        if(self.hour != "" || self.min != ""){
-                            self.dateToDisplay = self.formatTime(inHour: self.hour, inMin: self.min)
-                            DispatchQueue.main.async {
-                                self.currentTimeLbl.text = self.dateToDisplay
-                                self.setRemoveDailyReminderBtn()
+                        if request.identifier == "Daily Alert"{
+                            
+                            if let temp = request.trigger as? UNCalendarNotificationTrigger{
+                                self.hour = String(temp.dateComponents.hour!)
+                                self.min = String(temp.dateComponents.minute!)
                             }
                         }
-                    }
+                        if(self.hour == "" || self.min == ""){
+                            DispatchQueue.main.async {
+                                self.currentTimeLbl.text = "Not Set"
+                                self.setRemoveDailyReminderBtn()
+                            }
+                        }else{
+                            if(self.hour != "" || self.min != ""){
+                                self.dateToDisplay = self.formatTime(inHour: self.hour, inMin: self.min)
+                                DispatchQueue.main.async {
+                                    self.currentTimeLbl.text = self.dateToDisplay
+                                    self.setRemoveDailyReminderBtn()
+                                }
+                            }
+                        }
+                    } 
                 })
             } else if let error = error {
                 print(error.localizedDescription)
