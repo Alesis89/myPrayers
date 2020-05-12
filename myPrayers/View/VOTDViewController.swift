@@ -199,7 +199,7 @@ class VOTDViewController: UIViewController {
     
     @objc func shareVOTD(){
         
-        //Because saving images to photo library cause the UIActivityViewController to close down to the root view controler (my login page)
+        //Because saving images to photo library causes the UIActivityViewController to close down to the root view controler (my login page)
         //this is a work around to allow saving to photo library that will close down the fakeViewController and take me back to my
         //ViewController.
         

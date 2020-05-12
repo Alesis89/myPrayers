@@ -23,13 +23,11 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var createAccountButton: UIButton!
     var activeField: UITextField?
     
-    //Variable for Biometrics
-    var isBioSwitchOn = false
-    var isBioActivatedForApp = false //User confirmed to use BioMetrics
-    var isDeviceBioCapable = checkIfDeviceBioCapable()
-    var isBioTurnedOnForDevice = checkIfBioActivatedOnDevice()
-    var storedUserName = KeychainWrapper.standard.string(forKey: "userEmail")
-    var storedUserPassword = KeychainWrapper.standard.string(forKey: "userPassword")
+    //Variables for Biometrics
+    var bioType = checkBioType()
+    var isBioSwitchOn: Bool?
+    var storedUserName: String?
+    var storedUserPassword: String?
     
     let mainDelegate = UIApplication.shared.delegate as! AppDelegate
     var userId: String!
@@ -38,11 +36,12 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         createToolbar()
         setupLoginButton()
-        setupBioButton()
         setupPasswordImage()
-    
+        setupBioButton()
+        
         userEmail.addTarget(self, action: #selector(setActiveField(object:)), for: .editingDidBegin)
         userEmail.addTarget(self, action: #selector(isValidEmail), for: .editingDidEnd)
         
@@ -51,30 +50,24 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        
-        checkBio(completion: nil)
-        
-        if(isDeviceBioCapable){
-            //Device can use biometrics.  Check to see if user has turned on biometrics at the device level
-            if(isBioTurnedOnForDevice){
-                //See if user turned on biometrics for the app.  If so, we can try to login using biometrics
-                if(isBioSwitchOn && storedUserName != nil){
-                    //log into device using biometrics
-                    if(storedUserName != "" && storedUserPassword != ""){
-                        bioMetricLogin(inUserEmail: storedUserName!, inUserPassword: storedUserPassword!)
-                    }else{
-                        //User probably turned this on for the first time from the menu
-                        //Will return back to regular login.  Login function will store creds if isBioActivatedForApp is true
-                    }
-                }
-            }
-        }
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         checkBio(completion: nil)
+        
+        //If user logged out from app, do not try to auto login
+        if(self.mainDelegate.userStatus != AppDelegate.LoggedInStatus.loggedOut){
+            if(isBioSwitchOn == true && storedUserName != nil){
+                //log into device using biometrics
+                if(storedUserName != nil && storedUserPassword != nil){
+                    bioMetricLogin(inUserEmail: storedUserName!, inUserPassword: storedUserPassword!)
+                }else{
+                    //User probably turned this on for the first time from the menu
+                    //Will return back to regular login.  Login function will store creds if isBioActivatedForApp is true
+                }
+            }
+        }
     }
     
     deinit {
@@ -115,29 +108,21 @@ class LoginViewController: UIViewController {
     }
     
     func checkBio(completion:((Bool)->Void)?){
-        if(isBioTurnedOnForDevice){
-            guard let checkBio = (UserDefaults.standard.value(forKey: "SET BIOMETRICS") as? Bool) else {
-                isBioSwitchOn = false
-                bioButton.isHidden = true
-                completion?(true)
-                return
-            }
-            
-            if checkBio && isBioActivatedForApp{
-                isBioSwitchOn = true
-                bioButton.isHidden = false
-                completion?(true)
-            }else if (checkBio && !isBioActivatedForApp){
-                isBioSwitchOn = true
-                bioButton.isHidden = true
-                completion?(true)
-            }else{
-                isBioSwitchOn = false
-                bioButton.isHidden = true
-                completion?(true)
-            }
+        //setup values that will refresh on every load to the login page
+        
+        isBioSwitchOn = UserDefaults.standard.value(forKey: "SET BIOMETRICS") as? Bool
+        storedUserName = KeychainWrapper.standard.string(forKey: "userEmail")
+        storedUserPassword = KeychainWrapper.standard.string(forKey: "userPassword")
+        
+        print(storedUserName)
+        print(storedUserPassword)
+        
+        if (isBioSwitchOn == true && storedUserName != nil){
+            bioButton.isHidden = false
+            completion?(true)
         }else{
             bioButton.isHidden = true
+            completion?(true)
         }
     }
     
@@ -151,21 +136,26 @@ class LoginViewController: UIViewController {
     }
     
     func setupBioButton(){
-        bioImage.image =  UIImage(named: "face-id")!
+        if (bioType == .faceID){
+            bioImage.image =  UIImage(named: "face-id")!
+        }else if (bioType == .touchID){
+            bioImage.image =  UIImage(named: "touch-id")!
+        }
+        
         bioButton.setImage(bioImage.image, for: .normal)
-        bioButton.addTarget(self, action: #selector(faceIdTapped), for: .touchUpInside)
+        bioButton.addTarget(self, action: #selector(bioButtonTapped), for: .touchUpInside)
         //push the button off the edge of the textfield
         bioButton.contentEdgeInsets.right = 10
         bioButton.contentEdgeInsets.left = -10
     }
     
-    @objc func faceIdTapped(_ sender: Any) {
+    @objc func bioButtonTapped(_ sender: Any) {
         
         bioMetricLogin(inUserEmail: storedUserName!, inUserPassword: storedUserPassword!)
     }
     
     @IBAction func btnLogin(_ sender: Any) {
-        if(isBioSwitchOn && storedUserName == "" && storedUserPassword == ""){
+        if(isBioSwitchOn == true && storedUserName == nil && storedUserPassword == nil){
             //User just turned this on from menu
             storeCredsinKeyChain()
             
@@ -192,43 +182,43 @@ class LoginViewController: UIViewController {
         activity.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         //MARK - Verify credentials
-               Auth.auth().signIn(withEmail: "\(userName!)", password: "\(userPassword!)") { [weak self] user, error in
-                   if (user != nil){
-                    self!.mainDelegate.userStatus = AppDelegate.LoggedInStatus.loggedIn
-                       self!.userId = user?.user.uid
-                    
-                        //clear login and password for security reasons after being authenticated.
-                        self!.userEmail.text = nil
-                        self!.userPassword.text = nil
-                       
-                       //Check coredata for user info.  Core data values should be present if user previously logged in.
-                       self!.getDataFromCoreDataUser { (result) in
-                           if(result){
-                            
-                            let nc = self?.storyboard?.instantiateViewController(withIdentifier: "Nav Controller") as! UINavigationController
-                            nc.modalPresentationStyle = .fullScreen
-                            self?.present(nc, animated: true, completion: nil)
-
-                           }else{
-                               
-                               //Save user info to Core data
-                               self!.mainDelegate.displayName = user!.user.displayName
-                               self!.downloadUserProfileImage(userID: self!.userId, completion: { (result) in
-                                   if (result){
-                                       self!.saveData()
-                                   }
-                               })
-                            
-                            let nc = self?.storyboard?.instantiateViewController(withIdentifier: "Nav Controller") as! UINavigationController
-                            nc.modalPresentationStyle = .fullScreen
-                            self?.present(nc, animated: true, completion: nil)
-                           }
-                       }
-                   }else{
-                       errorMessageAlert(title: "Error Logging In", message: "\(error!.localizedDescription)", thisView: self!)
-                   }
-                   activity.stopAnimating()
-               }
+        Auth.auth().signIn(withEmail: "\(userName!)", password: "\(userPassword!)") { [weak self] user, error in
+            if (user != nil){
+                self!.mainDelegate.userStatus = AppDelegate.LoggedInStatus.loggedIn
+                self!.userId = user?.user.uid
+                
+                //clear login and password for security reasons after being authenticated.
+                self!.userEmail.text = nil
+                self!.userPassword.text = nil
+                
+                //Check coredata for user info.  Core data values should be present if user previously logged in.
+                self!.getDataFromCoreDataUser { (result) in
+                    if(result){
+                        
+                        let nc = self?.storyboard?.instantiateViewController(withIdentifier: "Nav Controller") as! UINavigationController
+                        nc.modalPresentationStyle = .fullScreen
+                        self?.present(nc, animated: true, completion: nil)
+                        
+                    }else{
+                        
+                        //Save user info to Core data
+                        self!.mainDelegate.displayName = user!.user.displayName
+                        self!.downloadUserProfileImage(userID: self!.userId, completion: { (result) in
+                            if (result){
+                                self!.saveData()
+                            }
+                        })
+                        
+                        let nc = self?.storyboard?.instantiateViewController(withIdentifier: "Nav Controller") as! UINavigationController
+                        nc.modalPresentationStyle = .fullScreen
+                        self?.present(nc, animated: true, completion: nil)
+                    }
+                }
+            }else{
+                errorMessageAlert(title: "Error Logging In", message: "\(error!.localizedDescription)", thisView: self!)
+            }
+            activity.stopAnimating()
+        }
     }
     
     @IBAction func resetPassword(_ sender: Any) {
@@ -347,19 +337,15 @@ class LoginViewController: UIViewController {
         //Login with users credentials.
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil ){
             let reason = "Log in to your account"
-            
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "\(reason)") { (success, error) in
                 if(success){
-                    self.isBioActivatedForApp = true
                     DispatchQueue.main.async {
                         self.loginUser(userName: inUserEmail, userPassword: inUserPassword)
                     }
                 }else{
-                    self.isBioActivatedForApp = false
                 }
             }
         }else{
-            isBioActivatedForApp = false
         }
     }
 }

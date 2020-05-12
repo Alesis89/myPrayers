@@ -91,7 +91,7 @@ class DailyNotificationViewController: UIViewController {
     }
     
     @IBAction func RemoveTime(_ sender: Any) {
-        center.removePendingNotificationRequests(withIdentifiers: ["Daily Reminder"])
+        center.removePendingNotificationRequests(withIdentifiers: ["Daily Alert"])
         currentTimeLbl.text = "Not Set"
         setRemoveDailyReminderBtn()
         dailyNotificationRemovedAlert(title: "Daily Notificaiton Removed", message: "Daily notification for prayer has been removed.", thisView: self)

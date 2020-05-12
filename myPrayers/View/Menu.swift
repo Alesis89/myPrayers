@@ -38,12 +38,10 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
             let context:LAContext = LAContext()
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil ){
                 if context.biometryType == LABiometryType.faceID{
-                    faceIDLabel = "Face ID"
+                    faceIDLabel = "Face ID:"
                 }else if context.biometryType == LABiometryType.touchID{
-                    faceIDLabel = "Touch ID"
+                    faceIDLabel = "Touch ID:"
                 }
-            }else{
-                faceIDLabel = "Biometric Login:"
             }
         }
         
@@ -130,7 +128,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     
     func setupProfileView(window: UIWindow){
         profileView.frame = CGRect(x: 0, y: 0, width: 250, height: window.frame.height/4)
-        profileView.backgroundColor = .white
+        profileView.backgroundColor = UIColor.init(red: 194/255, green: 194/255, blue: 223/255, alpha: 1.0)
         profileView.layer.shadowColor = UIColor.black.cgColor
         profileView.layer.shadowOpacity = 1
         profileView.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
@@ -140,7 +138,6 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     func setupSettingsButton(){
         settingsImageView.image = UIImage(named: "settings")
         settingsButton.setImage(settingsImageView.image, for: .normal)
-        settingsButton.tintColor = UIColor.purple
         settingsButton.addTarget(self, action: #selector(self.settingsButtonAction(_:)), for: .touchUpInside)
     }
     
@@ -159,6 +156,8 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
         profileImageView.isUserInteractionEnabled = true
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         profileImageView.clipsToBounds = true
+        profileImageView.layer.borderColor = UIColor.white.cgColor
+        profileImageView.layer.borderWidth = 2
     }
 
     func setProfileImageConstraints(){
@@ -213,12 +212,13 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     }
     
     func setupVOTDSwitch(){
-        votdSetting = UISwitch(frame:CGRect(x: 150, y: 150, width: 0, height: 0))
         votdSetting.addTarget(self, action: #selector(VOTDSwitchTapped), for: .touchUpInside)
+        votdSetting.onTintColor = UIColor.init(red: 194/255, green: 194/255, blue: 223/255, alpha: 1.0)
     }
     
     func setupBioSwitch(){
         faceIdSetting.addTarget(self, action: #selector(bioSwitchTapped), for: .touchUpInside)
+        faceIdSetting.onTintColor = UIColor.init(red: 194/255, green: 194/255, blue: 223/255, alpha: 1.0)
     }
     
     func setVOTDSwitchConstraints(){
@@ -275,8 +275,8 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
             errorMessageAlert(title: "\(faceIDLabel) Turned On", message: "Biometrics will be activated after your next login.", thisView: topVC!)
         }else{
             //remove stored keychain values
-            let _: Bool = KeychainWrapper.standard.removeObject(forKey: "userName")
-            let _: Bool = KeychainWrapper.standard.removeObject(forKey: "userPwd")
+            let _: Bool = KeychainWrapper.standard.removeObject(forKey: "userEmail")
+            let _: Bool = KeychainWrapper.standard.removeObject(forKey: "userPassword")
             UserDefaults.standard.set(false, forKey: "SET BIOMETRICS")
             setBioSwitch()
         }

@@ -45,6 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
+        
+        //check to see if our VOTD has been turned off by the user.  If so, go straight to login screen
+        
         _ = checkVOTDAtStartup(completion: { (result) in
             //check to see if VOTD is turned on.  If so, show the VOTD view controller first.
             if (result){

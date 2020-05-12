@@ -9,19 +9,20 @@
 import Foundation
 import LocalAuthentication
 
-func checkIfDeviceBioCapable()->Bool{
+func checkBioType()->LABiometryType{
     
     //Check to see if the device has biometric capabilities
     let context = LAContext()
-    var result = false
+    var result: LABiometryType!
+    
     if #available(iOS 11, *) {
         let _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
         if context.biometryType == .faceID{
-            result = true
+            result = LABiometryType .faceID
         }else if context.biometryType == .touchID{
-            result = true
+            result = LABiometryType .touchID
         }else if context.biometryType == .none{
-            result = false
+            result = LABiometryType .none
         }
     }
     return result
@@ -30,6 +31,7 @@ func checkIfDeviceBioCapable()->Bool{
 func checkIfBioActivatedOnDevice()->Bool{
     let context = LAContext()
     var result =  false
+    
     if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil ){
         //Device is capable, and turned on for this device
         result = true
