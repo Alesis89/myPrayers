@@ -1,5 +1,4 @@
 # myPrayers
-
 myPrayers is an applicaiton designed to allow you to quickly enter and store things you want to prayer for, as well as store
 prayer reqeusts you may learn about from other people.  
 
