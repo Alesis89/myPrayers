@@ -359,6 +359,8 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
             return 2
         }else if (section == 2){
             return 1
+        }else if (section == 3){
+            return 2
         }
         return 1
     }
@@ -393,20 +395,20 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
             cell.textLabel?.textColor = .black
             cell.accessoryView = faceIdSetting
             return cell
-            
-//            if(indexPath.row == 0){
-//                cell.textLabel?.text = faceIDLabel
-//                cell.textLabel?.textColor = .black
-//                cell.accessoryView = faceIdSetting
-//                return cell
-//            }else if (indexPath.row == 1){
-//                cell.textLabel?.textColor = .black
-//                cell.textLabel?.text = "Reset Password:  Coming Soon..."
-//                return cell
-//            }else{
-//                return cell
-//            }
-            
+        }else if (indexPath.section == 3){
+            if(indexPath.row == 0){
+                cell.textLabel?.text = "Privacy Policy"
+                cell.textLabel?.textColor = .black
+                cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                return cell
+            }else if(indexPath.row == 1){
+                cell.textLabel?.text = "Terms Policy"
+                cell.textLabel?.textColor = .black
+                cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+                return cell
+            }else{
+                return cell
+            }
         }else{
             return cell
         }
@@ -415,9 +417,9 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         var sectionsToReturn: Int!
         if(!checkIfBioActivatedOnDevice()){
-            sectionsToReturn = 2
-        }else{
             sectionsToReturn = 3
+        }else{
+            sectionsToReturn = 4
         }
         return sectionsToReturn
     }
@@ -452,9 +454,34 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
                 blackBackgroundView.alpha = 0
                 let height = UIApplication.shared.keyWindow?.frame.height
                 menuView.frame = CGRect.init(x: 0, y: 0, width: -250, height: height!)
+            }
+        }
+        
+        if(indexPath.section == 3){
+            if(indexPath.row == 0){
+                let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
+                let VC1 = topVC?.storyboard?.instantiateViewController(withIdentifier: "privacy") as! PrivacyViewController
+                VC1.modalPresentationStyle = .currentContext
+                VC1.title = "Privacy"
+                VC1.inPrivacySelection = "Privacy"
+                topVC!.show(VC1, sender: topVC)
                 
-//                let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
-//                errorMessageAlert(title: "Coming Soon", message: "", thisView: topVC!)
+                //Close the menu
+                blackBackgroundView.alpha = 0
+                let height = UIApplication.shared.keyWindow?.frame.height
+                menuView.frame = CGRect.init(x: 0, y: 0, width: -250, height: height!)
+            }else if(indexPath.row == 1){
+                let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
+                let VC1 = topVC?.storyboard?.instantiateViewController(withIdentifier: "privacy") as! PrivacyViewController
+                VC1.modalPresentationStyle = .currentContext
+                VC1.title = "Privacy"
+                VC1.inPrivacySelection = "TOS"
+                topVC!.show(VC1, sender: topVC)
+                
+                //Close the menu
+                blackBackgroundView.alpha = 0
+                let height = UIApplication.shared.keyWindow?.frame.height
+                menuView.frame = CGRect.init(x: 0, y: 0, width: -250, height: height!)
             }
         }
     }
@@ -472,6 +499,9 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
             return label
         }else if (section == 2){
             label.text = "Profile Security"
+            return label
+        }else if (section == 3){
+            label.text = "Privacy"
             return label
         }else{
             return label

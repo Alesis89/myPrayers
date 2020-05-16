@@ -168,6 +168,7 @@ class PrayerReminderTableViewController: UITableViewController{
         }else{
             setPrayerReminder(inIdentifier: inPrayerKey, inPrayFor: inPrayerFor, inMessageBody: inPrayerMessage, inDate: datePicker, inRepeat: repeatLabel.text!) { (success) in
                 if(success){
+                    self.setRemoveDailyReminderBtn()
                     dailyNotificationAddedAlert(title: "Prayer Notification Set", message: "Prayer notification set for \(self.lblPickerDate.text!)", thisView: self)
                 }
             }

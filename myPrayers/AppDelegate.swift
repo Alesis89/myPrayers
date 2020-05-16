@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let homePage: UIViewController = mainStoryBoard.instantiateViewController(withIdentifier: "VOTD") as! VOTDViewController
                  self.window?.rootViewController = homePage
                 window?.makeKeyAndVisible()
-               
+
             }else{
                 let homePage: UIViewController = mainStoryBoard.instantiateViewController(withIdentifier: "Login Controller") as! LoginViewController
                  self.window?.rootViewController = homePage

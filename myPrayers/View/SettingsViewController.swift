@@ -88,6 +88,8 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
                 
                 view.frame.origin.y = (-(activeField?.frame.origin.y)!)
                 
+            }else if(activeField?.accessibilityIdentifier == "email"){
+                view.frame.origin.y = (-(activeField?.frame.origin.y)!)
             }
         }else{
             view.frame.origin.y = 0

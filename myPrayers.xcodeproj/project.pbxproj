@@ -18,6 +18,7 @@
 		1D5B47B8230213B100CA6CDB /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5B47B7230213B100CA6CDB /* Alerts.swift */; };
 		1D5B47BA230237BF00CA6CDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D5B47B9230237BF00CA6CDB /* GoogleService-Info.plist */; };
 		1D687E652459FEDB0009C22B /* PrayerReminderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D687E642459FEDB0009C22B /* PrayerReminderTableViewController.swift */; };
+		1D68A156246F189100310BD8 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D68A155246F189000310BD8 /* PrivacyViewController.swift */; };
 		1D7EA981230C7862003954CD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7EA980230C7862003954CD /* SettingsViewController.swift */; };
 		1D8D54242435587500AA6E08 /* DailyNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8D54232435587500AA6E08 /* DailyNotificationViewController.swift */; };
 		1D958B5D245B2C85005A5836 /* RepeatReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D958B5C245B2C85005A5836 /* RepeatReminderViewController.swift */; };
@@ -51,6 +52,7 @@
 		1D5B47B7230213B100CA6CDB /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		1D5B47B9230237BF00CA6CDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1D687E642459FEDB0009C22B /* PrayerReminderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerReminderTableViewController.swift; sourceTree = "<group>"; };
+		1D68A155246F189000310BD8 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		1D7EA980230C7862003954CD /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		1D855C84243650FC00A02391 /* myPrayers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myPrayers.entitlements; sourceTree = "<group>"; };
 		1D8D54232435587500AA6E08 /* DailyNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNotificationViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				1D96C195230EF7CE0047A9F0 /* ViewPrayerViewController.swift */,
 				1D3D8844231428AB00E55DE5 /* ResetPasswordViewController.swift */,
 				1D8D54232435587500AA6E08 /* DailyNotificationViewController.swift */,
+				1D68A155246F189000310BD8 /* PrivacyViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				1D958B5D245B2C85005A5836 /* RepeatReminderViewController.swift in Sources */,
 				1DB1085322F7B88200DB4C26 /* myPrayers.xcdatamodeld in Sources */,
 				1D5AE6D124508CCD0074BCFF /* Biometrics.swift in Sources */,
+				1D68A156246F189100310BD8 /* PrivacyViewController.swift in Sources */,
 				1D8D54242435587500AA6E08 /* DailyNotificationViewController.swift in Sources */,
 				1DB1086722F7B9BB00DB4C26 /* LoginViewController.swift in Sources */,
 				1DB1086322F7B8F800DB4C26 /* Constants.swift in Sources */,
@@ -475,7 +479,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = myPrayers/myPrayers.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = 8Y3E4QY6HH;
 				INFOPLIST_FILE = myPrayers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -496,7 +500,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = myPrayers/myPrayers.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = 8Y3E4QY6HH;
 				INFOPLIST_FILE = myPrayers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -20,3 +20,9 @@ struct AppVersionBuildConstants{
     static let versionNumber = "CFBundleShortVersionString"
     static let buildNumber = "CFBundleVersion"
 }
+
+struct privacyTOSPolicies{
+    static let privacyPolicy = "https://alesis89.github.io/myPrayers/privacy/privacy-policy.html"
+    static let tosPolicy = "https://alesis89.github.io/myPrayers/privacy/tos.html"
+    static let gitHubMyPrayers = "https://alesis89.github.io/myPrayers"
+}

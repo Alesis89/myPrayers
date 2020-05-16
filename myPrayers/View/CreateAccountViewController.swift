@@ -21,6 +21,8 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var confirmPassword: UITextField!
     @IBOutlet weak var errorMessageLbl: UILabel!
     @IBOutlet weak var scrollBar: UIScrollView!
+    @IBOutlet weak var privacyBtn: UIButton!
+    @IBOutlet weak var termsBtn: UIButton!
     
     var emailConfirmed = false
     var passwordConfirmed = false
@@ -315,5 +317,19 @@ class CreateAccountViewController: UIViewController {
     }
     @IBAction func closeButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    @IBAction func privacyBtnTapped(_ sender: Any) {
+        let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
+        let VC1 = topVC?.storyboard?.instantiateViewController(withIdentifier: "privacy") as! PrivacyViewController
+        VC1.title = "Privacy"
+        VC1.inPrivacySelection = "Privacy"
+        topVC!.show(VC1, sender: topVC)
+    }
+    @IBAction func termsBtnTapped(_ sender: Any) {
+        let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
+        let VC1 = topVC?.storyboard?.instantiateViewController(withIdentifier: "privacy") as! PrivacyViewController
+        VC1.title = "Privacy"
+        VC1.inPrivacySelection = "TOS"
+        topVC!.show(VC1, sender: topVC)
     }
 }

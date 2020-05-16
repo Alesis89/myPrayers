@@ -114,9 +114,6 @@ class LoginViewController: UIViewController {
         storedUserName = KeychainWrapper.standard.string(forKey: "userEmail")
         storedUserPassword = KeychainWrapper.standard.string(forKey: "userPassword")
         
-        print(storedUserName)
-        print(storedUserPassword)
-        
         if (isBioSwitchOn == true && storedUserName != nil){
             bioButton.isHidden = false
             completion?(true)
