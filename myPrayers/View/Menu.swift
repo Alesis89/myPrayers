@@ -16,18 +16,24 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
 
     //Setup Variables
     let exitButton = UIButton()
+    let settingsButton = UIButton()
+    
+    var votdSetting = UISwitch()
+    var faceIdSetting = UISwitch()
+    
     let menuView = UIView()
     let profileView = UIView()
-    var votdSetting = UISwitch()
+    let blackBackgroundView = UIView()
+    
     var votdLabel = UILabel()
-    var faceIdSetting = UISwitch()
-    var faceIDLabel = ""
     var profileUserName = UILabel()
+    let versionLabel = UILabel()
+    let supportLabel = UILabel()
+    var faceIDLabel = ""
+    
     var profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
     var settingsImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-    let settingsButton = UIButton()
-    let blackBackgroundView = UIView()
-    let versionLabel = UILabel()
+    
     var topVC = UIViewController()
     let mainDelegate = UIApplication.shared.delegate as! AppDelegate
     var tableView = UITableView()
@@ -88,18 +94,21 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
             setBioSwitch()
             setupVersionLabel()
             setupExitButton()
+            setupSupportLabel()
             
             //menuView.addSubview(self.votdSetting)
             //menuView.addSubview(votdLabel)
             menuView.addSubview(tableView)
             menuView.addSubview(versionLabel)
-            menuView.addSubview(self.exitButton)
+            menuView.addSubview(exitButton)
+            menuView.addSubview(supportLabel)
            
             //setVOTDSwitchConstraints()
             //setVotdConstraints()
             setTableConstraints()
             setVersionConstraints()
             setExitButtonConstraints()
+            setSupportLabelConstraints()
             
             //Add our blackview and menuView to main window
             window.addSubview(blackBackgroundView)
@@ -182,7 +191,7 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     func setVersionConstraints(){
         versionLabel.translatesAutoresizingMaskIntoConstraints = false
         versionLabel.centerXAnchor.constraint(equalTo: menuView.centerXAnchor).isActive = true
-        versionLabel.bottomAnchor.constraint(equalTo: menuView.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+        versionLabel.topAnchor.constraint(equalTo: exitButton.bottomAnchor, constant: 8).isActive = true
     }
     
     func setupVersionLabel(){
@@ -245,7 +254,24 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
         exitButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         exitButton.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 20).isActive = true
         exitButton.trailingAnchor.constraint(equalTo: menuView.trailingAnchor, constant: -20).isActive = true
-        exitButton.bottomAnchor.constraint(equalTo: menuView.safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
+        exitButton.bottomAnchor.constraint(equalTo: menuView.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
+    }
+    
+    func setupSupportLabel(){
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.supportLabelAction(_:)))
+        self.supportLabel.isUserInteractionEnabled = true
+        self.supportLabel.addGestureRecognizer(tap)
+        
+        supportLabel.text = "Support"
+        supportLabel.font = UIFont(name: "Avenir Next", size: 14)
+        supportLabel.textColor = .purple
+    }
+    
+    func setSupportLabelConstraints(){
+        supportLabel.translatesAutoresizingMaskIntoConstraints = false
+        supportLabel.centerXAnchor.constraint(equalTo: menuView.centerXAnchor).isActive = true
+        supportLabel.bottomAnchor.constraint(equalTo: menuView.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
     }
     
     @objc func setVOTDSwitch(){
@@ -309,6 +335,20 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     @objc func exitButtonAction(_ sender:UIButton!){
         handleDismiss(logout: true)
     }
+   
+    @objc func supportLabelAction(_ sender:UIButton!){
+          let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
+          let VC1 = topVC?.storyboard?.instantiateViewController(withIdentifier: "privacy") as! PrivacyViewController
+          VC1.modalPresentationStyle = .currentContext
+          VC1.title = "Support"
+          VC1.inPrivacySelection = "gitHubMyPrayers"
+          topVC!.show(VC1, sender: topVC)
+          
+          //Close the menu
+          blackBackgroundView.alpha = 0
+          let height = UIApplication.shared.keyWindow?.frame.height
+          menuView.frame = CGRect.init(x: 0, y: 0, width: -250, height: height!)
+       }
     
     @objc func handleDismiss(logout: Bool){
         
@@ -395,20 +435,6 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
             cell.textLabel?.textColor = .black
             cell.accessoryView = faceIdSetting
             return cell
-        }else if (indexPath.section == 3){
-            if(indexPath.row == 0){
-                cell.textLabel?.text = "Privacy Policy"
-                cell.textLabel?.textColor = .black
-                cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-                return cell
-            }else if(indexPath.row == 1){
-                cell.textLabel?.text = "Terms Policy"
-                cell.textLabel?.textColor = .black
-                cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-                return cell
-            }else{
-                return cell
-            }
         }else{
             return cell
         }
@@ -417,9 +443,9 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         var sectionsToReturn: Int!
         if(!checkIfBioActivatedOnDevice()){
-            sectionsToReturn = 3
+            sectionsToReturn = 2
         }else{
-            sectionsToReturn = 4
+            sectionsToReturn = 3
         }
         return sectionsToReturn
     }
@@ -499,9 +525,6 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
             return label
         }else if (section == 2){
             label.text = "Profile Security"
-            return label
-        }else if (section == 3){
-            label.text = "Privacy"
             return label
         }else{
             return label

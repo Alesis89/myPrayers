@@ -39,7 +39,9 @@ class AddPrayerViewController: UIViewController, UITextViewDelegate {
         prayerTxt.layer.masksToBounds = true
         prayerTxt.text = "Prayer?"
         prayerTxt.textColor = UIColor(red: 201.0/255.0, green: 201.0/255.0, blue: 205.0/255.0, alpha: 1.0)
-
+        
+        
+        prayForTxt.addTarget(self, action: #selector(isValidPrayForLength(object:)), for: .editingChanged)
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -103,6 +105,13 @@ class AddPrayerViewController: UIViewController, UITextViewDelegate {
         
         prayerTxt.inputAccessoryView = toolbar
         prayForTxt.inputAccessoryView = toolbar
+    }
+    
+    @objc func isValidPrayForLength(object: UITextField){
+        
+        if (object.text!.count > 20){
+            object.deleteBackward()
+        }
     }
     
     @objc func dismissKeyboard(){

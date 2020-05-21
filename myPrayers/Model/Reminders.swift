@@ -66,6 +66,8 @@ func setPrayerReminder(inIdentifier: String, inPrayFor: String, inMessageBody: S
         dateComponents.month  = Calendar.current.dateComponents([.month], from: inDate.date).month
     default:
         repeatAlert = false
+        dateComponents.day  = Calendar.current.dateComponents([.day], from: inDate.date).day
+        dateComponents.weekday  = Calendar.current.dateComponents([.weekday], from: inDate.date).weekday
     }
     
     //These values are always set no matter the repeat options
