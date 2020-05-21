@@ -119,7 +119,4 @@ a:visited{
     .profile-name::after, .project-name::after {
         margin-left: 0;
     }
-    
-    .footer{
-        width: 100%;
 }
