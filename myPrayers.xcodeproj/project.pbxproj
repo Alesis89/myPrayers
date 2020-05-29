@@ -11,7 +11,6 @@
 		1D3D8845231428AB00E55DE5 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3D8844231428AB00E55DE5 /* ResetPasswordViewController.swift */; };
 		1D57E025230AFAF200C4C9C6 /* AddPrayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D57E024230AFAF200C4C9C6 /* AddPrayerViewController.swift */; };
 		1D57E029230B7D4400C4C9C6 /* ModifyPrayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D57E028230B7D4400C4C9C6 /* ModifyPrayerViewController.swift */; };
-		1D583A74230D7087002E4B3F /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1D583A73230D7087002E4B3F /* readme.txt */; };
 		1D5AE6D124508CCD0074BCFF /* Biometrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5AE6D024508CCD0074BCFF /* Biometrics.swift */; };
 		1D5AE6D32450E0C90074BCFF /* Reminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5AE6D22450E0C90074BCFF /* Reminders.swift */; };
 		1D5B47B623020A1D00CA6CDB /* PrayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5B47B523020A1D00CA6CDB /* PrayerTableViewCell.swift */; };
@@ -45,7 +44,6 @@
 		1D3D8844231428AB00E55DE5 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		1D57E024230AFAF200C4C9C6 /* AddPrayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPrayerViewController.swift; sourceTree = "<group>"; };
 		1D57E028230B7D4400C4C9C6 /* ModifyPrayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyPrayerViewController.swift; sourceTree = "<group>"; };
-		1D583A73230D7087002E4B3F /* readme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		1D5AE6D024508CCD0074BCFF /* Biometrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biometrics.swift; sourceTree = "<group>"; };
 		1D5AE6D22450E0C90074BCFF /* Reminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminders.swift; sourceTree = "<group>"; };
 		1D5B47B523020A1D00CA6CDB /* PrayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTableViewCell.swift; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 				1DB1085622F7B88300DB4C26 /* LaunchScreen.storyboard */,
 				1DB1085922F7B88300DB4C26 /* Info.plist */,
 				1D5B47B9230237BF00CA6CDB /* GoogleService-Info.plist */,
-				1D583A73230D7087002E4B3F /* readme.txt */,
 			);
 			path = myPrayers;
 			sourceTree = "<group>";
@@ -249,7 +246,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D583A74230D7087002E4B3F /* readme.txt in Resources */,
 				1DB1085822F7B88300DB4C26 /* LaunchScreen.storyboard in Resources */,
 				1D5B47BA230237BF00CA6CDB /* GoogleService-Info.plist in Resources */,
 				1DB1085522F7B88300DB4C26 /* Assets.xcassets in Resources */,
@@ -479,7 +475,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = myPrayers/myPrayers.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = 8Y3E4QY6HH;
 				INFOPLIST_FILE = myPrayers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -500,7 +496,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = myPrayers/myPrayers.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = 8Y3E4QY6HH;
 				INFOPLIST_FILE = myPrayers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

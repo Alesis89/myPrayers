@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -125,11 +125,21 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
                                 <state key="normal" title="Create a new account">
-                                    <color key="titleColor" red="0.76018208269999998" green="0.76078431369999999" blue="0.87302601339999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.76078431369999999" green="0.76078431369999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="createAccountTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4D8-lU-hLT"/>
                                     <action selector="resetPassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gec-So-np4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LNU-Yo-njc">
+                                <rect key="frame" x="181.5" y="617.5" width="51" height="30"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="13"/>
+                                <state key="normal" title="Support">
+                                    <color key="titleColor" red="0.76078431369999999" green="0.76078431369999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="privacyTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l2w-VE-f2z"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -144,7 +154,9 @@
                             <constraint firstItem="LiW-V4-9U1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FQD-u3-Zkd"/>
                             <constraint firstItem="LiW-V4-9U1" firstAttribute="top" secondItem="eFB-7h-CyY" secondAttribute="bottom" constant="30" id="Kfh-vZ-S1q"/>
                             <constraint firstItem="mYO-a4-nC2" firstAttribute="top" secondItem="LiW-V4-9U1" secondAttribute="bottom" constant="8" id="LOL-iE-I1S"/>
+                            <constraint firstItem="LNU-Yo-njc" firstAttribute="top" secondItem="mYO-a4-nC2" secondAttribute="bottom" constant="8" id="eEy-Ir-H6t"/>
                             <constraint firstItem="eFB-7h-CyY" firstAttribute="top" secondItem="s2I-hl-Wwj" secondAttribute="bottom" constant="20" id="jj1-Rj-jN6"/>
+                            <constraint firstItem="LNU-Yo-njc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nGT-4X-Q7Y"/>
                             <constraint firstItem="s2I-hl-Wwj" firstAttribute="top" secondItem="KyN-0A-8Mk" secondAttribute="bottom" id="rZ4-yS-QWp"/>
                             <constraint firstItem="eFB-7h-CyY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="vmM-4s-LUZ"/>
                         </constraints>
@@ -1160,19 +1172,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l2b-9U-RGe">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="770"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dcc-2Z-u3z">
+                                <rect key="frame" x="354" y="44" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="OLP-VN-1ep"/>
+                                    <constraint firstAttribute="height" constant="40" id="vD1-Ke-O9J"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" red="0.76078431369999999" green="0.76078431369999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeBtnTapped:" destination="1s7-1x-1zv" eventType="touchUpInside" id="768-3t-2YC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="l2b-9U-RGe" firstAttribute="top" secondItem="Dcc-2Z-u3z" secondAttribute="bottom" constant="8" id="b2x-pb-JR1"/>
+                            <constraint firstItem="Dcc-2Z-u3z" firstAttribute="top" secondItem="vTb-fO-zBI" secondAttribute="top" id="cmk-bh-abH"/>
                             <constraint firstItem="l2b-9U-RGe" firstAttribute="leading" secondItem="vTb-fO-zBI" secondAttribute="leading" id="dSm-vJ-rjX"/>
                             <constraint firstItem="vTb-fO-zBI" firstAttribute="bottom" secondItem="l2b-9U-RGe" secondAttribute="bottom" id="ssg-RQ-zNO"/>
-                            <constraint firstItem="l2b-9U-RGe" firstAttribute="top" secondItem="vTb-fO-zBI" secondAttribute="top" id="tit-68-qrQ"/>
+                            <constraint firstItem="vTb-fO-zBI" firstAttribute="trailing" secondItem="Dcc-2Z-u3z" secondAttribute="trailing" constant="20" id="ucM-3i-A2Q"/>
                             <constraint firstItem="vTb-fO-zBI" firstAttribute="trailing" secondItem="l2b-9U-RGe" secondAttribute="trailing" id="zbE-Be-mT3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vTb-fO-zBI"/>

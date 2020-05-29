@@ -345,4 +345,11 @@ class LoginViewController: UIViewController {
         }else{
         }
     }
+    
+    @IBAction func privacyTapped(_ sender: Any) {
+        let VC1 = storyboard?.instantiateViewController(withIdentifier: "privacy") as! PrivacyViewController
+        VC1.title = "Support"
+        VC1.inPrivacySelection = "gitHubMyPrayers"
+        self.present(VC1, animated: true, completion: nil)
+    }
 }
