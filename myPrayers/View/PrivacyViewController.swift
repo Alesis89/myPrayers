@@ -12,12 +12,21 @@ import WebKit
 class PrivacyViewController: UIViewController {
 
     @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var closeButton: UIButton!
     
     var inPrivacySelection: String!
+    var inCloseButtonNeeded = false
     var url:URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if (inCloseButtonNeeded){
+            closeButton.isHidden = false
+        }else{
+            closeButton.isHidden = true
+        }
+        
         
         if (inPrivacySelection == "Privacy"){
             url = URL(string: "\(privacyTOSPolicies.privacyPolicy)")!

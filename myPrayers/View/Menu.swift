@@ -337,18 +337,19 @@ class Menu: NSObject, UITableViewDelegate, UITableViewDataSource{
     }
    
     @objc func supportLabelAction(_ sender:UIButton!){
-          let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
-          let VC1 = topVC?.storyboard?.instantiateViewController(withIdentifier: "privacy") as! PrivacyViewController
-          VC1.modalPresentationStyle = .currentContext
-          VC1.title = "Support"
-          VC1.inPrivacySelection = "gitHubMyPrayers"
-          topVC!.show(VC1, sender: topVC)
-          
-          //Close the menu
-          blackBackgroundView.alpha = 0
-          let height = UIApplication.shared.keyWindow?.frame.height
-          menuView.frame = CGRect.init(x: 0, y: 0, width: -250, height: height!)
-       }
+        let topVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController
+        let VC1 = topVC?.storyboard?.instantiateViewController(withIdentifier: "privacy") as! PrivacyViewController
+        VC1.modalPresentationStyle = .currentContext
+        VC1.title = "Support"
+        VC1.inCloseButtonNeeded = false
+        VC1.inPrivacySelection = "gitHubMyPrayers"
+        topVC!.show(VC1, sender: topVC)
+        
+        //Close the menu
+        blackBackgroundView.alpha = 0
+        let height = UIApplication.shared.keyWindow?.frame.height
+        menuView.frame = CGRect.init(x: 0, y: 0, width: -250, height: height!)
+    }
     
     @objc func handleDismiss(logout: Bool){
         

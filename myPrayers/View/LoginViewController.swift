@@ -350,6 +350,7 @@ class LoginViewController: UIViewController {
         let VC1 = storyboard?.instantiateViewController(withIdentifier: "privacy") as! PrivacyViewController
         VC1.title = "Support"
         VC1.inPrivacySelection = "gitHubMyPrayers"
+        VC1.inCloseButtonNeeded = true
         self.present(VC1, animated: true, completion: nil)
     }
 }

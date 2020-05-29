@@ -1206,6 +1206,7 @@
                         <viewLayoutGuide key="safeArea" id="vTb-fO-zBI"/>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="Dcc-2Z-u3z" id="7gj-xx-J9y"/>
                         <outlet property="webView" destination="l2b-9U-RGe" id="5Pz-6A-hnh"/>
                     </connections>
                 </viewController>
